@@ -1,10 +1,6 @@
 
 using UnityEditor;
 using UnityEngine;
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine.Rendering;
 
 [CustomEditor(typeof(BakeryPointLight))]
@@ -383,7 +379,8 @@ public class ftPointLightInspector : UnityEditor.Editor
         TestPreviewRefreshProperty(ref cached, newVal.GetInstanceID());
     }
 
-    public override void OnInspectorGUI() {
+    public override void OnInspectorGUI()
+    {
         //if (showFtrace)
         {
             OnEnable();
@@ -410,7 +407,7 @@ public class ftPointLightInspector : UnityEditor.Editor
             EditorGUILayout.PropertyField(ftraceLightLegacySampling, new GUIContent("Legacy sampling", "Use Bakery's original more biased shadow sampling strategy. Produces noise-free shadows, but wide penumbras can exhibit banding. If disabled, an unbiased, but noisier technique is used."));
             EditorGUILayout.PropertyField(ftraceLightProj, new GUIContent("Projection mask", "Determines additional light masking mode."));
 
-            switch(ftraceLightProj.enumValueIndex)
+            switch (ftraceLightProj.enumValueIndex)
             {
                 case (int)BakeryPointLight.ftLightProjectionMode.Cookie:
                     EditorGUILayout.PropertyField(ftraceLightTexture2D, new GUIContent("Cookie texture", "Texture"));
@@ -530,7 +527,7 @@ public class ftPointLightInspector : UnityEditor.Editor
 
         bool shadowmaskNoDynamicLight = false;
 
-        foreach(BakeryPointLight selectedLight in targets)
+        foreach (BakeryPointLight selectedLight in targets)
         {
             bool match = true;
             //string why = "";
@@ -683,9 +680,9 @@ public class ftPointLightInspector : UnityEditor.Editor
             else
             {
                 eps *= Mathf.Max(lightInt, fintensity);
-                if (Mathf.Abs(lightR*lightInt - fr*fintensity) > eps ||
-                    Mathf.Abs(lightG*lightInt - fg*fintensity) > eps ||
-                    Mathf.Abs(lightB*lightInt - fb*fintensity) > eps)
+                if (Mathf.Abs(lightR * lightInt - fr * fintensity) > eps ||
+                    Mathf.Abs(lightG * lightInt - fg * fintensity) > eps ||
+                    Mathf.Abs(lightB * lightInt - fb * fintensity) > eps)
                 {
                     match = false;
                     why = "intensity doesn't match";
@@ -727,7 +724,7 @@ public class ftPointLightInspector : UnityEditor.Editor
 
             if (GUILayout.Button("Match lightmapped to real-time"))
             {
-                foreach(BakeryPointLight selectedLight in targets)
+                foreach (BakeryPointLight selectedLight in targets)
                 {
                     var light = selectedLight.GetComponent<Light>();
                     if (light == null) continue;
@@ -778,7 +775,7 @@ public class ftPointLightInspector : UnityEditor.Editor
             }
             if (GUILayout.Button("Match real-time to lightmapped"))
             {
-                foreach(BakeryPointLight selectedLight in targets)
+                foreach (BakeryPointLight selectedLight in targets)
                 {
                     var light = selectedLight.GetComponent<Light>();
                     if (light == null) continue;

@@ -10,11 +10,9 @@ language governing permissions and limitations under the license.
 #define DEBUG_TELEPORT_EVENT_HANDLERS
 
 using System;
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using Debug = UnityEngine.Debug;
+using UnityEngine;
 
 /// <summary>
 /// The TeleportTargetHandler's main purpose is to determine when the current aim target is valid

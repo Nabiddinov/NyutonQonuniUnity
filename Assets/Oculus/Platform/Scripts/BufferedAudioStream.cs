@@ -1,9 +1,7 @@
 //#define VERBOSE_LOGGING
 
-using UnityEngine;
-using System.Collections;
 using System;
-using Oculus.Platform;
+using UnityEngine;
 
 public class BufferedAudioStream
 {

@@ -10,15 +10,12 @@
 
 //#define DEBUGMESHDATA
 
-using UnityEngine;
-using UnityEditor;
-using System.IO;
-using System.Text;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using UnityEngine.Rendering;
+using System.IO;
 using System.Reflection;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ftBuildLights
 {
@@ -50,15 +47,15 @@ public class ftBuildLights
         f.Write(obj.transform.forward.y);
         f.Write(obj.transform.forward.z);
 
-        #if SRGBCONVERT
-            f.Write(obj.color.linear.r * obj.intensity);
-            f.Write(obj.color.linear.g * obj.intensity);
-            f.Write(obj.color.linear.b * obj.intensity);
-        #else
+#if SRGBCONVERT
+        f.Write(obj.color.linear.r * obj.intensity);
+        f.Write(obj.color.linear.g * obj.intensity);
+        f.Write(obj.color.linear.b * obj.intensity);
+#else
             f.Write(obj.color.r * obj.intensity);
             f.Write(obj.color.g * obj.intensity);
             f.Write(obj.color.b * obj.intensity);
-        #endif
+#endif
 
         f.Write(obj.shadowSpread);
         f.Write(SAMPLES);
@@ -123,15 +120,15 @@ public class ftBuildLights
         var f = new BinaryWriter(File.Open(folder + "/" + outName, FileMode.Create));
         if (ftRenderLightmap.clientMode) ftClient.serverFileList.Add(outName);
 
-        #if SRGBCONVERT
-            f.Write(obj.color.linear.r * obj.intensity);
-            f.Write(obj.color.linear.g * obj.intensity);
-            f.Write(obj.color.linear.b * obj.intensity);
-        #else
+#if SRGBCONVERT
+        f.Write(obj.color.linear.r * obj.intensity);
+        f.Write(obj.color.linear.g * obj.intensity);
+        f.Write(obj.color.linear.b * obj.intensity);
+#else
             f.Write(obj.color.r * obj.intensity);
             f.Write(obj.color.g * obj.intensity);
             f.Write(obj.color.b * obj.intensity);
-        #endif
+#endif
 
         f.Write(SAMPLES);
         f.Write(obj.hemispherical);
@@ -177,7 +174,7 @@ public class ftBuildLights
                 }
                 else
                 {
-                    int usage = (int)texUtil_GetUsage.Invoke(null, new object[]{obj.cubemap});
+                    int usage = (int)texUtil_GetUsage.Invoke(null, new object[] { obj.cubemap });
                     isDoubleLDR = usage == 1 // BakedLightmapDoubleLDR
                                || usage == 7;// DoubleLDR
                     isRGBM = usage == 5;     // RGBMEncoded
@@ -433,10 +430,10 @@ public class ftBuildLights
             if (obj.texture != null)
             {
                 uv = new Vector2[4];
-                uv[0] = new Vector2(0,0);
-                uv[1] = new Vector2(0,1);
-                uv[2] = new Vector2(1,1);
-                uv[3] = new Vector2(1,0);
+                uv[0] = new Vector2(0, 0);
+                uv[1] = new Vector2(0, 1);
+                uv[2] = new Vector2(1, 1);
+                uv[3] = new Vector2(1, 0);
             }
         }
 
@@ -492,7 +489,7 @@ public class ftBuildLights
             var downsampleTex = new Texture2D(downsampleRes, downsampleRes, TextureFormat.RGBAFloat, false, true);
             Graphics.Blit(tex, downsampleRT);
             Graphics.SetRenderTarget(downsampleRT);
-            downsampleTex.ReadPixels(new Rect(0,0,downsampleRes,downsampleRes), 0, 0, false);
+            downsampleTex.ReadPixels(new Rect(0, 0, downsampleRes, downsampleRes), 0, 0, false);
             downsampleTex.Apply();
             var bytes = downsampleTex.GetRawTextureData();
             RenderTexture.active = null;
@@ -502,11 +499,11 @@ public class ftBuildLights
             System.Buffer.BlockCopy(bytes, 0, pixels, 0, bytes.Length);
         }
 
-        for(int j=0; j<tris; j++)
+        for (int j = 0; j < tris; j++)
         {
-            var v1 = verts[indices[j*3]];
-            var v2 = verts[indices[j*3 + 1]];
-            var v3 = verts[indices[j*3 + 2]];
+            var v1 = verts[indices[j * 3]];
+            var v2 = verts[indices[j * 3 + 1]];
+            var v3 = verts[indices[j * 3 + 2]];
 
             if (corners == null)
             {
@@ -536,7 +533,7 @@ public class ftBuildLights
         // When an area light is with a width or height of 0, this will avoid an OOR exception (this will keep the baking running instead of crashing it...)
         float invTotalArea = totalWorldArea == 0 ? 0 : (1.0f / (totalWorldArea * 0.5f));
         float sumWeights = 0.0f;
-        for(int j=0; j<tris; j++)
+        for (int j = 0; j < tris; j++)
         {
             area[j] *= invTotalArea * 0.5f;
             sumWeights += area[j];
@@ -545,10 +542,10 @@ public class ftBuildLights
         float sampleWidth = sumWeights / SAMPLES;
         int outputSampleIx = -1;
         float weightSoFar = -Random.value * sampleWidth;
-        for(int i=0; i<SAMPLES; i++)
+        for (int i = 0; i < SAMPLES; i++)
         {
             float sampleDist = i * sampleWidth;
-            while(sampleDist >= weightSoFar && outputSampleIx + 1 < tris)
+            while (sampleDist >= weightSoFar && outputSampleIx + 1 < tris)
             {
                 weightSoFar += area[++outputSampleIx];
             }
@@ -619,7 +616,7 @@ public class ftBuildLights
         f.Write(obj.shadowmask ? 0 : obj.samples2);
         f.Write(obj.shadowmaskFalloff ? -SAMPLES : SAMPLES);
         Vector3 trinormal;
-        for(int sample=0; sample<SAMPLES; sample++)
+        for (int sample = 0; sample < SAMPLES; sample++)
         {
 #if OPTIMIZEDAREA2
             int tri = randomTriIndices[sample];
@@ -649,15 +646,15 @@ public class ftBuildLights
             }
 #endif
 
-            var A = verts[indices[tri*3]];
-            var B = verts[indices[tri*3+1]];
-            var C = verts[indices[tri*3+2]];
+            var A = verts[indices[tri * 3]];
+            var B = verts[indices[tri * 3 + 1]];
+            var C = verts[indices[tri * 3 + 2]];
             var point = (1.0f - Mathf.Sqrt(rndA)) * A + (Mathf.Sqrt(rndA) * (1.0f - rndB)) * B + (Mathf.Sqrt(rndA) * rndB) * C;
 
             if (corners == null) point = tform.TransformPoint(point);
 
             trinormal = Vector3.Cross(A - B, B - C);//.normalized;
-            float len = Mathf.Sqrt(trinormal.x*trinormal.x + trinormal.y*trinormal.y + trinormal.z*trinormal.z);
+            float len = Mathf.Sqrt(trinormal.x * trinormal.x + trinormal.y * trinormal.y + trinormal.z * trinormal.z);
             trinormal /= len;
 
             if (corners == null) trinormal = tform.TransformDirection(trinormal);
@@ -676,14 +673,14 @@ public class ftBuildLights
 
             if (obj.texture != null)
             {
-                var tA = uv[indices[tri*3]];
-                var tB = uv[indices[tri*3+1]];
-                var tC = uv[indices[tri*3+2]];
+                var tA = uv[indices[tri * 3]];
+                var tB = uv[indices[tri * 3 + 1]];
+                var tC = uv[indices[tri * 3 + 2]];
                 var tpoint = (1.0f - Mathf.Sqrt(rndA)) * tA + (Mathf.Sqrt(rndA) * (1.0f - rndB)) * tB + (Mathf.Sqrt(rndA) * rndB) * tC;
                 int tx = (int)((tpoint.x - Mathf.Floor(tpoint.x)) * (downsampleRes - 1));
                 int ty = (int)((tpoint.y - Mathf.Floor(tpoint.y)) * (downsampleRes - 1));
                 int pixelIndex = ty * downsampleRes + tx;
-                if (pixelIndex*4+2 < pixels.Length)
+                if (pixelIndex * 4 + 2 < pixels.Length)
                 {
                     float cr = pixels[pixelIndex * 4];
                     float cg = pixels[pixelIndex * 4 + 1];
@@ -714,15 +711,15 @@ public class ftBuildLights
         f.Write(obj.cutoff);
         f.Write(totalWorldArea * 0.5f);
 
-        #if SRGBCONVERT
-            f.Write(obj.color.linear.r * obj.intensity);
-            f.Write(obj.color.linear.g * obj.intensity);
-            f.Write(obj.color.linear.b * obj.intensity);
-        #else
+#if SRGBCONVERT
+        f.Write(obj.color.linear.r * obj.intensity);
+        f.Write(obj.color.linear.g * obj.intensity);
+        f.Write(obj.color.linear.b * obj.intensity);
+#else
             f.Write(obj.color.r * obj.intensity);
             f.Write(obj.color.g * obj.intensity);
             f.Write(obj.color.b * obj.intensity);
-        #endif
+#endif
 
         f.Write(obj.lmid);
 
@@ -774,15 +771,15 @@ public class ftBuildLights
         f.Write(fakeDistMult);
         f.Write(falloffMinRadius);
 
-        #if SRGBCONVERT
-            f.Write(obj.color.linear.r * obj.intensity);
-            f.Write(obj.color.linear.g * obj.intensity);
-            f.Write(obj.color.linear.b * obj.intensity);
-        #else
+#if SRGBCONVERT
+        f.Write(obj.color.linear.r * obj.intensity);
+        f.Write(obj.color.linear.g * obj.intensity);
+        f.Write(obj.color.linear.b * obj.intensity);
+#else
             f.Write(obj.color.r * obj.intensity);
             f.Write(obj.color.g * obj.intensity);
             f.Write(obj.color.b * obj.intensity);
-        #endif
+#endif
 
         var pos = obj.transform.position;
 
@@ -877,7 +874,7 @@ public class ftBuildLights
 
     static void WriteNullTerminatedStringWithNewLine(BinaryWriter f, string s)
     {
-        for(int i=0; i<s.Length; i++) f.Write(s[i]);
+        for (int i = 0; i < s.Length; i++) f.Write(s[i]);
         f.Write((byte)0);
         f.Write((byte)'\n');
     }
@@ -944,30 +941,30 @@ public class ftBuildLights
         else if (isIES)
         {
             var startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.CreateNoWindow  = false;
+            startInfo.CreateNoWindow = false;
             startInfo.UseShellExecute = false;
             startInfo.WorkingDirectory = folder;
-            startInfo.FileName        = Application.dataPath + "/Editor/x64/Bakery/ies2tex.exe";
+            startInfo.FileName = Application.dataPath + "/Editor/x64/Bakery/ies2tex.exe";
             startInfo.CreateNoWindow = true;
             //startInfo.Arguments       =  "../" + AssetDatabase.GetAssetPath(obj.iesFile) + " " + "cookie" + obj.UID + ".dds 1";
-            startInfo.Arguments       =  "\"" + Application.dataPath + "/../" + AssetDatabase.GetAssetPath(tex) + "\" " + texName + " 1";
+            startInfo.Arguments = "\"" + Application.dataPath + "/../" + AssetDatabase.GetAssetPath(tex) + "\" " + texName + " 1";
             if (ftRenderLightmap.clientMode) ftClient.serverFileList.Add(texName);
 
 #if LAUNCH_VIA_DLL
-            startInfo.Arguments       =  "\"" + Application.dataPath + "/../" + AssetDatabase.GetAssetPath(tex) + "\" \"" + folder + "/" + texName + "\" 1";
+            startInfo.Arguments = "\"" + Application.dataPath + "/../" + AssetDatabase.GetAssetPath(tex) + "\" \"" + folder + "/" + texName + "\" 1";
             Debug.Log("Running ies2tex " + startInfo.Arguments);
             var crt = ftRenderLightmap.ProcessCoroutine("ies2tex", startInfo.Arguments, false);
-            while(crt.MoveNext()) {}
+            while (crt.MoveNext()) { }
             int errCode = ftRenderLightmap.lastReturnValue;
 #else
             var exeProcess = System.Diagnostics.Process.Start(startInfo);
             exeProcess.WaitForExit();
             int errCode = exeProcess.ExitCode;
 #endif
-            if (errCode!=0)
+            if (errCode != 0)
             {
-                ftRenderLightmap.DebugLogError("ies2tex error: "+ ftErrorCodes.TranslateI2T(errCode));
-                Debug.LogError("ies2tex error: "+ ftErrorCodes.TranslateI2T(errCode) + " with args " + startInfo.Arguments);
+                ftRenderLightmap.DebugLogError("ies2tex error: " + ftErrorCodes.TranslateI2T(errCode));
+                Debug.LogError("ies2tex error: " + ftErrorCodes.TranslateI2T(errCode) + " with args " + startInfo.Arguments);
                 return false;
             }
         }
@@ -990,13 +987,13 @@ public class ftBuildLights
         if (ftRenderLightmap.clientMode) ftClient.serverFileList.Add(outName);
 
         int numLights = 0;
-        for(int L=start; L<=end; L++)
+        for (int L = start; L <= end; L++)
         {
             if (!skipLight[L]) numLights++;
         }
         flights.Write(numLights);
 
-        for(int i=start; i<=end; i++)
+        for (int i = start; i <= end; i++)
         {
             if (skipLight[i]) continue;
 
@@ -1095,7 +1092,7 @@ public class ftBuildLights
 
         flights.Write(ignoreNormal ? (byte)1 : (byte)0);
 
-        for(int L=start; L<=end; L++)
+        for (int L = start; L <= end; L++)
         {
             if (skipLight[L]) continue;
 

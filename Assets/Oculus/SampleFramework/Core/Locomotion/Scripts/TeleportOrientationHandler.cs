@@ -8,8 +8,8 @@ language governing permissions and limitations under the license.
 ************************************************************************************/
 
 using System;
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 /// <summary>
 /// The orientation handler is what determines the final rotation of the player after the teleport.

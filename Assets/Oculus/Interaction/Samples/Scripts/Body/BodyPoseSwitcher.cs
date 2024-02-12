@@ -19,9 +19,9 @@
  */
 
 using System;
-using UnityEngine;
 using Oculus.Interaction.Body.Input;
 using Oculus.Interaction.Body.PoseDetection;
+using UnityEngine;
 
 namespace Oculus.Interaction.Body.Samples
 {

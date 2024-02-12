@@ -1,11 +1,10 @@
-using UnityEngine;
-using UnityEditor.SceneManagement;
-using System.Text;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
+using UnityEngine;
 
 public class ftClient
 {
@@ -135,7 +134,7 @@ public class ftClient
             bool connectionInProgress = true;
             bool connectionError = false;
             double timeout = ftRenderLightmap.GetTimeMs() + serverConnectionTimeout;
-            while(connectionInProgress)
+            while (connectionInProgress)
             {
                 connectionInProgress = false;
                 try
@@ -159,7 +158,7 @@ public class ftClient
                         }
                     }
                 }
-                catch(SocketException s)
+                catch (SocketException s)
                 {
                     if (s.ErrorCode == 10035) // WSAEWOULDBLOCK
                     {
@@ -224,7 +223,7 @@ public class ftClient
 #endif
                 }
             }
-            catch(SocketException s)
+            catch (SocketException s)
             {
                 lastServerMsg = "Failed to get data from server (" + s.ErrorCode + ")";
                 lastServerMsgIsError = true;
@@ -259,7 +258,7 @@ public class ftClient
             double maxTimeToReceive = 10.0;
             double timeToInterrupt = ftRenderLightmap.GetTimeMs() + maxTimeToReceive;
 
-            while(!interrupted)
+            while (!interrupted)
             {
                 if (ftRenderLightmap.GetTimeMs() > timeToInterrupt)
                 {
@@ -272,19 +271,19 @@ public class ftClient
                 {
                     //while(true)
                     //{
-                        if (waitingForGet)
-                        {
-                            int bytesReceived = statusSocket.Receive(fileBuffer, byteCount, fileBuffer.Length - byteCount, SocketFlags.None);
-                            byteCount += bytesReceived;
-                            //Debug.Log("Received " + bytesReceived);
-                            if (bytesReceived == 0) interrupted = true;//break;
-                        }
-                        else
-                        {
-                            byteCount = statusSocket.Receive(status);
-                            //break;
-                            interrupted = true;
-                        }
+                    if (waitingForGet)
+                    {
+                        int bytesReceived = statusSocket.Receive(fileBuffer, byteCount, fileBuffer.Length - byteCount, SocketFlags.None);
+                        byteCount += bytesReceived;
+                        //Debug.Log("Received " + bytesReceived);
+                        if (bytesReceived == 0) interrupted = true;//break;
+                    }
+                    else
+                    {
+                        byteCount = statusSocket.Receive(status);
+                        //break;
+                        interrupted = true;
+                    }
                     //}
                 }
                 catch
@@ -316,7 +315,7 @@ public class ftClient
                 if (waitingForGet)
                 {
                     Debug.Log("Data received: " + byteCount);
-                    var ext = lastServerFile.Substring(lastServerFile.Length-3).ToLower();
+                    var ext = lastServerFile.Substring(lastServerFile.Length - 3).ToLower();
                     string outPath;
                     if (ext == "lz4" || ext == "dds")
                     {
@@ -401,7 +400,7 @@ public class ftClient
             {
                 //var sleepTime = timeToUpdateServerStatus - curTime;
                 //if (sleepTime > 0) System.Threading.Thread.Sleep((int)sleepTime);
-                while(true)
+                while (true)
                 {
                     var curTime = ftRenderLightmap.GetTimeMs();
                     if (curTime >= timeToUpdateServerStatus) break;
@@ -464,18 +463,18 @@ public class ftClient
         var remoteEP = new IPEndPoint(ipAdd, serverPort);
         bool connectionInProgress;
 
-        for(int i=0; i<serverFileList.Count; i++)
+        for (int i = 0; i < serverFileList.Count; i++)
         {
             var fsoc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             connectionInProgress = true;
-            while(connectionInProgress)
+            while (connectionInProgress)
             {
                 try
                 {
                     connectionInProgress = false;
                     fsoc.Connect(remoteEP);
                 }
-                catch(SocketException s)
+                catch (SocketException s)
                 {
                     if (s.ErrorCode == 10035) // WSAEWOULDBLOCK
                     {
@@ -503,18 +502,18 @@ public class ftClient
             System.Buffer.BlockCopy(System.BitConverter.GetBytes(numTasks), 0, buff, 0, 4);
             buff[4] = SERVERTASK_RECEIVEFILE;
             buff[5] = (byte)serverFileList[i].Length;
-            for(int j=0; j<serverFileList[i].Length; j++) buff[6+j] = (byte)serverFileList[i][j];
+            for (int j = 0; j < serverFileList[i].Length; j++) buff[6 + j] = (byte)serverFileList[i][j];
             System.Buffer.BlockCopy(sceneFile, 0, buff, headerSize, sceneFile.Length);
 
             connectionInProgress = true;
-            while(connectionInProgress)
+            while (connectionInProgress)
             {
                 try
                 {
                     connectionInProgress = false;
                     fsoc.Send(buff);
                 }
-                catch(SocketException s)
+                catch (SocketException s)
                 {
                     if (s.ErrorCode == 10035) // WSAEWOULDBLOCK
                     {

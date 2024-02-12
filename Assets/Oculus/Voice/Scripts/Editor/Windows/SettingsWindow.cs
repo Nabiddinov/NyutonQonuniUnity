@@ -21,13 +21,13 @@
 using System.Collections.Generic;
 using Meta.Voice.Hub.Attributes;
 using Meta.Voice.Hub.Interfaces;
+using Meta.Voice.TelemetryUtilities;
 using Meta.Voice.VSDKHub;
 using Meta.WitAi;
 using Meta.WitAi.Windows;
 using Oculus.Voice.Utility;
 using Oculus.Voice.Windows;
 using UnityEngine;
-using Meta.Voice.TelemetryUtilities;
 
 namespace Meta.Voice.Windows
 {

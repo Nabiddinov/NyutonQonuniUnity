@@ -1,11 +1,8 @@
-using UnityEngine;
-using UnityEngine.Rendering;
+using System;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
+using UnityEngine;
+using UnityEngine.Rendering;
 
 //-------------------------------------------------------------------------------------
 // ***** OculusBuildSamples

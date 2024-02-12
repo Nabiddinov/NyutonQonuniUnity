@@ -9,10 +9,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Meta.Voice.TelemetryUtilities;
+using Meta.WitAi.Data.Configuration;
 using UnityEditor;
 using UnityEngine;
-using Meta.WitAi.Data.Configuration;
 
 namespace Meta.WitAi.Windows
 {

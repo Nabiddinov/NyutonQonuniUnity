@@ -7,11 +7,11 @@
  */
 
 using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
 using System.Reflection;
 using Meta.WitAi.Data.Configuration;
 using Meta.WitAi.Data.Info;
+using UnityEditor;
+using UnityEngine;
 
 namespace Meta.WitAi.Windows
 {

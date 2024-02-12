@@ -1,8 +1,8 @@
 #if UNITY_EDITOR
 
-using UnityEngine;
-using UnityEditor;
 using System.IO;
+using UnityEditor;
+using UnityEngine;
 
 public class ftUVGBufferGen
 {
@@ -78,10 +78,10 @@ public class ftUVGBufferGen
         Debug.Log(proj);*/
 
         var proj = new Matrix4x4();
-        proj.SetRow(0, new Vector4(2.00000f,  0.00000f, 0.00000f, -1.00000f + offsetX));
-        proj.SetRow(1, new Vector4(0.00000f,  2.00000f, 0.00000f, -1.00000f + offsetY));
-        proj.SetRow(2, new Vector4(0.00000f,  0.00000f, -0.00198f,    -0.98f));
-        proj.SetRow(3, new Vector4(0.00000f,  0.00000f, 0.00000f, 1.00000f));
+        proj.SetRow(0, new Vector4(2.00000f, 0.00000f, 0.00000f, -1.00000f + offsetX));
+        proj.SetRow(1, new Vector4(0.00000f, 2.00000f, 0.00000f, -1.00000f + offsetY));
+        proj.SetRow(2, new Vector4(0.00000f, 0.00000f, -0.00198f, -0.98f));
+        proj.SetRow(3, new Vector4(0.00000f, 0.00000f, 0.00000f, 1.00000f));
 
         //if (ftBuildGraphics.unityVersionMajor < 2018) // Unity 2018 stopped multiplying vertices by world matrix in meta pass
         //{
@@ -110,14 +110,14 @@ public class ftUVGBufferGen
         texAlbedo = new Texture2D(size, size, TextureFormat.RGBA32, false, false);
 
         Graphics.SetRenderTarget(rtAlbedo);
-        GL.Clear(true, true, new Color(0,0,0,0));
+        GL.Clear(true, true, new Color(0, 0, 0, 0));
 
         if (hasEmissive)
         {
             rtEmissive = new RenderTexture(size, size, 0, RenderTextureFormat.ARGBHalf, RenderTextureReadWrite.Linear);
             texEmissive = new Texture2D(size, size, TextureFormat.RGBAHalf, false, true);
             Graphics.SetRenderTarget(rtEmissive);
-            GL.Clear(true, true, new Color(0,0,0,0));
+            GL.Clear(true, true, new Color(0, 0, 0, 0));
         }
 
         if (hasNormal)
@@ -125,7 +125,7 @@ public class ftUVGBufferGen
             rtNormal = new RenderTexture(size, size, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);
             texNormal = new Texture2D(size, size, TextureFormat.RGBA32, false, true);
             Graphics.SetRenderTarget(rtNormal);
-            GL.Clear(true, true, new Color(0,0,0,0));
+            GL.Clear(true, true, new Color(0, 0, 0, 0));
         }
 
         //GL.sRGBWrite = true;//!hasEmissive;
@@ -142,11 +142,11 @@ public class ftUVGBufferGen
         texelSize = (1.0f / size) / 5;
         //shaBlack = new Vector4(0,0,0,0);
         //shaWhite = new Vector4(0,0,0,1);
-        metaControl = new Vector4(1,0,0,0);
-        metaControlAlbedo = new Vector4(1,0,0,0);
-        metaControlEmission = new Vector4(0,1,0,0);
-        metaControlNormal = new Vector4(0,0,1,0);
-        metaControlAlpha = new Vector4(0,0,0,1);
+        metaControl = new Vector4(1, 0, 0, 0);
+        metaControlAlbedo = new Vector4(1, 0, 0, 0);
+        metaControlEmission = new Vector4(0, 1, 0, 0);
+        metaControlNormal = new Vector4(0, 0, 1, 0);
+        metaControlAlpha = new Vector4(0, 0, 0, 1);
         Shader.SetGlobalVector("unity_MetaVertexControl", metaControl);
         Shader.SetGlobalFloat("unity_OneOverOutputBoost", 1.0f);
         Shader.SetGlobalFloat("unity_MaxOutputValue", 10000000.0f);
@@ -161,7 +161,7 @@ public class ftUVGBufferGen
         texAlpha = new Texture2D(size, size, TextureFormat.RGBA32, false, true);
         texAlpha.name = "BakeryTexAlpha";
         Graphics.SetRenderTarget(rtAlpha);
-        GL.Clear(true, true, new Color(0,0,0,0));
+        GL.Clear(true, true, new Color(0, 0, 0, 0));
     }
 
     static public void RenderUVGBuffer(Mesh mesh, Renderer renderer, Vector4 scaleOffset, Transform worldTransform, bool vertexBake,
@@ -200,7 +200,7 @@ public class ftUVGBufferGen
 
             if (vertexBake)
             {
-                for(int i=0; i<mesh.subMeshCount; i++)
+                for (int i = 0; i < mesh.subMeshCount; i++)
                 {
                     var indices = m.GetIndices(i);
                     m.SetIndices(indices, MeshTopology.Points, i, false);
@@ -212,7 +212,7 @@ public class ftUVGBufferGen
 
         //UpdateMatrix(worldMatrix);
 
-        for(int pass=0; pass<PASS_COUNT; pass++)
+        for (int pass = 0; pass < PASS_COUNT; pass++)
         {
             if (pass == PASS_EMISSIVE && !emissiveEnabled) continue;
             if (pass == PASS_NORMAL && !normalEnabled) continue;
@@ -236,11 +236,11 @@ public class ftUVGBufferGen
                 Graphics.SetRenderTarget(rtAlpha);
             }
 
-            for(int i=0; i<mesh.subMeshCount; i++)
+            for (int i = 0; i < mesh.subMeshCount; i++)
             {
                 if (materials.Length <= i) break;
-                if (materials[i] ==  null) continue;
-                if (materials[i].shader ==  null) continue;
+                if (materials[i] == null) continue;
+                if (materials[i].shader == null) continue;
 
                 // Optionally skip emission
                 bool passAsBlack = (pass == PASS_EMISSIVE && materials[i].globalIlluminationFlags != MaterialGlobalIlluminationFlags.BakedEmissive);
@@ -261,7 +261,7 @@ public class ftUVGBufferGen
                             if (metaPass < 0)
                             {
                                 // Try finding another pass pass with "META" in it
-                                for(int mpass=0; mpass<materials[i].passCount; mpass++)
+                                for (int mpass = 0; mpass < materials[i].passCount; mpass++)
                                 {
                                     if (materials[i].GetPassName(mpass).IndexOf("META") >= 0)
                                     {
@@ -382,13 +382,13 @@ public class ftUVGBufferGen
                             }
                             else
                             {
-                                normalMat.SetVector("_BumpMap_scaleOffset", new Vector4(1,1,0,0));
+                                normalMat.SetVector("_BumpMap_scaleOffset", new Vector4(1, 1, 0, 0));
                             }
                         }
                         else if (materials[i].HasProperty("_NormalMap"))
                         {
                             normalMat.SetTexture("_BumpMap", materials[i].GetTexture("_NormalMap"));
-                            normalMat.SetVector("_BumpMap_scaleOffset", new Vector4(1,1,0,0));
+                            normalMat.SetVector("_BumpMap_scaleOffset", new Vector4(1, 1, 0, 0));
                         }
                         else
                         {
@@ -396,13 +396,13 @@ public class ftUVGBufferGen
                         }
                         normalMat.SetFloat("_IsTerrain", terrainNormals ? 1.0f : 0.0f);
                         normalMat.SetTexture("bestFitNormalMap", texBestFit);
-                        normalMat.SetFloat("_IsPerPixel", (isURP||isHDRP) ? 1.0f : 0.0f);
+                        normalMat.SetFloat("_IsPerPixel", (isURP || isHDRP) ? 1.0f : 0.0f);
                         normalMat.SetPass(0);
                     }
                     else
                     {
                         materials[i].SetTexture("bestFitNormalMap", texBestFit);
-                        materials[i].SetFloat("_IsPerPixel", (isURP||isHDRP) ? 1.0f : 0.0f);
+                        materials[i].SetFloat("_IsPerPixel", (isURP || isHDRP) ? 1.0f : 0.0f);
                         materials[i].SetPass(metaPass);
                     }
                     Shader.SetGlobalVector("unity_MetaFragmentControl", metaControlNormal);
@@ -425,17 +425,17 @@ public class ftUVGBufferGen
 
                 if (!vertexBake)
                 {
-                    for(int j=0; j<uvOffset.Length/2; j++)
+                    for (int j = 0; j < uvOffset.Length / 2; j++)
                     {
                         if (pass < PASS_NORMAL)
                         {
-                            UpdateMatrix(worldMatrix, uvOffset[j*2] * texelSize, uvOffset[j*2+1] * texelSize);
+                            UpdateMatrix(worldMatrix, uvOffset[j * 2] * texelSize, uvOffset[j * 2 + 1] * texelSize);
                         }
                         else
                         {
                             // TODO: use in HDRP as well
                             var srcVec = scaleOffset;//(isHDRP) ? scaleOffsetFlipped : scaleOffset;
-                            var vec = new Vector4(srcVec.x, srcVec.y, srcVec.z + uvOffset[j*2] * texelSize, srcVec.w + uvOffset[j*2+1] * texelSize);
+                            var vec = new Vector4(srcVec.x, srcVec.y, srcVec.z + uvOffset[j * 2] * texelSize, srcVec.w + uvOffset[j * 2 + 1] * texelSize);
                             Shader.SetGlobalVector("unity_LightmapST", vec);
                             if (bakeryPass >= 0)
                             {
@@ -444,7 +444,7 @@ public class ftUVGBufferGen
                             else
                             {
                                 var s = worldTransform.lossyScale;
-                                bool isFlipped = Mathf.Sign(s.x*s.y*s.z) < 0;
+                                bool isFlipped = Mathf.Sign(s.x * s.y * s.z) < 0;
                                 normalMat.SetFloat("_IsFlipped", isFlipped ? -1.0f : 1.0f);
                                 normalMat.SetPass(0);
                             }
@@ -456,11 +456,11 @@ public class ftUVGBufferGen
                 {
                     UpdateMatrix(worldMatrix, 0, 0);
 #if SUPPORT_MBLOCKS
-    #if UNITY_2018_1_OR_NEWER
+#if UNITY_2018_1_OR_NEWER
                     renderer.GetPropertyBlock(mb, i);
-    #else
+#else
                     renderer.GetPropertyBlock(mb);
-    #endif
+#endif
                     Graphics.DrawMesh(m, worldMatrix, materials[i], 0, null, i, mb, false, false, false);
 #else
                     Graphics.DrawMeshNow(m, worldMatrix, i);
@@ -475,7 +475,7 @@ public class ftUVGBufferGen
         GL.PopMatrix();
 
         Graphics.SetRenderTarget(rtAlbedo);
-        texAlbedo.ReadPixels(new Rect(0,0,rtAlbedo.width,rtAlbedo.height), 0, 0, false);
+        texAlbedo.ReadPixels(new Rect(0, 0, rtAlbedo.width, rtAlbedo.height), 0, 0, false);
         texAlbedo.Apply();
         Graphics.SetRenderTarget(null);
         rtAlbedo.Release();
@@ -483,7 +483,7 @@ public class ftUVGBufferGen
         if (emissiveEnabled)
         {
             Graphics.SetRenderTarget(rtEmissive);
-            texEmissive.ReadPixels(new Rect(0,0,rtEmissive.width,rtEmissive.height), 0, 0, false);
+            texEmissive.ReadPixels(new Rect(0, 0, rtEmissive.width, rtEmissive.height), 0, 0, false);
             texEmissive.Apply();
             Graphics.SetRenderTarget(null);
             rtEmissive.Release();
@@ -492,7 +492,7 @@ public class ftUVGBufferGen
         if (normalEnabled)
         {
             Graphics.SetRenderTarget(rtNormal);
-            texNormal.ReadPixels(new Rect(0,0,rtNormal.width,rtNormal.height), 0, 0, false);
+            texNormal.ReadPixels(new Rect(0, 0, rtNormal.width, rtNormal.height), 0, 0, false);
             texNormal.Apply();
             Graphics.SetRenderTarget(null);
             rtNormal.Release();
@@ -501,7 +501,7 @@ public class ftUVGBufferGen
         if (alphaEnabled)
         {
             Graphics.SetRenderTarget(rtAlpha);
-            texAlpha.ReadPixels(new Rect(0,0,rtAlpha.width,rtAlpha.height), 0, 0, false);
+            texAlpha.ReadPixels(new Rect(0, 0, rtAlpha.width, rtAlpha.height), 0, 0, false);
             texAlpha.Apply();
             Graphics.SetRenderTarget(null);
             rtAlpha.Release();
@@ -523,7 +523,7 @@ public class ftUVGBufferGen
 
         Graphics.Blit(emissive, rt, matFromRGBM);
 
-        tex.ReadPixels(new Rect(0,0,rt.width,rt.height), 0, 0, false);
+        tex.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0, false);
         tex.Apply();
 
         Graphics.SetRenderTarget(null);
@@ -552,14 +552,14 @@ public class ftUVGBufferGen
         GL.sRGBWrite = albedo.format == TextureFormat.RGBA32;
         Graphics.Blit(albedo, rt, matDilate);
 
-        for(int i=0; i<8; i++)
+        for (int i = 0; i < 8; i++)
         {
             Graphics.Blit(rt, rt2, matDilate);
             Graphics.Blit(rt2, rt, matDilate);
         }
 
         Graphics.SetRenderTarget(rt);
-        albedo.ReadPixels(new Rect(0,0,rt.width,rt.height), 0, 0, false);
+        albedo.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0, false);
         albedo.Apply();
 
         Graphics.SetRenderTarget(null);
@@ -586,7 +586,7 @@ public class ftUVGBufferGen
         Graphics.Blit(albedo, rt, matMultiply);
 
         Graphics.SetRenderTarget(rt);
-        albedo.ReadPixels(new Rect(0,0,rt.width,rt.height), 0, 0, false);
+        albedo.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0, false);
         albedo.Apply();
 
         Graphics.SetRenderTarget(null);

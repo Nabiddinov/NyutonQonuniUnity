@@ -7,10 +7,8 @@ language governing permissions and limitations under the license.
 
 ************************************************************************************/
 
-using UnityEngine;
-using System.Collections;
-using System.Linq;
 using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(TeleportTransitionWarp))]
 public class TeleportTransitionWarpInspector : Editor

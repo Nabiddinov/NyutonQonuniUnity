@@ -21,8 +21,8 @@
 
 using System;
 using Oculus.VR.Editor;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(OVRProjectConfig))]
 public class OVRProjectConfigEditor : Editor

@@ -19,14 +19,13 @@
  */
 
 #if UNITY_EDITOR_WIN && UNITY_ANDROID
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System;
 using System.Linq;
-using UnityEngine;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
+using UnityEngine;
 
 public class OVRBundleManager
 {

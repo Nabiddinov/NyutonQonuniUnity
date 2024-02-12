@@ -8,8 +8,8 @@
 
 using System;
 using Meta.Conduit;
-using Meta.WitAi.Json;
 using Meta.WitAi.Data.Intents;
+using Meta.WitAi.Json;
 using UnityEngine;
 using UnityEngine.Serialization;
 

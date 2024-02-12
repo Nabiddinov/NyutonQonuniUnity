@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
+using System;
 using Oculus.Interaction.GrabAPI;
 using Oculus.Interaction.Input;
-using System;
 using UnityEngine;
 
 namespace Oculus.Interaction.HandGrab

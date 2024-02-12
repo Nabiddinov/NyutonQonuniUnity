@@ -19,9 +19,9 @@
  */
 
 using System;
+using System.Collections.Generic;
 using Oculus.Interaction.Input;
 using UnityEngine;
-using System.Collections.Generic;
 
 namespace Oculus.Interaction.PoseDetection
 {

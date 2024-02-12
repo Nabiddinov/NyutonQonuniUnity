@@ -18,8 +18,8 @@
  * limitations under the License.
  */
 
-using Oculus.Interaction.Input;
 using System;
+using Oculus.Interaction.Input;
 using UnityEngine;
 
 namespace Oculus.Interaction.OVR.Input
@@ -36,7 +36,7 @@ namespace Oculus.Interaction.OVR.Input
         private RemapConfig _remapConfig = new RemapConfig()
         {
             Enabled = false,
-            Curve = AnimationCurve.Linear(0,0,1,1)
+            Curve = AnimationCurve.Linear(0, 0, 1, 1)
         };
 
         [Serializable]

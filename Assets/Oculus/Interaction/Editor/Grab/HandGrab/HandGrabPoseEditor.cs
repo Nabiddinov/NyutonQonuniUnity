@@ -18,10 +18,10 @@
  * limitations under the License.
  */
 
+using System.Collections.Generic;
 using Oculus.Interaction.Editor;
 using Oculus.Interaction.HandGrab.Visuals;
 using Oculus.Interaction.Input;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 

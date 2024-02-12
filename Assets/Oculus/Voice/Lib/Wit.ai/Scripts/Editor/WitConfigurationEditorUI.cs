@@ -7,9 +7,9 @@
  */
 
 using System;
+using Meta.WitAi.Data.Configuration;
 using UnityEditor;
 using UnityEngine;
-using Meta.WitAi.Data.Configuration;
 
 namespace Meta.WitAi
 {

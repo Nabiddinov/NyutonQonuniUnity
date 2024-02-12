@@ -223,7 +223,7 @@ public class ftErrorCodes
         return text;
     }
 
-    public static string TranslateServer(int code, int app=0, int appCode=0)
+    public static string TranslateServer(int code, int app = 0, int appCode = 0)
     {
         string text;
         if (code == ftClient.SERVERERROR_BUSY)
@@ -259,7 +259,7 @@ public class ftErrorCodes
         if (app == "ies2tex") return TranslateI2T(code);
         if (app == "rgba2tga") return TranslateCombineMasks(code);
         if (app == "seamfixer") return TranslateSeamfixer(code);
-        return ""+code;
+        return "" + code;
     }
 }
 

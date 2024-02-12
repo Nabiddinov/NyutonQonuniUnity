@@ -1,8 +1,6 @@
 ﻿// Disable 'obsolete' warnings
 #pragma warning disable 0618
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -48,7 +46,7 @@ public class BakeryVolumeInspector : Editor
 
     string FormatSize(int b)
     {
-        float mb = b / (float)(1024*1024);
+        float mb = b / (float)(1024 * 1024);
         return mb.ToString("0.0");
     }
 
@@ -99,17 +97,17 @@ public class BakeryVolumeInspector : Editor
         {
             const int blockDimension = 4;
             const int blockByteSize = 16; // both BC6H and BC7
-            int numBlocks = (sizeX/blockDimension) * (sizeY/blockDimension);
+            int numBlocks = (sizeX / blockDimension) * (sizeY / blockDimension);
             vSize = numBlocks * blockByteSize * sizeZ * 4;
         }
         else
         {
-            vSize = sizeX*sizeY*sizeZ*8*3;
+            vSize = sizeX * sizeY * sizeZ * 8 * 3;
         }
         string note = "VRAM: " + FormatSize(vSize) + " MB " + (storage.renderSettingsCompressVolumes ? "(compressed color)" : "(color)");
         if (rmode == (int)ftRenderLightmap.RenderMode.Shadowmask || pstorage.volumeRenderMode == (int)BakeryLightmapGroup.RenderMode.Shadowmask)
         {
-            note += ", " + FormatSize(sizeX*sizeY*sizeZ * (ftraceShadowmaskEncoding.intValue == 0 ? 4 : 1)) + " MB (mask)";
+            note += ", " + FormatSize(sizeX * sizeY * sizeZ * (ftraceShadowmaskEncoding.intValue == 0 ? 4 : 1)) + " MB (mask)";
         }
         EditorGUILayout.LabelField(note);
 
@@ -152,7 +150,7 @@ public class BakeryVolumeInspector : Editor
             if (mrs.Length > 0)
             {
                 var b = mrs[0].bounds;
-                for(int i=1; i<mrs.Length; i++)
+                for (int i = 1; i < mrs.Length; i++)
                 {
                     b.Encapsulate(mrs[i].bounds);
                 }
@@ -186,12 +184,12 @@ public class BakeryVolumeInspector : Editor
         var bmin = vol.bounds.min;
         var bmax = vol.bounds.max;
         var bsize = vol.bounds.size;
-        EditorGUILayout.LabelField("Min: " + bmin.x+", "+bmin.y+", "+bmin.z);
-        EditorGUILayout.LabelField("Max: " + bmax.x+", "+bmax.y+", "+bmax.z);
+        EditorGUILayout.LabelField("Min: " + bmin.x + ", " + bmin.y + ", " + bmin.z);
+        EditorGUILayout.LabelField("Max: " + bmax.x + ", " + bmax.y + ", " + bmax.z);
 
         if (GUILayout.Button("Copy bounds to clipboard"))
         {
-            GUIUtility.systemCopyBuffer = "float3 bmin = float3(" + F(bmin.x)+", "+F(bmin.y)+", "+F(bmin.z) + "); float3 bmax = float3(" + F(bmax.x)+", "+F(bmax.y)+", "+F(bmax.z) + "); float3 binvsize = float3(" + F(1.0f/bsize.x)+", "+F(1.0f/bsize.y)+", "+F(1.0f/bsize.z) + ");";
+            GUIUtility.systemCopyBuffer = "float3 bmin = float3(" + F(bmin.x) + ", " + F(bmin.y) + ", " + F(bmin.z) + "); float3 bmax = float3(" + F(bmax.x) + ", " + F(bmax.y) + ", " + F(bmax.z) + "); float3 binvsize = float3(" + F(1.0f / bsize.x) + ", " + F(1.0f / bsize.y) + ", " + F(1.0f / bsize.z) + ");";
         }
 
         serializedObject.ApplyModifiedProperties();

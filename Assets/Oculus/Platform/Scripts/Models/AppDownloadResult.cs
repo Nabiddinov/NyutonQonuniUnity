@@ -2,22 +2,18 @@
 
 namespace Oculus.Platform.Models
 {
-  using System;
-  using System.Collections;
-  using Oculus.Platform.Models;
-  using System.Collections.Generic;
-  using UnityEngine;
+    using System;
 
-  public class AppDownloadResult
-  {
-    /// Timestamp in milliseconds when the operation finished.
-    public readonly long Timestamp;
-
-
-    public AppDownloadResult(IntPtr o)
+    public class AppDownloadResult
     {
-      Timestamp = CAPI.ovr_AppDownloadResult_GetTimestamp(o);
+        /// Timestamp in milliseconds when the operation finished.
+        public readonly long Timestamp;
+
+
+        public AppDownloadResult(IntPtr o)
+        {
+            Timestamp = CAPI.ovr_AppDownloadResult_GetTimestamp(o);
+        }
     }
-  }
 
 }

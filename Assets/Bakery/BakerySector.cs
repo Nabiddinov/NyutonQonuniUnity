@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class BakerySector : MonoBehaviour
@@ -28,7 +27,7 @@ public class BakerySector : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        for(int i=0; i<cpoints.Count; i++)
+        for (int i = 0; i < cpoints.Count; i++)
         {
             if (cpoints[i] != null) Gizmos.DrawWireSphere(cpoints[i].position, 1.0f);
         }

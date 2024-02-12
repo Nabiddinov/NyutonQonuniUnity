@@ -9,13 +9,11 @@ language governing permissions and limitations under the license.
 
 #define DEBUG_LOCOMOTION_PANEL
 
-using UnityEngine;
-using System.Collections;
 using System.Diagnostics;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
-using UnityEngine.EventSystems;
-using UnityEngine.Events;
 
 public class LocomotionSampleSupport : MonoBehaviour
 {

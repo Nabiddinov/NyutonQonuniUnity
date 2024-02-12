@@ -18,17 +18,17 @@
  * limitations under the License.
  */
 
+using System.Collections;
 using Oculus.Interaction.HandGrab;
 using UnityEngine;
-using UnityEngine.Assertions;
-using System.Collections;
 
 namespace Oculus.Interaction
 {
 
     public class PressureBreakable : MonoBehaviour, IHandGrabUseDelegate
     {
-        [SerializeField] [Range(0, 1)]
+        [SerializeField]
+        [Range(0, 1)]
         private float _breakThreshold = 0.9f;
 
         [SerializeField]

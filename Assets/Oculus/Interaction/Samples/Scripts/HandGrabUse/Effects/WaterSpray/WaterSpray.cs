@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-using Oculus.Interaction.HandGrab;
 using System.Collections;
 using System.Collections.Generic;
+using Oculus.Interaction.HandGrab;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -52,7 +52,7 @@ namespace Oculus.Interaction.Demo
         [SerializeField]
         private float _triggerSpeed = 3f;
         [SerializeField]
-        private AnimationCurve _strengthCurve = AnimationCurve.EaseInOut(0f,0f,1f,1f);
+        private AnimationCurve _strengthCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
         [Header("Output")]
         [SerializeField, Tooltip("Masks the Raycast used to find objects to make wet")]

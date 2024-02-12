@@ -25,10 +25,7 @@ using Meta.WitAi.Dictation.Events;
 using Meta.WitAi.Events;
 using Meta.WitAi.Interfaces;
 using Meta.WitAi.Requests;
-using Meta.WitAi.Utilities;
 using Oculus.Voice.Core.Bindings.Android;
-using Oculus.Voice.Dictation.Configuration;
-using UnityEngine.Events;
 
 namespace Oculus.Voice.Dictation.Bindings.Android
 {

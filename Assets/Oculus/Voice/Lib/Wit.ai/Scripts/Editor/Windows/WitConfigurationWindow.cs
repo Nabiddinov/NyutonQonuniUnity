@@ -8,10 +8,10 @@
 
 using System;
 using System.Collections.Generic;
+using Meta.WitAi.Data.Configuration;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor.SceneManagement;
-using Meta.WitAi.Data.Configuration;
 
 namespace Meta.WitAi.Windows
 {

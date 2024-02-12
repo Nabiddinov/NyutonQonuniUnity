@@ -10,15 +10,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Meta.Voice.Audio;
 using Meta.WitAi.Json;
 using Meta.WitAi.Speech;
-using UnityEngine;
-using UnityEngine.Serialization;
-using Meta.Voice.Audio;
 using Meta.WitAi.TTS.Data;
 using Meta.WitAi.TTS.Integrations;
 using Meta.WitAi.TTS.Interfaces;
+using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Meta.WitAi.TTS.Utilities
 {
@@ -32,11 +32,13 @@ namespace Meta.WitAi.TTS.Utilities
 
         [Header("Text Settings")]
         [Tooltip("Text that is added to the front of any Speech() request")]
-        [TextArea] [FormerlySerializedAs("prependedText")]
+        [TextArea]
+        [FormerlySerializedAs("prependedText")]
         public string PrependedText;
 
         [Tooltip("Text that is added to the end of any Speech() text")]
-        [TextArea] [FormerlySerializedAs("appendedText")]
+        [TextArea]
+        [FormerlySerializedAs("appendedText")]
         public string AppendedText;
 
         [Header("Load Settings")]
@@ -59,10 +61,10 @@ namespace Meta.WitAi.TTS.Utilities
         }
 
         [Tooltip("Preset voice setting id of TTSService voice settings")]
-        [HideInInspector] [SerializeField] public string presetVoiceID;
+        [HideInInspector][SerializeField] public string presetVoiceID;
 
         [Tooltip("Custom wit specific voice settings used if the preset is null or empty")]
-        [HideInInspector] [SerializeField] public TTSWitVoiceSettings customWitVoiceSettings;
+        [HideInInspector][SerializeField] public TTSWitVoiceSettings customWitVoiceSettings;
 
         // Override voice settings
         private TTSVoiceSettings _overrideVoiceSettings;
@@ -1084,7 +1086,7 @@ namespace Meta.WitAi.TTS.Utilities
                 yield break;
             }
             // Wait while loading/speaking
-            yield return SpeakQueuedAsync(new string[] {textToSpeak}, voiceSettings, diskCacheSettings, playbackEvents);
+            yield return SpeakQueuedAsync(new string[] { textToSpeak }, voiceSettings, diskCacheSettings, playbackEvents);
         }
 
         /// <summary>
@@ -1222,7 +1224,7 @@ namespace Meta.WitAi.TTS.Utilities
         private void RefreshPlayback()
         {
             // Ignore if currently playing or nothing in uque
-            if (SpeakingClip != null ||  _queuedRequests == null || _queuedRequests.Count == 0 || _audioPlayer == null)
+            if (SpeakingClip != null || _queuedRequests == null || _queuedRequests.Count == 0 || _audioPlayer == null)
             {
                 return;
             }

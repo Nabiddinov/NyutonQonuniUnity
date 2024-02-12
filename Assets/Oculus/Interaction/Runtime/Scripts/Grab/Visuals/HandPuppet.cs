@@ -18,8 +18,8 @@
  * limitations under the License.
  */
 
-using Oculus.Interaction.Input;
 using System.Collections.Generic;
+using Oculus.Interaction.Input;
 using UnityEngine;
 
 namespace Oculus.Interaction.HandGrab.Visuals

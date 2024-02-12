@@ -38,9 +38,9 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using UnityEngine;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
+using UnityEngine;
 
 // Internal C# wrapper for OVRPlugin.
 
@@ -3653,13 +3653,13 @@ public static partial class OVRPlugin
             if (expensiveSharpen)
                 flags |= (uint)OverlayFlag.ExpensiveSharpen;
             if (efficientSharpen)
-                    flags |= (uint)OverlayFlag.EfficientSharpen;
+                flags |= (uint)OverlayFlag.EfficientSharpen;
             if (bicubic)
                 flags |= (uint)OverlayFlag.BicubicFiltering;
             if (secureContent)
                 flags |= (uint)OverlayFlag.SecureContent;
             if (automaticFiltering)
-                flags |= (uint) OverlayFlag.AutoFiltering;
+                flags |= (uint)OverlayFlag.AutoFiltering;
             if (shape == OverlayShape.Cylinder || shape == OverlayShape.Cubemap)
             {
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -4113,7 +4113,8 @@ public static partial class OVRPlugin
         {
             Bool generatedByController = Bool.False;
             Result result = OVRP_1_86_0.ovrp_AreHandPosesGeneratedByControllerData(stepId, nodeId, ref generatedByController);
-            if(result == Result.Success && generatedByController == Bool.True) {
+            if (result == Result.Success && generatedByController == Bool.True)
+            {
                 return true;
             }
             return false;
@@ -4133,7 +4134,8 @@ public static partial class OVRPlugin
         if (version >= OVRP_1_88_0.version)
         {
             Result result = OVRP_1_88_0.ovrp_SetSimultaneousHandsAndControllersEnabled(enabled ? Bool.True : Bool.False);
-            if(result == Result.Success) {
+            if (result == Result.Success)
+            {
                 return true;
             }
         }
@@ -4151,7 +4153,8 @@ public static partial class OVRPlugin
         {
             Bool isInHand = Bool.True;
             Result result = OVRP_1_86_0.ovrp_GetControllerIsInHand(stepId, nodeId, ref isInHand);
-            if(result == Result.Success && isInHand == Bool.False) {
+            if (result == Result.Success && isInHand == Bool.False)
+            {
                 return false;
             }
             return true;

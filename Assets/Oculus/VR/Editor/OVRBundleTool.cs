@@ -20,13 +20,12 @@
 
 #if UNITY_EDITOR_WIN && UNITY_ANDROID
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Reflection;
 using System.IO;
-using UnityEngine;
+using System.Reflection;
 using UnityEditor;
+using UnityEngine;
 
 public class OVRBundleTool : EditorWindow
 {

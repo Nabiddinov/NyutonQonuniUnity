@@ -5,8 +5,6 @@ using UnityEditor;
 #endif
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 [ExecuteInEditMode]
 [DisallowMultipleComponent]
@@ -65,12 +63,12 @@ public class BakeryLightMesh : MonoBehaviour
 
 #endif
 
-	void OnDrawGizmosSelected()
-	{
-		Gizmos.color = Color.yellow;
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
         var mr = gameObject.GetComponent<MeshRenderer>();
-        if (mr!=null) Gizmos.DrawWireSphere(mr.bounds.center, cutoff);
-	}
+        if (mr != null) Gizmos.DrawWireSphere(mr.bounds.center, cutoff);
+    }
 }
 
 

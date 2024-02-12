@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -12,7 +11,6 @@ public class Change : MonoBehaviour
         StartCoroutine(AnimationController());
     }
 
-
     IEnumerator AnimationController()
     {
         yield return new WaitForSeconds(49f);
@@ -20,8 +18,6 @@ public class Change : MonoBehaviour
         GetComponent<Animator>().SetInteger("Link", 1);
 
         StartCoroutine(CanvasAnimControler());
-
-        // GetComponent<Animator>().Play("Idle");
 
         yield return new WaitForSeconds(35.4f);
 
@@ -35,5 +31,4 @@ public class Change : MonoBehaviour
         yield return new WaitForSeconds(5f);
         CanvasAnim.SetInteger("Canva", 2);
     }
-
 }

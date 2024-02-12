@@ -28,10 +28,8 @@
 #define REQUIRES_XR_SDK
 #endif
 
-using System.Diagnostics;
-
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 // TODO: rename to MetaXRSimulatorDownloader after UPM migration
 public class MetaXRSimulatorEnabler : MonoBehaviour

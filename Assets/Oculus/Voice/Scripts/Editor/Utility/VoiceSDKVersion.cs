@@ -19,7 +19,6 @@
  */
 
 using System;
-using Oculus.VoiceSDK;
 using UnityEngine;
 
 namespace Oculus.Voice.Utility

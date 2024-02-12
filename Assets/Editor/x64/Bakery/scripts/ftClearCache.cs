@@ -1,15 +1,14 @@
-using UnityEngine;
-using UnityEditor;
-using UnityEngine.SceneManagement;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ftClearCache
 {
     static void Clear(string[] files)
     {
-        for(int i=0; i<files.Length; i++) File.Delete(files[i]);
+        for (int i = 0; i < files.Length; i++) File.Delete(files[i]);
     }
 
     [MenuItem("Bakery/Utilities/Clear cache", false, 51)]
@@ -20,7 +19,7 @@ public class ftClearCache
         var defaultPath = System.Environment.GetEnvironmentVariable("TEMP", System.EnvironmentVariableTarget.Process) + "\\frender";
 
         var sceneCount = SceneManager.sceneCount;
-        for(int i=0; i<sceneCount; i++)
+        for (int i = 0; i < sceneCount; i++)
         {
             var scene = SceneManager.GetSceneAt(i);
             if (!scene.isLoaded) continue;
@@ -32,7 +31,7 @@ public class ftClearCache
             list.Add(storage.renderSettingsTempPath == "" ? defaultPath : storage.renderSettingsTempPath);
         }
 
-        foreach(var tempPath in list)
+        foreach (var tempPath in list)
         {
             if (EditorUtility.DisplayDialog("Bakery", "Clear cache from '" + tempPath + "'?", "OK", "Cancel"))
             {

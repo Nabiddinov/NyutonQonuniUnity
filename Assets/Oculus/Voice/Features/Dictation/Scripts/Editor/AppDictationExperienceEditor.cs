@@ -7,9 +7,7 @@
  */
 
 using System.IO;
-using Meta.WitAi;
 using Meta.WitAi.Dictation;
-using Meta.WitAi.Windows;
 using UnityEditor;
 using UnityEngine;
 

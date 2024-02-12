@@ -3,23 +3,18 @@
 
 #if UNITY_EDITOR
 
-using UnityEngine;
-using UnityEditor;
-using UnityEditor.Callbacks;
-using System;
-using System.IO;
-using System.Text;
-using System.Net;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Networking;
+using System.IO;
 using System.Runtime.InteropServices;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.Networking;
 
 [InitializeOnLoad]
 public class ftUpdater : EditorWindow
 {
-    [DllImport ("frender", CallingConvention=CallingConvention.Cdecl)]
-    public static extern int ExtractZIP([MarshalAs(UnmanagedType.LPWStr)]string zipFilename, int skipInnerFolders, string onlyFolder, [MarshalAs(UnmanagedType.LPWStr)]string outPath);
+    [DllImport("frender", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int ExtractZIP([MarshalAs(UnmanagedType.LPWStr)] string zipFilename, int skipInnerFolders, string onlyFolder, [MarshalAs(UnmanagedType.LPWStr)] string outPath);
 
     IEnumerator progressFunc;
     float progress = 0.0f;
@@ -35,8 +30,8 @@ public class ftUpdater : EditorWindow
 
     bool anythingDownloaded = false;
 
-	[MenuItem ("Bakery/Utilities/Check for patches", false, 1000)]
-	public static void Check()
+    [MenuItem("Bakery/Utilities/Check for patches", false, 1000)]
+    public static void Check()
     {
         var instance = (ftUpdater)GetWindow(typeof(ftUpdater));
         instance.titleContent.text = "Bakery patch";
@@ -58,7 +53,7 @@ public class ftUpdater : EditorWindow
     {
         var req = UnityWebRequest.Get(url + curItem);
         yield return req.Send();
-        while(!req.isDone)
+        while (!req.isDone)
         {
             progress = req.downloadProgress;
             Repaint();
@@ -89,7 +84,7 @@ public class ftUpdater : EditorWindow
         lastVer = "";
         var req = UnityWebRequest.Get(url + curItem + "&getLastVer");
         yield return req.Send();
-        while(!req.isDone)
+        while (!req.isDone)
         {
             progress = req.downloadProgress;
             Repaint();
@@ -118,7 +113,7 @@ public class ftUpdater : EditorWindow
     IEnumerator DownloadItemIfNewer(string url)
     {
         var dw = GetLastVer(url);
-        while(dw.MoveNext()) yield return null;
+        while (dw.MoveNext()) yield return null;
         if (isError) yield break;
 
         var fname = curItem + "-cver.txt"; // currently installed
@@ -133,7 +128,7 @@ public class ftUpdater : EditorWindow
         }
 
         dw = DownloadItem(url);
-        while(dw.MoveNext()) yield return null;
+        while (dw.MoveNext()) yield return null;
         anythingDownloaded = true;
 
         File.WriteAllText(curItem + "-dver.txt", lastVer); // downloaded
@@ -162,13 +157,13 @@ public class ftUpdater : EditorWindow
             // Download bakery-csharp
             curItem = "bakery-csharp";
             var dw = DownloadItemIfNewer("https://geom.io/bakery/github-download.php?name=" + username + "&invoice=" + inLM + "&repo=");
-            while(dw.MoveNext()) yield return null;
+            while (dw.MoveNext()) yield return null;
             if (isError) yield break;
 
             // Download bakery-compiled
             curItem = "bakery-compiled";
             dw = DownloadItemIfNewer("https://geom.io/bakery/github-download.php?name=" + username + "&invoice=" + inLM + "&repo=");
-            while(dw.MoveNext()) yield return null;
+            while (dw.MoveNext()) yield return null;
             if (isError) yield break;
         }
 
@@ -177,7 +172,7 @@ public class ftUpdater : EditorWindow
             // Download bakery-rtpreview-csharp
             curItem = "bakery-rtpreview-csharp";
             var dw = DownloadItemIfNewer("https://geom.io/bakery/github-download.php?name=" + username + "&invoice=" + inRT + "&repo=");
-            while(dw.MoveNext()) yield return null;
+            while (dw.MoveNext()) yield return null;
             if (isError) yield break;
         }
 
@@ -197,7 +192,7 @@ public class ftUpdater : EditorWindow
             var runtimePath = cachePath + "/Runtime";
             if (!Directory.Exists(runtimePath)) Directory.CreateDirectory(runtimePath);
 
-            var editorPath =  cachePath + "/Editor";
+            var editorPath = cachePath + "/Editor";
             if (!Directory.Exists(editorPath)) Directory.CreateDirectory(editorPath);
 
             if (downloadLM)
@@ -300,7 +295,7 @@ public class ftUpdater : EditorWindow
         {
             PlayerPrefs.SetString("BakeryGHUsername", username);
         }
-        y += 18*2;
+        y += 18 * 2;
 
         if (GUI.Button(new Rect(0, y, 320, 18), "Check"))
         {
@@ -324,7 +319,7 @@ public class ftUpdater : EditorWindow
         {
             EditorGUI.HelpBox(new Rect(0, y, 320, 40), errMsg, MessageType.Error);
         }
-	}
+    }
 
     private static void Copy(string srcFolder, string destFolder)
     {

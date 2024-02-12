@@ -18,10 +18,10 @@
  * limitations under the License.
  */
 
-using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Meta.XR.BuildingBlocks.Editor
 {

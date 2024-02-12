@@ -7,14 +7,11 @@
  */
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
-using Meta.WitAi.Data.Info;
 using Meta.WitAi.Json;
 
 namespace Meta.WitAi.Lib
@@ -86,7 +83,7 @@ namespace Meta.WitAi.Lib
 
                 return JsonConvert.DeserializeToken(json);
             }
-            VLog.W("Could not open file named "+ fileName);
+            VLog.W("Could not open file named " + fileName);
             return null;
         }
 

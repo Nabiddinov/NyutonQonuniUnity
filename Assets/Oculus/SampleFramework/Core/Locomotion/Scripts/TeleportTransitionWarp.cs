@@ -7,8 +7,8 @@ language governing permissions and limitations under the license.
 
 ************************************************************************************/
 
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 /// <summary>
 /// This transition will move the player to the destination over the span of a fixed amount of time.

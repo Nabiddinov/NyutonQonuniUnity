@@ -5,8 +5,6 @@ using UnityEditor;
 #endif
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 [ExecuteInEditMode]
 [DisallowMultipleComponent]
@@ -117,66 +115,66 @@ public class BakeryPointLight : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-      Gizmos.color = color;//Color.yellow;
-      Gizmos.DrawWireSphere(transform.position, shadowSpread);
+        Gizmos.color = color;//Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, shadowSpread);
 
-      Gizmos.color = new Color(color.r, color.g, color.b, 0.25f);//Color.gray;
-      if (projMode != ftLightProjectionMode.Cookie && projMode != ftLightProjectionMode.Cone) Gizmos.DrawWireSphere(transform.position, cutoff);
+        Gizmos.color = new Color(color.r, color.g, color.b, 0.25f);//Color.gray;
+        if (projMode != ftLightProjectionMode.Cookie && projMode != ftLightProjectionMode.Cone) Gizmos.DrawWireSphere(transform.position, cutoff);
 
-      if (projMode != 0)
-      {
-          Gizmos.color = color;//Color.yellow;
-          Vector3 endPoint;
-          if (projMode == ftLightProjectionMode.Cookie || projMode == ftLightProjectionMode.Cone)
-          {
-            endPoint = transform.forward * 2;
-            Gizmos.DrawRay(transform.position, endPoint);
-
-            float angle2 = (180 - angle) * Mathf.Deg2Rad * 0.5f;
-            //float x = Mathf.Cos(angle2);
-            //float radius = x * cutoff;
-
-            float x = 1 / Mathf.Sin(angle2);
-            x = Mathf.Sqrt(x * x - 1);
-            float radius = x * cutoff;
-
-            const int segments = 16;
-            for(int i=0; i<segments; i++)
-            {
-                float p1 = i / (float)segments;
-                float p2 = (i+1) / (float)segments;
-
-                float x1 = Mathf.Cos(p1 * Mathf.PI*2);
-                float y1 = Mathf.Sin(p1 * Mathf.PI*2);
-
-                float x2 = Mathf.Cos(p2 * Mathf.PI*2);
-                float y2 = Mathf.Sin(p2 * Mathf.PI*2);
-
-                Vector3 A = transform.position + transform.forward * cutoff + transform.right * x1 * radius + transform.up * y1 * radius;
-                Vector3 B = transform.position + transform.forward * cutoff + transform.right * x2 * radius + transform.up * y2 * radius;
-                Gizmos.DrawLine(A, B);
-
-                if (i % 4 == 0) Gizmos.DrawLine(transform.position, A);
-            }
-          }
-          else
-          {
-            if (projMode == ftLightProjectionMode.IES && directionMode == Direction.PositiveZ)
+        if (projMode != 0)
+        {
+            Gizmos.color = color;//Color.yellow;
+            Vector3 endPoint;
+            if (projMode == ftLightProjectionMode.Cookie || projMode == ftLightProjectionMode.Cone)
             {
                 endPoint = transform.forward * 2;
+                Gizmos.DrawRay(transform.position, endPoint);
+
+                float angle2 = (180 - angle) * Mathf.Deg2Rad * 0.5f;
+                //float x = Mathf.Cos(angle2);
+                //float radius = x * cutoff;
+
+                float x = 1 / Mathf.Sin(angle2);
+                x = Mathf.Sqrt(x * x - 1);
+                float radius = x * cutoff;
+
+                const int segments = 16;
+                for (int i = 0; i < segments; i++)
+                {
+                    float p1 = i / (float)segments;
+                    float p2 = (i + 1) / (float)segments;
+
+                    float x1 = Mathf.Cos(p1 * Mathf.PI * 2);
+                    float y1 = Mathf.Sin(p1 * Mathf.PI * 2);
+
+                    float x2 = Mathf.Cos(p2 * Mathf.PI * 2);
+                    float y2 = Mathf.Sin(p2 * Mathf.PI * 2);
+
+                    Vector3 A = transform.position + transform.forward * cutoff + transform.right * x1 * radius + transform.up * y1 * radius;
+                    Vector3 B = transform.position + transform.forward * cutoff + transform.right * x2 * radius + transform.up * y2 * radius;
+                    Gizmos.DrawLine(A, B);
+
+                    if (i % 4 == 0) Gizmos.DrawLine(transform.position, A);
+                }
             }
             else
             {
-                endPoint = -transform.up * 2;
+                if (projMode == ftLightProjectionMode.IES && directionMode == Direction.PositiveZ)
+                {
+                    endPoint = transform.forward * 2;
+                }
+                else
+                {
+                    endPoint = -transform.up * 2;
+                }
+                Gizmos.DrawRay(transform.position, endPoint);
             }
-            Gizmos.DrawRay(transform.position, endPoint);
-          }
-          endPoint += transform.position;
-          Gizmos.DrawLine(endPoint, endPoint + (transform.position + transform.right - endPoint).normalized * 0.5f);
-          Gizmos.DrawLine(endPoint, endPoint + (transform.position - transform.right - endPoint).normalized * 0.5f);
-          Gizmos.DrawLine(endPoint, endPoint + (transform.position + transform.up - endPoint).normalized * 0.5f);
-          Gizmos.DrawLine(endPoint, endPoint + (transform.position - transform.up - endPoint).normalized * 0.5f);
-      }
+            endPoint += transform.position;
+            Gizmos.DrawLine(endPoint, endPoint + (transform.position + transform.right - endPoint).normalized * 0.5f);
+            Gizmos.DrawLine(endPoint, endPoint + (transform.position - transform.right - endPoint).normalized * 0.5f);
+            Gizmos.DrawLine(endPoint, endPoint + (transform.position + transform.up - endPoint).normalized * 0.5f);
+            Gizmos.DrawLine(endPoint, endPoint + (transform.position - transform.up - endPoint).normalized * 0.5f);
+        }
     }
 #endif
 }

@@ -1,29 +1,27 @@
-using UnityEngine;
-using UnityEditor;
-using System.IO;
-using UnityEngine.SceneManagement;
 using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices;
+using UnityEditor;
+using UnityEngine;
 
 public class ftDetectSettings
 {
-    [DllImport ("frender", CallingConvention=CallingConvention.Cdecl)]
-    public static extern System.IntPtr RunLocalProcess([MarshalAs(UnmanagedType.LPWStr)]string commandline, bool setWorkDir);
+    [DllImport("frender", CallingConvention = CallingConvention.Cdecl)]
+    public static extern System.IntPtr RunLocalProcess([MarshalAs(UnmanagedType.LPWStr)] string commandline, bool setWorkDir);
 
-    [DllImport ("frender", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("frender", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool IsProcessFinished(System.IntPtr proc);
 
-    [DllImport ("frender", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("frender", CallingConvention = CallingConvention.Cdecl)]
     public static extern int GetProcessReturnValueAndClose(System.IntPtr proc);
 
-    [DllImport ("simpleProgressBar", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("simpleProgressBar", CallingConvention = CallingConvention.Cdecl)]
     public static extern int simpleProgressBarShow(string header, string msg, float percent, float step, bool onTop);
 
-    [DllImport ("simpleProgressBar", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("simpleProgressBar", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool simpleProgressBarCancelled();
 
-    [DllImport ("simpleProgressBar", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("simpleProgressBar", CallingConvention = CallingConvention.Cdecl)]
     public static extern void simpleProgressBarEnd();
 
     static IEnumerator progressFunc;
@@ -52,7 +50,7 @@ public class ftDetectSettings
     public static void DetectCompatSettings()
     {
         var bakeryPath = ftLightmaps.GetEditorPath();
-        ValidateFileAttribs(bakeryPath+"/hwtestdata/image.lz4");
+        ValidateFileAttribs(bakeryPath + "/hwtestdata/image.lz4");
 
         progressFunc = DetectCoroutine();
         EditorApplication.update += DetectUpdate;
@@ -69,42 +67,42 @@ public class ftDetectSettings
         crt = ProcessCoroutine("ftraceRTX.exe /sun hwtestdata light 4 0 0 direct0.bin");
         while (crt.MoveNext()) yield return null;
         if (userCanceled) yield break;
-        runsRTX = lastReturnValue==0;
+        runsRTX = lastReturnValue == 0;
         progress += step;
 
         ShowProgress("Testing: non-RTX ray-tracing", progress);
         crt = ProcessCoroutine("ftrace.exe /sun hwtestdata light 4 0 0 direct0.bin");
         while (crt.MoveNext()) yield return null;
         if (userCanceled) yield break;
-        runsNonRTX = lastReturnValue==0;
+        runsNonRTX = lastReturnValue == 0;
         progress += step;
 
         ShowProgress("Testing: OptiX 5.1 denoiser", progress);
         crt = ProcessCoroutine("denoiserLegacy c hwtestdata/image.lz4 hwtestdata/image.lz4 16 0");
         while (crt.MoveNext()) yield return null;
         if (userCanceled) yield break;
-        runsOptix5 = lastReturnValue==0;
+        runsOptix5 = lastReturnValue == 0;
         progress += step;
 
         ShowProgress("Testing: OptiX 6.0 denoiser", progress);
         crt = ProcessCoroutine("denoiser c hwtestdata/image.lz4 hwtestdata/image.lz4 16 0");
         while (crt.MoveNext()) yield return null;
         if (userCanceled) yield break;
-        runsOptix6 = lastReturnValue==0;
+        runsOptix6 = lastReturnValue == 0;
         progress += step;
 
         ShowProgress("Testing: OptiX 7.2 denoiser", progress);
         crt = ProcessCoroutine("denoiser72 c hwtestdata/image.lz4 hwtestdata/image.lz4 16 0");
         while (crt.MoveNext()) yield return null;
         if (userCanceled) yield break;
-        runsOptix7 = lastReturnValue==0;
+        runsOptix7 = lastReturnValue == 0;
         progress += step;
 
         ShowProgress("Testing: OpenImageDenoise", progress);
         crt = ProcessCoroutine("denoiserOIDN c hwtestdata/image.lz4 hwtestdata/image.lz4 16 0");
         while (crt.MoveNext()) yield return null;
         if (userCanceled) yield break;
-        runsOIDN = lastReturnValue==0;
+        runsOIDN = lastReturnValue == 0;
         progress += step;
 
         simpleProgressBarEnd();
@@ -245,7 +243,7 @@ public class ftDetectSettings
             lastReturnValue = -1;
             yield break;
         }
-        while(!IsProcessFinished(exeProcess))
+        while (!IsProcessFinished(exeProcess))
         {
             yield return null;
             userCanceled = simpleProgressBarCancelled();

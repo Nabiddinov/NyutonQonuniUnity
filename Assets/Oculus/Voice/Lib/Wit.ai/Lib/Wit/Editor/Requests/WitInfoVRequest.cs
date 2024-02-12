@@ -10,9 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using UnityEngine;
-using Meta.WitAi.Json;
 using Meta.WitAi.Data.Info;
+using Meta.WitAi.Json;
+using UnityEngine;
 
 namespace Meta.WitAi.Requests
 {
@@ -28,7 +28,7 @@ namespace Meta.WitAi.Requests
         public WitInfoVRequest(IWitRequestConfiguration configuration, bool useServerToken = true,
             RequestProgressDelegate onDownloadProgress = null,
             RequestFirstResponseDelegate onFirstResponse = null)
-            : base(configuration, null, useServerToken, onDownloadProgress, onFirstResponse) {}
+            : base(configuration, null, useServerToken, onDownloadProgress, onFirstResponse) { }
 
         // Get all apps & return the current app info
         public bool RequestAppId(RequestCompleteDelegate<string> onComplete)
@@ -92,7 +92,7 @@ namespace Meta.WitAi.Requests
         {
             var uri = new Uri(downloadUri);
             var request = new VRequest();
-            request.RequestFile(uri, (result,error) =>
+            request.RequestFile(uri, (result, error) =>
             {
                 try
                 {

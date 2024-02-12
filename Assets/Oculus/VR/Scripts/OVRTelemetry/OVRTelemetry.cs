@@ -23,7 +23,6 @@
 #endif
 
 using System;
-using UnityEngine;
 
 internal static partial class OVRTelemetry
 {

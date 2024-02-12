@@ -18,12 +18,12 @@
  * limitations under the License.
  */
 
+using System.Collections.Generic;
+using Meta.XR.BuildingBlocks.Editor;
 using Oculus.Interaction.HandGrab;
 using Oculus.Interaction.Input;
 using Oculus.Interaction.Throw;
-using System.Collections.Generic;
 using UnityEngine;
-using Meta.XR.BuildingBlocks.Editor;
 
 namespace Oculus.Interaction.Editor.BuildingBlocks
 {

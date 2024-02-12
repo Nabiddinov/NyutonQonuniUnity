@@ -1,12 +1,8 @@
 
+using System.IO;
 using UnityEditor;
 using UnityEngine;
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine.SceneManagement;
-using UnityEditor.SceneManagement;
 
 [CustomEditor(typeof(BakeryLightmapGroupSelector))]
 [CanEditMultipleObjects]
@@ -36,7 +32,7 @@ public class ftLMGroupSelectorInspector : UnityEditor.Editor
     void ForceSavePrefabOverride(UnityEngine.Object[] targets)
     {
 #if UNITY_2018_3_OR_NEWER
-        foreach(BakeryLightmapGroupSelector obj in targets)
+        foreach (BakeryLightmapGroupSelector obj in targets)
         {
             PrefabUtility.RecordPrefabInstancePropertyModifications(obj);
             EditorUtility.SetDirty(obj);
@@ -44,7 +40,8 @@ public class ftLMGroupSelectorInspector : UnityEditor.Editor
 #endif
     }
 
-    public override void OnInspectorGUI() {
+    public override void OnInspectorGUI()
+    {
         serializedObject.Update();
 
         //if (!ftraceAsset.hasMultipleDifferentValues)
@@ -60,7 +57,7 @@ public class ftLMGroupSelectorInspector : UnityEditor.Editor
 
             if (changed)
             {
-                foreach(BakeryLightmapGroupSelector obj in targets)
+                foreach (BakeryLightmapGroupSelector obj in targets)
                 {
                     Undo.RecordObject(obj, "Change LMGroup");
                     obj.lmgroupAsset = selectedLMGroup;
@@ -80,29 +77,47 @@ public class ftLMGroupSelectorInspector : UnityEditor.Editor
 
                 //EditorGUILayout.LabelField("Packed atlas: " + (group.mode == BakeryLightmapGroup.ftLMGroupMode.PackAtlas ? "yes" : "no"));
                 var modeString = "Packing: ";
-                if (group.mode == BakeryLightmapGroup.ftLMGroupMode.OriginalUV) {
+                if (group.mode == BakeryLightmapGroup.ftLMGroupMode.OriginalUV)
+                {
                     modeString += "original UV";
-                } else if (group.mode == BakeryLightmapGroup.ftLMGroupMode.PackAtlas) {
+                }
+                else if (group.mode == BakeryLightmapGroup.ftLMGroupMode.PackAtlas)
+                {
                     modeString += "packed atlas";
-                } else {
+                }
+                else
+                {
                     modeString += "vertex";
                 }
                 EditorGUILayout.LabelField(modeString);
 
                 modeString = "Directional: ";
-                if (group.renderDirMode == BakeryLightmapGroup.RenderDirMode.Auto) {
+                if (group.renderDirMode == BakeryLightmapGroup.RenderDirMode.Auto)
+                {
                     modeString += "auto";
-                } else if (group.renderDirMode == BakeryLightmapGroup.RenderDirMode.None) {
+                }
+                else if (group.renderDirMode == BakeryLightmapGroup.RenderDirMode.None)
+                {
                     modeString += "none";
-                } else if (group.renderDirMode == BakeryLightmapGroup.RenderDirMode.BakedNormalMaps) {
+                }
+                else if (group.renderDirMode == BakeryLightmapGroup.RenderDirMode.BakedNormalMaps)
+                {
                     modeString += "baked normal maps";
-                } else if (group.renderDirMode == BakeryLightmapGroup.RenderDirMode.DominantDirection) {
+                }
+                else if (group.renderDirMode == BakeryLightmapGroup.RenderDirMode.DominantDirection)
+                {
                     modeString += "dominant direction";
-                } else if (group.renderDirMode == BakeryLightmapGroup.RenderDirMode.RNM) {
+                }
+                else if (group.renderDirMode == BakeryLightmapGroup.RenderDirMode.RNM)
+                {
                     modeString += "RNM";
-                } else if (group.renderDirMode == BakeryLightmapGroup.RenderDirMode.SH) {
+                }
+                else if (group.renderDirMode == BakeryLightmapGroup.RenderDirMode.SH)
+                {
                     modeString += "SH";
-                } else if (group.renderDirMode == BakeryLightmapGroup.RenderDirMode.MonoSH) {
+                }
+                else if (group.renderDirMode == BakeryLightmapGroup.RenderDirMode.MonoSH)
+                {
                     modeString += "MonoSH";
                 }
                 EditorGUILayout.LabelField(modeString);
@@ -115,7 +130,7 @@ public class ftLMGroupSelectorInspector : UnityEditor.Editor
                     }
                     else
                     {
-                        EditorGUILayout.LabelField("Resolution: " + (ftraceOverride.boolValue ? (ftraceResolution.intValue + " (atlas: " + group.resolution + ")") : (group.resolution)+""));
+                        EditorGUILayout.LabelField("Resolution: " + (ftraceOverride.boolValue ? (ftraceResolution.intValue + " (atlas: " + group.resolution + ")") : (group.resolution) + ""));
                     }
                 }
 

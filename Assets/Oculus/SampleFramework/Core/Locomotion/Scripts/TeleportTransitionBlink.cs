@@ -8,8 +8,8 @@ language governing permissions and limitations under the license.
 ************************************************************************************/
 
 using System;
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 /// <summary>
 /// This transition will cause the screen to quickly fade to black, perform the repositioning, and then fade

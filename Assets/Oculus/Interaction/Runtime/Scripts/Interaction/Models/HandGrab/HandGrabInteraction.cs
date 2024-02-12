@@ -19,9 +19,9 @@
  */
 
 using Oculus.Interaction.Grab;
-using UnityEngine;
 using Oculus.Interaction.GrabAPI;
 using Oculus.Interaction.Input;
+using UnityEngine;
 
 namespace Oculus.Interaction.HandGrab
 {

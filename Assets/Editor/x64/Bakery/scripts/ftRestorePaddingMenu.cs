@@ -1,5 +1,5 @@
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ftRestorePaddingMenu
@@ -20,7 +20,7 @@ public class ftRestorePaddingMenu
         {
             var sceneCount = SceneManager.sceneCount;
             int reimported = 0;
-            for(int i=0; i<sceneCount; i++)
+            for (int i = 0; i < sceneCount; i++)
             {
                 var scene = SceneManager.GetSceneAt(i);
                 if (!scene.isLoaded) continue;
@@ -29,7 +29,7 @@ public class ftRestorePaddingMenu
                 var store = go.GetComponent<ftLightmapsStorage>();
                 if (store == null) continue;
 
-                for(int j=0; j<store.modifiedAssetPathList.Count; j++)
+                for (int j = 0; j < store.modifiedAssetPathList.Count; j++)
                 {
                     bool updated = false;
                     var path = store.modifiedAssetPathList[j];
@@ -45,9 +45,9 @@ public class ftRestorePaddingMenu
                     else
                     {
                         var dataExisting = gstorage.modifiedAssets[mstoreIndex];
-                        for(int k=0; k<data.meshName.Count; k++)
+                        for (int k = 0; k < data.meshName.Count; k++)
                         {
-                            int ind = dataExisting.meshName.IndexOf( data.meshName[k] );
+                            int ind = dataExisting.meshName.IndexOf(data.meshName[k]);
                             if (ind >= 0)
                             {
                                 if (dataExisting.padding[ind] != data.padding[k])
@@ -63,9 +63,9 @@ public class ftRestorePaddingMenu
                             }
                             else
                             {
-                                dataExisting.meshName.Add( data.meshName[k] );
-                                dataExisting.padding.Add( data.padding[k] );
-                                dataExisting.unwrapper.Add( data.unwrapper[k] );
+                                dataExisting.meshName.Add(data.meshName[k]);
+                                dataExisting.padding.Add(data.padding[k]);
+                                dataExisting.unwrapper.Add(data.unwrapper[k]);
                                 updated = true;
                             }
                         }

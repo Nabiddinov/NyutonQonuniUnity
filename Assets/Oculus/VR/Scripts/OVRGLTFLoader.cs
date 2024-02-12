@@ -18,14 +18,13 @@
  * limitations under the License.
  */
 
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System;
 using System.Linq;
-using UnityEngine;
-using OVRSimpleJSON;
 using System.Threading.Tasks;
+using OVRSimpleJSON;
+using UnityEngine;
 
 /// <summary>
 /// This is a lightweight glTF model loader that is guaranteed to work with models loaded from the Oculus runtime

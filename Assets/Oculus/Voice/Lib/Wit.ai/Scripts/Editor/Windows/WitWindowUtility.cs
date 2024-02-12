@@ -8,8 +8,8 @@
 
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using Meta.WitAi.Data.Configuration;
+using UnityEditor;
 
 namespace Meta.WitAi.Windows
 {

@@ -7,7 +7,6 @@
  */
 
 using System;
-using System.Drawing;
 using UnityEngine;
 
 namespace Meta.Voice.Hub
@@ -43,7 +42,7 @@ namespace Meta.Voice.Hub
         public virtual bool ShowPageGroupTitle => showPageGroupTitle;
         public virtual bool AllowWithoutContextFilter => _allowWithoutContextFilter;
         public virtual string[] ParentContexts => _parentContexts;
-        
+
         public virtual ScriptableObjectReflectionPage[] ScriptableObjectReflectionPages => _scriptableObjectPages;
 
         [Serializable]

@@ -1,10 +1,9 @@
 #if UNITY_EDITOR
 
-using UnityEngine;
-using UnityEditor;
-using UnityEngine.SceneManagement;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
+using UnityEditor;
+using UnityEngine;
 
 public class ftSavePaddingMenu
 {
@@ -23,7 +22,7 @@ public class ftSavePaddingMenu
         var sel = Selection.objects;
         var pathList = new List<string>();
 
-        for(int i=0; i<sel.Length; i++)
+        for (int i = 0; i < sel.Length; i++)
         {
             var path = AssetDatabase.GetAssetPath(sel[i]);
             if (path == "") continue;
@@ -31,7 +30,7 @@ public class ftSavePaddingMenu
         }
 
         int ctr = 0;
-        for(int i=0; i<pathList.Count; i++)
+        for (int i = 0; i < pathList.Count; i++)
         {
             var index = gstorage.modifiedAssetPathList.IndexOf(pathList[i]);
             if (index < 0)

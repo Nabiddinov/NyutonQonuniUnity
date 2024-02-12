@@ -18,11 +18,11 @@
  * limitations under the License.
  */
 
-using UnityEditor;
 using System.Reflection;
 using Meta.WitAi.Data.Info;
 using Meta.WitAi.Windows;
 using Oculus.Voice.Inspectors;
+using UnityEditor;
 
 namespace Oculus.Voice.Windows
 {

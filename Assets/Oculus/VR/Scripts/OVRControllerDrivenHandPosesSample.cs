@@ -18,18 +18,9 @@
  * limitations under the License.
  */
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
-using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
-using System.Linq;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 
 /// <summary>
 /// Simple script for running the ControllerDrivenHandPosesSample

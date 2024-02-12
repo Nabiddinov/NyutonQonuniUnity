@@ -6,7 +6,6 @@ public class Scen2ChangeA : MonoBehaviour
 {
     public Animator CanvasAnim;
 
-  
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))

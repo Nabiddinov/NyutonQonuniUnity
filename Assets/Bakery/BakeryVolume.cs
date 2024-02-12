@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 #if UNITY_EDITOR
-using UnityEditor;
-using UnityEditor.IMGUI.Controls;
 #endif
 
 [ExecuteInEditMode]
@@ -61,7 +57,7 @@ public class BakeryVolume : MonoBehaviour
     public Vector3 GetInvSize()
     {
         var b = bounds;
-        return new Vector3(1.0f/b.size.x, 1.0f/b.size.y, 1.0f/b.size.z);;
+        return new Vector3(1.0f / b.size.x, 1.0f / b.size.y, 1.0f / b.size.z); ;
     }
 
     public Matrix4x4 GetMatrix()
@@ -79,7 +75,7 @@ public class BakeryVolume : MonoBehaviour
         Shader.SetGlobalTexture("_VolumeMask", bakedMask);
         var b = bounds;
         var bmin = b.min;
-        var bis = new Vector3(1.0f/b.size.x, 1.0f/b.size.y, 1.0f/b.size.z);;
+        var bis = new Vector3(1.0f / b.size.x, 1.0f / b.size.y, 1.0f / b.size.z); ;
         Shader.SetGlobalVector("_GlobalVolumeMin", bmin);
         Shader.SetGlobalVector("_GlobalVolumeInvSize", bis);
         if (supportRotationAfterBake) Shader.SetGlobalMatrix("_GlobalVolumeMatrix", GetMatrix());

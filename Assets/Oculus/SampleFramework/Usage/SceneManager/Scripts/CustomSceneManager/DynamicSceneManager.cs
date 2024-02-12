@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UnityEngine;
 using DynamicSceneManagerHelper;
+using UnityEngine;
 
 /// <summary>
 /// This sample expands on the snapshot scene manager and adds the ability
@@ -84,7 +84,7 @@ public class DynamicSceneManager : MonoBehaviour
 
             var children = new List<OVRAnchor>();
             await container.FetchChildrenAsync(children);
-            snapshot.Anchors.Add(room, new SceneSnapshot.Data { Children = children});
+            snapshot.Anchors.Add(room, new SceneSnapshot.Data { Children = children });
 
             foreach (var child in children)
             {

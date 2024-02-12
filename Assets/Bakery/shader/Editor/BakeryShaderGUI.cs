@@ -309,7 +309,7 @@ namespace UnityEditor
                             volumeMask.textureValue = assignedVolume.bakedMask;
                             var b = assignedVolume.bounds;
                             volumeMin.vectorValue = b.min;
-                            volumeInvSize.vectorValue = new Vector3(1.0f/b.size.x, 1.0f/b.size.y, 1.0f/b.size.z);
+                            volumeInvSize.vectorValue = new Vector3(1.0f / b.size.x, 1.0f / b.size.y, 1.0f / b.size.z);
                             assignedVolume = null;
                         }
                         if (volume0.textureValue != null)
@@ -324,7 +324,7 @@ namespace UnityEditor
                                 volumeInvSize.vectorValue = Vector3.one * 1000001;
                             }
                         }
-                        EditorGUILayout.LabelField("Current Volume: " + (volume0.textureValue == null ? "<none or global>" : volume0.textureValue.name.Substring(0, volume0.textureValue.name.Length-1)));
+                        EditorGUILayout.LabelField("Current Volume: " + (volume0.textureValue == null ? "<none or global>" : volume0.textureValue.name.Substring(0, volume0.textureValue.name.Length - 1)));
                         EditorGUI.BeginDisabledGroup(true);
                         m_MaterialEditor.TexturePropertySingleLine(Styles.volLabel0, volume0);
                         m_MaterialEditor.TexturePropertySingleLine(Styles.volLabel1, volume1);
@@ -333,7 +333,7 @@ namespace UnityEditor
                         var bmin4 = volumeMin.vectorValue;
                         var bmin = new Vector3(bmin4.x, bmin4.y, bmin4.z);
                         var invSize = volumeInvSize.vectorValue;
-                        var bmax = new Vector3(1.0f/invSize.x + bmin.x, 1.0f/invSize.y + bmin.y, 1.0f/invSize.z + bmin.z);
+                        var bmax = new Vector3(1.0f / invSize.x + bmin.x, 1.0f / invSize.y + bmin.y, 1.0f / invSize.z + bmin.z);
                         EditorGUILayout.LabelField("Min: " + bmin);
                         EditorGUILayout.LabelField("Max: " + bmax);
                         EditorGUI.EndDisabledGroup();

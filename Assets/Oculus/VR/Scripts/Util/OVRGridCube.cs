@@ -19,7 +19,6 @@
  */
 
 using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// Diagnostic display with a regular grid of cubes for visual testing of

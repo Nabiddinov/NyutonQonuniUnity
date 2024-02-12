@@ -18,13 +18,12 @@
  * limitations under the License.
  */
 
-using Oculus.Interaction.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Oculus.Interaction.Input;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace Oculus.Interaction.PoseDetection.Debug
 {

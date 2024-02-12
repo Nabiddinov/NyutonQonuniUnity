@@ -1,8 +1,8 @@
 namespace Oculus.Platform
 {
-    using UnityEngine;
     using System;
     using System.Collections.Generic;
+    using UnityEngine;
 
     public static class Callback
     {

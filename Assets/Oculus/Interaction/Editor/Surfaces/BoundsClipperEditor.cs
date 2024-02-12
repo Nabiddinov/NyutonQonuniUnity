@@ -19,11 +19,11 @@
  */
 
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-using Oculus.Interaction.Surfaces;
-using UnityEngine.SceneManagement;
 using System.Linq;
+using Oculus.Interaction.Surfaces;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Oculus.Interaction.Editor
 {
