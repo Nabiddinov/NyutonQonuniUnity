@@ -40,7 +40,7 @@ public class BakeryLightmappedPrefab : MonoBehaviour
         }
 
         var transforms = GetComponentsInChildren<Transform>();
-        for(int i=0; i<transforms.Length; i++)
+        for (int i = 0; i < transforms.Length; i++)
         {
             if (PrefabUtility.FindPrefabRoot(transforms[i].gameObject) != gameObject)
             {
@@ -55,7 +55,7 @@ public class BakeryLightmappedPrefab : MonoBehaviour
         var mods = PrefabUtility.GetPropertyModifications(gameObject);
         if (mods != null)
         {
-            for(int i=0; i<mods.Length; i++)
+            for (int i = 0; i < mods.Length; i++)
             {
                 if (mods[i] == null) continue;
 #if UNITY_2018_3_OR_NEWER
@@ -72,7 +72,7 @@ public class BakeryLightmappedPrefab : MonoBehaviour
                     if (mods[i].propertyPath.Contains("m_LocalScale")) continue;
                 }
 
-                errorMessage = "prefab contains unapplied data (" + mods[i].target+"."+mods[i].propertyPath + ")";
+                errorMessage = "prefab contains unapplied data (" + mods[i].target + "." + mods[i].propertyPath + ")";
                 return false;
             }
         }
@@ -80,10 +80,10 @@ public class BakeryLightmappedPrefab : MonoBehaviour
         var comps = gameObject.GetComponents<Component>();
         var comps2 = gameObject.GetComponentsInChildren<Component>();
 
-        for(int t=0; t<2; t++)
+        for (int t = 0; t < 2; t++)
         {
             var comps3 = t == 0 ? comps : comps2;
-            for(int c=0; c<comps3.Length; c++)
+            for (int c = 0; c < comps3.Length; c++)
             {
                 var prefabObj = PrefabUtility.GetPrefabObject(comps3[c]);
                 if (prefabObj != prefabRootObj)

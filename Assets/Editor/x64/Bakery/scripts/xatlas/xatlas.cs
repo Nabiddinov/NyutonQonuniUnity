@@ -1,8 +1,7 @@
-using UnityEngine;
-using UnityEditor;
-using UnityEditor.SceneManagement;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UnityEditor;
+using UnityEngine;
 
 public class xatlas
 {
@@ -11,40 +10,40 @@ public class xatlas
     public static List<Vector2> newUVBuffer;
     public static List<int> newXrefBuffer;
 
-    [DllImport ("xatlasLib", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("xatlasLib", CallingConvention = CallingConvention.Cdecl)]
     public static extern System.IntPtr xatlasCreateAtlas();
 
-    [DllImport ("xatlasLib", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("xatlasLib", CallingConvention = CallingConvention.Cdecl)]
     public static extern int xatlasAddMesh(System.IntPtr atlas, int vertexCount, System.IntPtr positions, System.IntPtr normals, System.IntPtr uv, int indexCount, int[] indices32);
 
-    [DllImport ("xatlasLib", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("xatlasLib", CallingConvention = CallingConvention.Cdecl)]
     public static extern int xatlasAddUVMesh(System.IntPtr atlas, int vertexCount, System.IntPtr uv, int indexCount, int[] indices32, bool allowRotate);
 
-    [DllImport ("xatlasLib", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("xatlasLib", CallingConvention = CallingConvention.Cdecl)]
     public static extern void xatlasParametrize(System.IntPtr atlas);
 
-    [DllImport ("xatlasLib", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("xatlasLib", CallingConvention = CallingConvention.Cdecl)]
     public static extern void xatlasPack(System.IntPtr atlas, int attempts, float texelsPerUnit, int resolution, int maxChartSize, int padding, bool bruteForce, bool blockAlign);//, bool allowRotate);
 
-    [DllImport ("xatlasLib", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("xatlasLib", CallingConvention = CallingConvention.Cdecl)]
     public static extern void xatlasNormalize(System.IntPtr atlas, int[] atlasSizes, bool preferDensity);
 
-    [DllImport ("xatlasLib", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("xatlasLib", CallingConvention = CallingConvention.Cdecl)]
     public static extern int xatlasGetAtlasCount(System.IntPtr atlas);
 
-    [DllImport ("xatlasLib", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("xatlasLib", CallingConvention = CallingConvention.Cdecl)]
     public static extern int xatlasGetAtlasIndex(System.IntPtr atlas, int meshIndex, int chartIndex);
 
-    [DllImport ("xatlasLib", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("xatlasLib", CallingConvention = CallingConvention.Cdecl)]
     public static extern int xatlasGetVertexCount(System.IntPtr atlas, int meshIndex);
 
-    [DllImport ("xatlasLib", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("xatlasLib", CallingConvention = CallingConvention.Cdecl)]
     public static extern int xatlasGetIndexCount(System.IntPtr atlas, int meshIndex);
 
-    [DllImport ("xatlasLib", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("xatlasLib", CallingConvention = CallingConvention.Cdecl)]
     public static extern void xatlasGetData(System.IntPtr atlas, int meshIndex, System.IntPtr outUV, System.IntPtr outRef, System.IntPtr outIndices);
 
-    [DllImport ("xatlasLib", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("xatlasLib", CallingConvention = CallingConvention.Cdecl)]
     public static extern int xatlasClear(System.IntPtr atlas);
 
     static T[] FillAtrribute<T>(List<int> xrefArray, T[] origArray)
@@ -52,7 +51,7 @@ public class xatlas
         if (origArray == null || origArray.Length == 0) return origArray;
 
         var arr = new T[xrefArray.Count];
-        for(int i=0; i<xrefArray.Count; i++)
+        for (int i = 0; i < xrefArray.Count; i++)
         {
             int xref = xrefArray[i];
             arr[i] = origArray[xref];
@@ -75,7 +74,7 @@ public class xatlas
     public static void Unwrap(Mesh m, UnwrapParam uparams)
     {
         //EditorUtility.DisplayDialog("Bakery", "xatlas start", "OK");
-        int padding = (int)(uparams.packMargin*1024);
+        int padding = (int)(uparams.packMargin * 1024);
         //Debug.Log("xatlas! " + padding);
 
         newUVBuffer = null;
@@ -106,7 +105,7 @@ public class xatlas
             var pointerUV = (System.IntPtr)0;
 #endif
 
-            for(int i=0; i<m.subMeshCount; i++)
+            for (int i = 0; i < m.subMeshCount; i++)
             {
                 err = xatlasAddMesh(atlas, m.vertexCount, pointerPos, pointerNorm, pointerUV, (int)m.GetIndexCount(i), m.GetIndices(i));
                 if (err == 1)
@@ -158,7 +157,7 @@ public class xatlas
 
         newUVBuffer = new List<Vector2>();
         newXrefBuffer = new List<int>();
-        while(newUVBuffer.Count < m.vertexCount)
+        while (newUVBuffer.Count < m.vertexCount)
         {
             newUVBuffer.Add(new Vector2(-100, -100));
             newXrefBuffer.Add(0);
@@ -167,7 +166,7 @@ public class xatlas
         xatlasNormalize(atlas, null, false);
 
         // Collect UVs/xrefs/indices
-        for(int i=0; i<m.subMeshCount; i++)
+        for (int i = 0; i < m.subMeshCount; i++)
         {
             // Get data from xatlas
             int newVertCount = xatlasGetVertexCount(atlas, i);
@@ -198,7 +197,7 @@ public class xatlas
 
             // Generate new UV buffer and xatlas->final index mappings
             var xatlasIndexToNewIndex = new int[newVertCount];
-            for(int j=0; j<newVertCount; j++)
+            for (int j = 0; j < newVertCount; j++)
             {
                 int xref = xrefBuffer[j];
                 Vector2 uv = uvBuffer[j];
@@ -225,9 +224,9 @@ public class xatlas
             }
 
             // Generate final index buffer
-            for(int j=0; j<indexCount; j++)
+            for (int j = 0; j < indexCount; j++)
             {
-                indexBuffer[j] = xatlasIndexToNewIndex[ indexBuffer[j] ];
+                indexBuffer[j] = xatlasIndexToNewIndex[indexBuffer[j]];
             }
             indexBuffers.Add(indexBuffer);
         }
@@ -251,33 +250,33 @@ public class xatlas
         //if (newXrefBuffer.Count > m.vertexCount) // commented because can be also swapped around
         {
             m.vertices = FillAtrribute<Vector3>(newXrefBuffer, positions);
-            m.normals =  FillAtrribute<Vector3>(newXrefBuffer, normals);
-            m.boneWeights =  FillAtrribute<BoneWeight>(newXrefBuffer, m.boneWeights);
-            m.colors32 =  FillAtrribute<Color32>(newXrefBuffer, m.colors32);
-            m.tangents =  FillAtrribute<Vector4>(newXrefBuffer, m.tangents);
-            m.uv =  FillAtrribute<Vector2>(newXrefBuffer, m.uv);
-            m.uv3 =  FillAtrribute<Vector2>(newXrefBuffer, m.uv3);
-            m.uv4 =  FillAtrribute<Vector2>(newXrefBuffer, m.uv4);
+            m.normals = FillAtrribute<Vector3>(newXrefBuffer, normals);
+            m.boneWeights = FillAtrribute<BoneWeight>(newXrefBuffer, m.boneWeights);
+            m.colors32 = FillAtrribute<Color32>(newXrefBuffer, m.colors32);
+            m.tangents = FillAtrribute<Vector4>(newXrefBuffer, m.tangents);
+            m.uv = FillAtrribute<Vector2>(newXrefBuffer, m.uv);
+            m.uv3 = FillAtrribute<Vector2>(newXrefBuffer, m.uv3);
+            m.uv4 = FillAtrribute<Vector2>(newXrefBuffer, m.uv4);
 #if UNITY_2018_2_OR_NEWER
-            m.uv5 =  FillAtrribute<Vector2>(newXrefBuffer, m.uv5);
-            m.uv6 =  FillAtrribute<Vector2>(newXrefBuffer, m.uv6);
-            m.uv7 =  FillAtrribute<Vector2>(newXrefBuffer, m.uv7);
-            m.uv8 =  FillAtrribute<Vector2>(newXrefBuffer, m.uv8);
+            m.uv5 = FillAtrribute<Vector2>(newXrefBuffer, m.uv5);
+            m.uv6 = FillAtrribute<Vector2>(newXrefBuffer, m.uv6);
+            m.uv7 = FillAtrribute<Vector2>(newXrefBuffer, m.uv7);
+            m.uv8 = FillAtrribute<Vector2>(newXrefBuffer, m.uv8);
 #endif
         }
 
         m.uv2 = newUVBuffer.ToArray();
 
-/*
+        /*
 
-        // Set new UV2
-        var finalUV2 = new Vector2[vertCount + newUV2.Count];
-        for(int i=0; i<vertCount; i++) finalUV2[i] = uv2[i];
-        for(int i=0; i<newUV2.Count; i++) finalUV2[i + vertCount] = newUV2[i];
-        m.uv2 = finalUV2;
-*/
+                // Set new UV2
+                var finalUV2 = new Vector2[vertCount + newUV2.Count];
+                for(int i=0; i<vertCount; i++) finalUV2[i] = uv2[i];
+                for(int i=0; i<newUV2.Count; i++) finalUV2[i + vertCount] = newUV2[i];
+                m.uv2 = finalUV2;
+        */
         // Set indices
-        for(int i=0; i<m.subMeshCount; i++)
+        for (int i = 0; i < m.subMeshCount; i++)
         {
             m.SetTriangles(indexBuffers[i], i);
         }

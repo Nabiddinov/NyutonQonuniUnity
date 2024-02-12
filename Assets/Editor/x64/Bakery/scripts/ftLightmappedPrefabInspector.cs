@@ -17,7 +17,7 @@ public class ftLightmappedPrefabInspector : UnityEditor.Editor
     void OnPrefabInstanceUpdate(GameObject go)
     {
         allPrefabsGood = true;
-        foreach(BakeryLightmappedPrefab selected in targets)
+        foreach (BakeryLightmappedPrefab selected in targets)
         {
             //if (go != selected.gameObject) continue;
             Refresh(selected);
@@ -27,7 +27,7 @@ public class ftLightmappedPrefabInspector : UnityEditor.Editor
     void OnEnable()
     {
         allPrefabsGood = true;
-        foreach(BakeryLightmappedPrefab selected in targets)
+        foreach (BakeryLightmappedPrefab selected in targets)
         {
             Refresh(selected);
         }
@@ -58,7 +58,8 @@ public class ftLightmappedPrefabInspector : UnityEditor.Editor
         return pstore;
     }
 
-    public override void OnInspectorGUI() {
+    public override void OnInspectorGUI()
+    {
 
         serializedObject.Update();
         var prev = isEnabled.boolValue;
@@ -69,7 +70,7 @@ public class ftLightmappedPrefabInspector : UnityEditor.Editor
         if (isEnabled.boolValue != prev)
         {
             allPrefabsGood = true;
-            foreach(BakeryLightmappedPrefab selected in targets)
+            foreach (BakeryLightmappedPrefab selected in targets)
             {
                 selected.enableBaking = isEnabled.boolValue;
                 Refresh(selected);
@@ -82,7 +83,7 @@ public class ftLightmappedPrefabInspector : UnityEditor.Editor
         }
         else
         {
-            foreach(BakeryLightmappedPrefab selected in targets)
+            foreach (BakeryLightmappedPrefab selected in targets)
             {
                 if (selected.errorMessage.Length > 0) EditorGUILayout.LabelField("Error: " + selected.errorMessage);
             }
@@ -93,7 +94,7 @@ public class ftLightmappedPrefabInspector : UnityEditor.Editor
             if (EditorUtility.DisplayDialog("Bakery", "Change current render settings to prefab?", "OK", "Cancel"))
             {
                 var storage = ftRenderLightmap.FindRenderSettingsStorage();
-                foreach(BakeryLightmappedPrefab pref in targets)
+                foreach (BakeryLightmappedPrefab pref in targets)
                 {
                     var prefabStorage = FindPrefabStorage(pref);
                     ftLightmapsStorage.CopySettings(prefabStorage, storage);
@@ -108,7 +109,7 @@ public class ftLightmappedPrefabInspector : UnityEditor.Editor
             if (EditorUtility.DisplayDialog("Bakery", "Save current render settings to prefab?", "OK", "Cancel"))
             {
                 var storage = ftRenderLightmap.FindRenderSettingsStorage();
-                foreach(BakeryLightmappedPrefab pref in targets)
+                foreach (BakeryLightmappedPrefab pref in targets)
                 {
                     var prefabStorage = FindPrefabStorage(pref);
                     ftLightmapsStorage.CopySettings(storage, prefabStorage);

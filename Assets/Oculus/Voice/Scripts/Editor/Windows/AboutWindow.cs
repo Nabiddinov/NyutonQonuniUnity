@@ -18,17 +18,17 @@
  * limitations under the License.
  */
 
-using Meta.Voice.VSDKHub;
 using Meta.Voice.Hub.Attributes;
 using Meta.Voice.Hub.Interfaces;
+using Meta.Voice.VSDKHub;
 using Meta.WitAi;
-using Oculus.Voice.Utility;
 using Oculus.Voice;
+using Oculus.Voice.Utility;
 using UnityEngine;
 
 namespace Meta.Voice
 {
-    [MetaHubPage("About", VoiceHubConstants.CONTEXT_VOICE,  priority: 1000)]
+    [MetaHubPage("About", VoiceHubConstants.CONTEXT_VOICE, priority: 1000)]
     public class AboutWindow : IMetaHubPage
     {
         private Vector2 _offset;

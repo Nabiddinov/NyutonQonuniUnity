@@ -8,16 +8,14 @@
 
 using System;
 using System.Collections;
-using System.Text;
-using System.Security.Cryptography;
 using System.Collections.Generic;
-using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using Meta.Voice.Audio;
-using Meta.WitAi.Requests;
-using UnityEngine;
 using Meta.WitAi.TTS.Data;
 using Meta.WitAi.TTS.Events;
 using Meta.WitAi.TTS.Interfaces;
+using UnityEngine;
 
 namespace Meta.WitAi.TTS
 {

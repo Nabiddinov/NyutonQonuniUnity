@@ -6,7 +6,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-using Meta.Voice.Hub;
 using Meta.Voice.Hub.Attributes;
 using Meta.Voice.Hub.Interfaces;
 using UnityEngine;

@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BakeryAlwaysRender : MonoBehaviour {
+public class BakeryAlwaysRender : MonoBehaviour
+{
 }

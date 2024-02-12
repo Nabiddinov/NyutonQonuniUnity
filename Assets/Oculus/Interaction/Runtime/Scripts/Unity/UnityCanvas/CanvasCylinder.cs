@@ -19,8 +19,8 @@
  */
 
 using System;
-using Oculus.Interaction.Surfaces;
 using System.Collections.Generic;
+using Oculus.Interaction.Surfaces;
 using UnityEditor;
 using UnityEngine;
 

@@ -18,8 +18,8 @@
  * limitations under the License.
  */
 
-using Oculus.Interaction.Locomotion;
 using System.Collections.Generic;
+using Oculus.Interaction.Locomotion;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;

@@ -9,7 +9,6 @@
 using Meta.WitAi.Data.Entities;
 using Meta.WitAi.Data.Intents;
 using Meta.WitAi.Json;
-using UnityEngine;
 
 namespace Meta.WitAi
 {
@@ -362,7 +361,7 @@ namespace Meta.WitAi
             var node = response;
             int nodeIndex;
 
-            for(nodeIndex = 0; nodeIndex < nodes.Length - 1; nodeIndex++)
+            for (nodeIndex = 0; nodeIndex < nodes.Length - 1; nodeIndex++)
             {
                 var nodeName = nodes[nodeIndex];
                 string[] arrayElements = SplitArrays(nodeName);

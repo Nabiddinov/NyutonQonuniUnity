@@ -1,8 +1,8 @@
-using UnityEngine;
+using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using System.IO;
-using System.Collections.Generic;
+using UnityEngine;
 
 public class ftModelPostProcessorInternal : AssetPostprocessor
 {
@@ -60,13 +60,13 @@ public partial class ftModelPostProcessor : ftModelPostProcessorInternal
         ModelImporter importer = (ModelImporter)assetImporter;
 
         //if (storage == null) return;
-        bool hasGlobalPaddingAdjustment  = (storage != null && storage.modifiedAssetPathList.IndexOf(assetPath) >= 0);
+        bool hasGlobalPaddingAdjustment = (storage != null && storage.modifiedAssetPathList.IndexOf(assetPath) >= 0);
         bool hasGlobalPaddingAdjustment2 = false;
 #if UNITY_2017_1_OR_NEWER
         var props = importer.extraUserProperties;
-        for(int p=0; p<props.Length; p++)
+        for (int p = 0; p < props.Length; p++)
         {
-            if (props[p].Substring(0,7) == "#BAKERY")
+            if (props[p].Substring(0, 7) == "#BAKERY")
             {
                 hasGlobalPaddingAdjustment2 = true;
                 break;
@@ -119,9 +119,9 @@ public partial class ftModelPostProcessor : ftModelPostProcessorInternal
 #if UNITY_2017_1_OR_NEWER
             deserializedSuccess = false;
             var props = importer.extraUserProperties;
-            for(int p=0; p<props.Length; p++)
+            for (int p = 0; p < props.Length; p++)
             {
-                if (props[p].Substring(0,7) == "#BAKERY")
+                if (props[p].Substring(0, 7) == "#BAKERY")
                 {
                     var json = props[p].Substring(7);
                     deserialized = JsonUtility.FromJson<ftGlobalStorage.AdjustedMesh>(json);
@@ -180,18 +180,18 @@ public partial class ftModelPostProcessor : ftModelPostProcessorInternal
         int overlapCounter = 0;
 
         Graphics.SetRenderTarget(rt);
-        GL.Clear(false, true, new Color(0,0,0,0));
+        GL.Clear(false, true, new Color(0, 0, 0, 0));
         mat.SetPass(0);
 
         bool hasUV1 = RenderMeshes(g.transform, deep);
         if (hasUV1)
         {
-            tex.ReadPixels(new Rect(0,0,res,res), 0, 0, false);
+            tex.ReadPixels(new Rect(0, 0, res, res), 0, 0, false);
             tex.Apply();
 
             var bytes = tex.GetRawTextureData();
             overlap = 0;
-            for(int i=0; i<bytes.Length; i++)
+            for (int i = 0; i < bytes.Length; i++)
             {
                 if (bytes[i] > 1)
                 {
@@ -257,15 +257,15 @@ public partial class ftModelPostProcessor : ftModelPostProcessorInternal
     bool ValidateMesh(Mesh m, ftGlobalStorage.Unwrapper unwrapper)
     {
 #if UNITY_2017_3_OR_NEWER
-    #if UNITY_2018_4_OR_NEWER
+#if UNITY_2018_4_OR_NEWER
         // Bug was fixed in 2018.3.5, but the closest define is for 2018.4
-    #else
+#else
         if (m.indexFormat == UnityEngine.Rendering.IndexFormat.UInt32 && unwrapper == ftGlobalStorage.Unwrapper.Default)
         {
             Debug.LogError("Can't adjust UV padding for " + m.name + " due to Unity bug. Please set Index Format to 16-bit on the asset or use xatlas.");
             return false;
         }
-    #endif
+#endif
 #endif
         return true;
     }
@@ -299,7 +299,7 @@ public partial class ftModelPostProcessor : ftModelPostProcessorInternal
 
                     if (!ValidateMesh(m, unwrapper)) return;
 
-                    uparams.packMargin = padding/1024.0f;
+                    uparams.packMargin = padding / 1024.0f;
                     Unwrap(m, uparams, unwrapper);
                 }
             }
@@ -324,7 +324,7 @@ public partial class ftModelPostProcessor : ftModelPostProcessorInternal
 
                     if (!ValidateMesh(m, unwrapper)) return;
 
-                    uparams.packMargin = padding/1024.0f;
+                    uparams.packMargin = padding / 1024.0f;
                     Unwrap(m, uparams, unwrapper);
                 }
             }
@@ -341,7 +341,7 @@ public partial class ftModelPostProcessor : ftModelPostProcessorInternal
 
                     if (!ValidateMesh(m, unwrapper)) return;
 
-                    uparams.packMargin = padding/1024.0f;
+                    uparams.packMargin = padding / 1024.0f;
                     Unwrap(m, uparams, unwrapper);
                 }
             }

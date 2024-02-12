@@ -20,7 +20,7 @@ namespace sc.terrain.proceduralpainter
         public static TerrainPainter Current;
 
         public Terrain[] terrains;
-        [Attributes.ResolutionDropdown(64, 1024)] 
+        [Attributes.ResolutionDropdown(64, 1024)]
         public int splatmapResolution = 256;
         [Attributes.ResolutionDropdown(16, 2048)]
         [Tooltip("The color/base map is a pre-rendered texture for the terrain color. This is shown on the terrain in the distance. High resolutions usually have little benefit")]
@@ -35,26 +35,26 @@ namespace sc.terrain.proceduralpainter
         public bool autoRepaint;
         public List<TerrainChangeListener> terrainListeners = new List<TerrainChangeListener>();
         public Bounds bounds;
-        
+
 #if VEGETATION_STUDIO_PRO
         [Tooltip("Refreshes the vegetation systems after painting. If vegetation items use terrain layers masks, this is useful")]
         public bool refreshVegetationOnPaint;
 #endif
-        #if __MICROSPLAT__
+#if __MICROSPLAT__
         [Tooltip("Assign the TextureArrayConfig asset here. Adding, removing or re-ordering layers will be also be applied to the texture array")]
         public TextureArrayConfig msTexArray;
-        #endif
-        
+#endif
+
         [SerializeField]
         //Reference it once here, so it gets included in a build
         private Shader filterShader;
-        
+
         public delegate void TerrainRepaintEvent(Terrain terrain);
         /// <summary>
         /// Triggers whenever a terrain is repainted. Passes the context terrain as a parameter.
         /// </summary>
         public static event TerrainRepaintEvent OnTerrainRepaint;
-        
+
         private void OnEnable()
         {
             if (!filterShader) filterShader = Shader.Find("Hidden/TerrainPainter/Modifier");
@@ -68,13 +68,13 @@ namespace sc.terrain.proceduralpainter
         public void ResizeSplatmaps()
         {
             //Needs to happen before repainting, all terrains must have the same splatmap resolution. PaintContext throws warnings otherwise
-            
+
             foreach (Terrain terrain in terrains)
             {
-                if(terrain) terrain.terrainData.alphamapResolution = splatmapResolution;
+                if (terrain) terrain.terrainData.alphamapResolution = splatmapResolution;
             }
         }
-        
+
         public void RecalculateBounds()
         {
             bounds = Utilities.RecalculateBounds(terrains);
@@ -109,10 +109,10 @@ namespace sc.terrain.proceduralpainter
                     Debug.LogError("Missing terrain assigned to TerrainPainter", this);
                     continue;
                 }
-                
+
                 RepaintTerrain(terrain);
             }
-            
+
             //ApplyAllStamps();
         }
 
@@ -123,21 +123,21 @@ namespace sc.terrain.proceduralpainter
         public void RepaintTerrain(Terrain terrain)
         {
             if (layerSettings.Count == 0 || terrain == null) return;
-            
+
             ModifierStack.Configure(terrain, bounds, splatmapResolution);
-            
+
             ModifierStack.ProcessLayers(terrain, layerSettings);
 
             ApplyStampsToTerrain(terrain);
-            
+
             //Regenerate basemap
             terrain.terrainData.baseMapResolution = colorMapResolution;
             terrain.terrainData.SetBaseMapDirty();
 
             RefreshVegetation(terrain);
-            
+
             terrain.Flush();
-            
+
             OnTerrainRepaint?.Invoke(terrain);
 
 #if UNITY_EDITOR
@@ -175,7 +175,7 @@ namespace sc.terrain.proceduralpainter
             LayerSettings s = new LayerSettings();
             s.layer = layer;
             s.modifierStack = new List<Modifier>();
-            
+
             layerSettings.Insert(0, s);
 
             SetTerrainLayers();
@@ -188,7 +188,7 @@ namespace sc.terrain.proceduralpainter
         public void SetAutoRepaint(bool value)
         {
             autoRepaint = value;
-            
+
             if (value)
             {
                 RemoveTerrainListeners();
@@ -214,10 +214,10 @@ namespace sc.terrain.proceduralpainter
             {
                 DestroyImmediate(terrainListeners[i]);
             }
-            
+
             terrainListeners.Clear();
         }
-        
+
         /// <summary>
         /// Ensures that all configured layers are in fact assigned to the terrains. Also removed if they were.
         /// </summary>
@@ -225,18 +225,18 @@ namespace sc.terrain.proceduralpainter
         public void SetTerrainLayers()
         {
             TerrainLayer[] layers = Utilities.SettingsToLayers(layerSettings);
-            
+
             foreach (Terrain terrain in terrains)
             {
                 terrain.terrainData.terrainLayers = layers;
                 terrain.terrainData.SetBaseMapDirty();
-                
+
 #if UNITY_EDITOR
                 EditorUtility.SetDirty(terrain.terrainData);
 #endif
             }
         }
-        
+
         #region Virtual
         //Only should be called after the modifiers have been applied, otherwise it acts as a persistent brush
         private void ApplyStampsToTerrain(Terrain terrain)

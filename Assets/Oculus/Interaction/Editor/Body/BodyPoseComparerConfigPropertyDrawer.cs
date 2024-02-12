@@ -18,13 +18,13 @@
  * limitations under the License.
  */
 
-using UnityEngine;
-using UnityEditor;
-using System.Linq;
 using System.Collections.Generic;
-using Oculus.Interaction.Body.PoseDetection;
-using Oculus.Interaction.Body.Input;
+using System.Linq;
 using System.Reflection;
+using Oculus.Interaction.Body.Input;
+using Oculus.Interaction.Body.PoseDetection;
+using UnityEditor;
+using UnityEngine;
 
 namespace Oculus.Interaction.Body.Editor
 {

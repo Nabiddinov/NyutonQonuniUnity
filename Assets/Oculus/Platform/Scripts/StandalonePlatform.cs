@@ -1,9 +1,9 @@
 namespace Oculus.Platform
 {
-    using UnityEngine;
     using System;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using UnityEngine;
 
     public sealed class StandalonePlatform
     {

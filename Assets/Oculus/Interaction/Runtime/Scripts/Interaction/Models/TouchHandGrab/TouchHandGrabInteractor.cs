@@ -19,11 +19,9 @@
  */
 
 using System;
-using UnityEngine;
-using UnityEngine.Assertions;
 using Oculus.Interaction.Input;
 using Oculus.Interaction.PoseDetection;
-using UnityEngine.Serialization;
+using UnityEngine;
 
 namespace Oculus.Interaction
 {

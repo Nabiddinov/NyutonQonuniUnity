@@ -1,8 +1,6 @@
 ﻿// Disable 'obsolete' warnings
 #pragma warning disable 0618
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.IO;
@@ -53,7 +51,7 @@ public class BakerySectorInspector : Editor
         var outRend = vol.previewDisabledRenderers;
         if (outRend != null)
         {
-            for(int i=0; i<outRend.Count; i++)
+            for (int i = 0; i < outRend.Count; i++)
             {
                 if (outRend[i] != null) outRend[i].enabled = true;
             }
@@ -67,7 +65,7 @@ public class BakerySectorInspector : Editor
         var temp = vol.previewTempObjects;
         if (temp != null)
         {
-            for(int i=0; i<temp.Count; i++)
+            for (int i = 0; i < temp.Count; i++)
             {
                 if (temp[i] != null) DestroyImmediate(temp[i]);
             }
@@ -85,12 +83,12 @@ public class BakerySectorInspector : Editor
         serializedObject.Update();
         var vol = target as BakerySector;
 
-        if ( ToggleButtonStyleNormal == null )
+        if (ToggleButtonStyleNormal == null)
         {
             ToggleButtonStyleNormal = "Button";
         }
 
-        if ( ToggleButtonStyleNormalBig == null )
+        if (ToggleButtonStyleNormalBig == null)
         {
             ToggleButtonStyleNormalBig = new GUIStyle("Button");
             ToggleButtonStyleNormalBig.fixedHeight = 32;
@@ -146,7 +144,7 @@ public class BakerySectorInspector : Editor
                 var exportSceneFunc = ftBuildGraphics.ExportScene(null, false, true, asset);
                 var prevSector = storage.renderSettingsSector as BakerySector;
                 storage.renderSettingsSector = ftRenderLightmap.curSector = vol;
-                while(exportSceneFunc.MoveNext())
+                while (exportSceneFunc.MoveNext())
                 {
                 }
                 storage.renderSettingsSector = ftRenderLightmap.curSector = prevSector;
@@ -171,7 +169,7 @@ public class BakerySectorInspector : Editor
                     var apath = fname + ".asset";
                     AssetDatabase.CreateAsset(asset, apath);
 
-                    for(int i=0; i<asset.meshes.Count; i++)
+                    for (int i = 0; i < asset.meshes.Count; i++)
                     {
                         if (asset.meshes[i] == null)
                         {
@@ -234,7 +232,7 @@ public class BakerySectorInspector : Editor
             var exportSceneFunc = ftBuildGraphics.ExportScene(null, false, true, asset);
             var prevSector = storage.renderSettingsSector as BakerySector;
             storage.renderSettingsSector = ftRenderLightmap.curSector = vol;
-            while(exportSceneFunc.MoveNext())
+            while (exportSceneFunc.MoveNext())
             {
             }
             storage.renderSettingsSector = ftRenderLightmap.curSector = prevSector;
@@ -244,7 +242,7 @@ public class BakerySectorInspector : Editor
             vol.previewDisabledRenderers = outRend;
             if (outRend != null)
             {
-                for(int i=0; i<outRend.Count; i++)
+                for (int i = 0; i < outRend.Count; i++)
                 {
                     if (outRend[i] != null) outRend[i].enabled = false;
                 }
@@ -287,7 +285,7 @@ public class BakerySectorInspector : Editor
             GUILayout.Label("Edit capture points:");
         }
 
-        for(int i=0; i<vol.cpoints.Count; i++)
+        for (int i = 0; i < vol.cpoints.Count; i++)
         {
             if (vol.cpoints[i] == null)
             {
@@ -375,7 +373,7 @@ public class BakerySectorInspector : Editor
         }
         if (curSelectedB >= 0 || curSelectedC >= 0) Tools.current = Tool.None;
 
-        for(int i=0; i<vol.tforms.Count; i++)
+        for (int i = 0; i < vol.tforms.Count; i++)
         {
             if (vol.tforms[i] == null) continue;
 
@@ -400,7 +398,7 @@ public class BakerySectorInspector : Editor
 
             if (cull)
             {
-                if(!GeometryUtility.TestPlanesAABB(frustum, new Bounds(vol.tforms[i].position, Vector3.one)))
+                if (!GeometryUtility.TestPlanesAABB(frustum, new Bounds(vol.tforms[i].position, Vector3.one)))
                 {
                     continue;
                 }
@@ -449,7 +447,7 @@ public class BakerySectorInspector : Editor
         Handles.matrix = Matrix4x4.identity;
         Handles.color = Color.green;
 
-        for(int i=0; i<vol.cpoints.Count; i++)
+        for (int i = 0; i < vol.cpoints.Count; i++)
         {
             if (vol.cpoints[i] == null) continue;
 
@@ -457,7 +455,7 @@ public class BakerySectorInspector : Editor
 
             if (cull)
             {
-                if(!GeometryUtility.TestPlanesAABB(frustum, new Bounds(vol.cpoints[i].position, Vector3.one)))
+                if (!GeometryUtility.TestPlanesAABB(frustum, new Bounds(vol.cpoints[i].position, Vector3.one)))
                 {
                     continue;
                 }

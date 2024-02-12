@@ -27,9 +27,9 @@ using Meta.WitAi.Interfaces;
 using Meta.WitAi.Requests;
 using Meta.WitAi.TTS;
 using Meta.WitAi.TTS.Data;
-using Oculus.Voice.Core.Utilities;
 using Oculus.Voice.Core.Bindings.Android.PlatformLogger;
 using Oculus.Voice.Core.Bindings.Interfaces;
+using Oculus.Voice.Core.Utilities;
 using UnityEngine;
 
 namespace Oculus.Voice.Logging
@@ -79,15 +79,15 @@ namespace Oculus.Voice.Logging
         // Init logger
         private void InitLogger()
         {
-            #if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID && !UNITY_EDITOR
             // PI Logger
             var loggerImpl = new VoiceSDKPlatformLoggerImpl();
             loggerImpl.Connect(VoiceSDKConstants.SdkVersion);
             _voiceSDKLoggerImpl = loggerImpl;
-            #else
+#else
             // Console Logger
             _voiceSDKLoggerImpl = new VoiceSDKConsoleLoggerImpl();
-            #endif
+#endif
 
             // Get configuration
             WitConfiguration witConfig = Service.GetComponent<IWitConfigurationProvider>()?.Configuration;

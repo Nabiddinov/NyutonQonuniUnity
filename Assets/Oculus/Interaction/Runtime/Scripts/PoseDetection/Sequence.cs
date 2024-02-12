@@ -20,8 +20,8 @@
 
 using System;
 using System.Collections.Generic;
-using Oculus.Interaction.PoseDetection.Debug;
 using System.Linq;
+using Oculus.Interaction.PoseDetection.Debug;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -266,7 +266,7 @@ namespace Oculus.Interaction.PoseDetection
 
         #endregion
 
-        public bool Active { get; private set;  }
+        public bool Active { get; private set; }
 
         static Sequence()
         {

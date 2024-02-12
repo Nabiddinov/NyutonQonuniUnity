@@ -8,9 +8,9 @@
 
 using System;
 using System.Collections.Generic;
+using Meta.WitAi.Interfaces;
 using Meta.WitAi.Json;
 using Meta.WitAi.Requests;
-using Meta.WitAi.Interfaces;
 
 namespace Meta.WitAi.Configuration
 {
@@ -34,7 +34,8 @@ namespace Meta.WitAi.Configuration
         /// <summary>
         /// Formerly used for request id
         /// </summary>
-        [Obsolete("Use 'RequestId' property instead")] [JsonIgnore]
+        [Obsolete("Use 'RequestId' property instead")]
+        [JsonIgnore]
         public string requestID => RequestId;
 
         /// <summary>

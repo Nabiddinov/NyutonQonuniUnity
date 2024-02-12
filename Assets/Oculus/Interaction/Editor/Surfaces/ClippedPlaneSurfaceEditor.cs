@@ -19,10 +19,10 @@
  */
 
 
-using UnityEditor;
-using Oculus.Interaction.Surfaces;
-using UnityEngine;
 using System.Linq;
+using Oculus.Interaction.Surfaces;
+using UnityEditor;
+using UnityEngine;
 
 namespace Oculus.Interaction.Editor
 {

@@ -1,18 +1,15 @@
 #if UNITY_EDITOR
 
-using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEditor;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using UnityEditor.SceneManagement;
-using UnityEngine.SceneManagement;
-using System.Text.RegularExpressions;
+using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /*
 Not supported by RTPreview:
@@ -32,10 +29,10 @@ Not supported by RTPreview:
 
 public class ftPreview : EditorWindow
 {
-    [DllImport ("frender", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("frender", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool StartPreviewInput();
 
-    [DllImport ("frender", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("frender", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool SendPreviewInput(float rx, float ry, float rz,
                                                float ux, float uy, float uz,
                                                float fx, float fy, float fz,
@@ -43,13 +40,13 @@ public class ftPreview : EditorWindow
                                                float fov, float exposure, float backFaceWeight, float emissiveBoost, float aoRadius, float aoIntensity,
                                                int refreshConstVer, int refreshFullVer, int frameVer, int maxIntegrationSteps);
 
-    [DllImport ("frender", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("frender", CallingConvention = CallingConvention.Cdecl)]
     public static extern void EndPreviewInput();
 
-    [DllImport ("frender", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("frender", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool SendPreviewData(byte[] data, int dataSize);
 
-    [DllImport ("frender", CallingConvention=CallingConvention.Cdecl)]
+    [DllImport("frender", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool GetPreviewImage(byte[] data, int dataSize);
 
     public static int pwidth = 640;
@@ -138,13 +135,13 @@ public class ftPreview : EditorWindow
         Debug.LogWarning(previewActive);
         if (previewActive)
         {
-            if (!SendPreviewInput(0,0,0,
-                                  0,0,0,
-                                  0,0,0,
-                                  0,0,0,
+            if (!SendPreviewInput(0, 0, 0,
+                                  0, 0, 0,
+                                  0, 0, 0,
+                                  0, 0, 0,
                                   0, 0,
                                   -1, 0, 0, 0,
-                                  0,0,0,1))
+                                  0, 0, 0, 1))
             {
                 Debug.LogError("Failed to send input to preview (2)");
             }
@@ -154,7 +151,7 @@ public class ftPreview : EditorWindow
 
     static void WriteNullTerminatedStringWithNewLine(BinaryWriter f, string s)
     {
-        for(int i=0; i<s.Length; i++) f.Write(s[i]);
+        for (int i = 0; i < s.Length; i++) f.Write(s[i]);
         f.Write((byte)0);
         f.Write((byte)'\n');
     }
@@ -173,7 +170,7 @@ public class ftPreview : EditorWindow
         // Collect lights
         allDirects = new List<BakeryDirectLight>();
         var _allDirects = FindObjectsOfType(typeof(BakeryDirectLight)) as BakeryDirectLight[];
-        for(int i=0; i<_allDirects.Length; i++)
+        for (int i = 0; i < _allDirects.Length; i++)
         {
             var obj = _allDirects[i] as BakeryDirectLight;
             if (!obj.enabled) continue;
@@ -181,7 +178,7 @@ public class ftPreview : EditorWindow
         }
         allSkies = new List<BakerySkyLight>();
         var _allSkies = FindObjectsOfType(typeof(BakerySkyLight)) as BakerySkyLight[];
-        for(int i=0; i<_allSkies.Length; i++)
+        for (int i = 0; i < _allSkies.Length; i++)
         {
             var obj = _allSkies[i] as BakerySkyLight;
             if (!obj.enabled) continue;
@@ -189,7 +186,7 @@ public class ftPreview : EditorWindow
         }
         allPoints = new List<BakeryPointLight>();
         var _allPoints = FindObjectsOfType(typeof(BakeryPointLight)) as BakeryPointLight[];
-        for(int i=0; i<_allPoints.Length; i++)
+        for (int i = 0; i < _allPoints.Length; i++)
         {
             var obj = _allPoints[i] as BakeryPointLight;
             if (!obj.enabled) continue;
@@ -204,15 +201,15 @@ public class ftPreview : EditorWindow
         const int sampleLimit = 0; // compare // disable for now
         const int sampleForceLimit = 64; // set
 
-        for(int i=0; i<allDirects.Count; i++)
+        for (int i = 0; i < allDirects.Count; i++)
         {
             allDirects[i].transform.hasChanged = false;
         }
-        for(int i=0; i<allPoints.Count; i++)
+        for (int i = 0; i < allPoints.Count; i++)
         {
             allPoints[i].transform.hasChanged = false;
         }
-        for(int i=0; i<allSkies.Count; i++)
+        for (int i = 0; i < allSkies.Count; i++)
         {
             allSkies[i].transform.hasChanged = false;
         }
@@ -231,12 +228,12 @@ public class ftPreview : EditorWindow
             pheight = (int)sceneViewRect.height;
         }
 
-        for(int i=0; i<_allAreas.Length; i++)
+        for (int i = 0; i < _allAreas.Length; i++)
         {
             var obj = _allAreas[i] as BakeryLightMesh;
             if (!obj.enabled) continue;
 
-            while(allAreas.Count <= -obj.lmid) allAreas.Add(null);
+            while (allAreas.Count <= -obj.lmid) allAreas.Add(null);
             allAreas[-obj.lmid] = obj;
 
             //Debug.LogError("Set " +obj.name+" "+obj.lmid);
@@ -308,7 +305,7 @@ public class ftPreview : EditorWindow
         flights.Write(numGlobalLights);
         flights.Write(numLocalLights);
         flights.Write(numAreas);
-        for(int i=0; i<allDirects.Count; i++)
+        for (int i = 0; i < allDirects.Count; i++)
         {
             var tform = allDirects[i].transform;
             flights.Write(Mathf.Min((allDirects[i].indirectIntensity * ftRenderLightmap.hackIndirectBoost) / 100.0f, 0.99f));
@@ -320,7 +317,7 @@ public class ftPreview : EditorWindow
             flights.Write(allDirects[i].color.linear.g * allDirects[i].intensity);
             flights.Write(allDirects[i].color.linear.b * allDirects[i].intensity);
         }
-        for(int i=0; i<allSkies.Count; i++)
+        for (int i = 0; i < allSkies.Count; i++)
         {
             flights.Write(1.0f + Mathf.Min((allSkies[i].indirectIntensity * ftRenderLightmap.hackIndirectBoost) / 100.0f, 0.99f));
             flights.Write(allSkies[i].cubemap ? 1.0f : 0.0f);
@@ -336,7 +333,7 @@ public class ftPreview : EditorWindow
             }
         }
         Vector3 right, up, forward;
-        for(int i=0; i<allPoints.Count; i++)
+        for (int i = 0; i < allPoints.Count; i++)
         {
             var tform = allPoints[i].transform;
             var projMode = allPoints[i].projMode;
@@ -414,17 +411,17 @@ public class ftPreview : EditorWindow
                 }
             }
         }
-        for(int i=0; i<smallAreas.Count; i++)
+        for (int i = 0; i < smallAreas.Count; i++)
         {
             var buff = smallAreasBuffers[i];
             float hemisphereArea = 2 * 3.141592653589793f;
             float m = smallAreasPointSize[i] / hemisphereArea;
             m *= 2;
-            m /= buff.Count/3;
+            m /= buff.Count / 3;
             var baseR = (smallAreas[i].color.linear.r * smallAreas[i].intensity) * m;
             var baseG = (smallAreas[i].color.linear.g * smallAreas[i].intensity) * m;
             var baseB = (smallAreas[i].color.linear.b * smallAreas[i].intensity) * m;
-            for(int j=0; j<buff.Count; j+=3)
+            for (int j = 0; j < buff.Count; j += 3)
             {
                 flights.Write(4.0f);
                 flights.Write(buff[j].x);
@@ -436,9 +433,9 @@ public class ftPreview : EditorWindow
                 flights.Write(smallAreasPointSize[i]);
                 flights.Write(1.0f / smallAreas[i].cutoff);
 
-                flights.Write(baseR * buff[j+2].x);
-                flights.Write(baseG * buff[j+2].y);
-                flights.Write(baseB * buff[j+2].z);
+                flights.Write(baseR * buff[j + 2].x);
+                flights.Write(baseG * buff[j + 2].y);
+                flights.Write(baseB * buff[j + 2].z);
                 flights.Write(180.0f);
 
                 flights.Write(1.0f);
@@ -451,13 +448,13 @@ public class ftPreview : EditorWindow
                 flights.Write(0.0f);
                 flights.Write(0.0f);
 
-                flights.Write(buff[j+1].x);
-                flights.Write(buff[j+1].y);
-                flights.Write(buff[j+1].z);
+                flights.Write(buff[j + 1].x);
+                flights.Write(buff[j + 1].y);
+                flights.Write(buff[j + 1].z);
                 flights.Write(0.0f);
             }
         }
-        for(int i=0; i<allAreas.Count; i++)
+        for (int i = 0; i < allAreas.Count; i++)
         {
             if (allAreas[i] == null || allAreas[i].samples <= sampleLimit)
             {
@@ -469,13 +466,13 @@ public class ftPreview : EditorWindow
             else
             {
                 var color = allAreas[i].color.linear;
-                int val1 = ((int)(color.r*255) << 16) | ((int)(color.g*255) << 8) | ((int)(color.b*255));
+                int val1 = ((int)(color.r * 255) << 16) | ((int)(color.g * 255) << 8) | ((int)(color.b * 255));
                 float val2 = allAreas[i].intensity;
                 float val3 = allAreas[i].indirectIntensity * ftRenderLightmap.hackIndirectBoost;
                 float val4 = (allAreas[i].texture != null ? -1.0f : 1.0f) / allAreas[i].cutoff;
                 if (!allAreas[i].selfShadow)
                 {
-                    val3 = (val3==0.0f ? -float.Epsilon : -val3);
+                    val3 = (val3 == 0.0f ? -float.Epsilon : -val3);
                 }
                 flights.Write(val1);
                 flights.Write(val2);
@@ -483,14 +480,14 @@ public class ftPreview : EditorWindow
                 flights.Write(val4);
             }
         }
-        for(int i=0; i<allSkies.Count; i++)
+        for (int i = 0; i < allSkies.Count; i++)
         {
             if (allSkies[i].cubemap)
             {
                 WriteNullTerminatedStringWithNewLine(flights, ftBuildLights.GetTempTexName(allSkies[i].cubemap, "sky"));
             }
         }
-        for(int i=0; i<allPoints.Count; i++)
+        for (int i = 0; i < allPoints.Count; i++)
         {
             var projMode = allPoints[i].projMode;
 
@@ -512,7 +509,7 @@ public class ftPreview : EditorWindow
                 WriteNullTerminatedStringWithNewLine(flights, ftBuildLights.GetTempTexName(allPoints[i].cookie));
             }
         }
-        for(int i=0; i<allAreas.Count; i++)
+        for (int i = 0; i < allAreas.Count; i++)
         {
             if (allAreas[i] != null && allAreas[i].texture != null && allAreas[i].samples > sampleLimit)
             {
@@ -640,7 +637,7 @@ public class ftPreview : EditorWindow
         {
             msg = "Preview is active";
         }
-        EditorGUI.HelpBox(new Rect(15,y+5,220,40), msg, MessageType.Info);
+        EditorGUI.HelpBox(new Rect(15, y + 5, 220, 40), msg, MessageType.Info);
         y += 40;
 
         if (previewActive)
@@ -658,8 +655,8 @@ public class ftPreview : EditorWindow
             bool textEdited = (prev != exposure);
             float maxExp = 20;
             float expPow = 2.0f;
-            float exposureSlider = Mathf.Pow(exposure/maxExp, 1.0f/expPow);
-            exposureSlider = GUI.HorizontalSlider(new Rect(125, y, 120-25, 15), exposureSlider, 0.0f, 1.0f);
+            float exposureSlider = Mathf.Pow(exposure / maxExp, 1.0f / expPow);
+            exposureSlider = GUI.HorizontalSlider(new Rect(125, y, 120 - 25, 15), exposureSlider, 0.0f, 1.0f);
             prev = exposure;
             exposure = (Mathf.Pow(exposureSlider, expPow)) * maxExp;
             if (prev != exposure && !textEdited)
@@ -841,7 +838,7 @@ public class ftPreview : EditorWindow
             var exportSceneFunc = ftBuildGraphics.ExportScene((ftRenderLightmap)EditorWindow.GetWindow(typeof(ftRenderLightmap)), true);
             ftRenderLightmap.progressBarEnabled = true;
             ftRenderLightmap.clientMode = false;
-            while(exportSceneFunc.MoveNext())
+            while (exportSceneFunc.MoveNext())
             {
                 ftRenderLightmap.progressBarText = ftBuildGraphics.progressBarText;
                 ftRenderLightmap.progressBarPercent = ftBuildGraphics.progressBarPercent;
@@ -881,7 +878,7 @@ public class ftPreview : EditorWindow
             EndPreviewInput();
             inputActive = false;
         }
-        pprocess = ftRenderLightmap.RunFTrace("interactive " + ftRenderLightmap.scenePathQuoted +  " a 4 0 0 preview.bin", true);
+        pprocess = ftRenderLightmap.RunFTrace("interactive " + ftRenderLightmap.scenePathQuoted + " a 4 0 0 preview.bin", true);
         if (pprocess == (System.IntPtr)0)
         {
             Debug.LogError("Failed to launch preview");
@@ -917,7 +914,7 @@ public class ftPreview : EditorWindow
             if (!ftRenderLightmap.IsProcessFinished(pprocess))
             {
                 int refreshTransforms = 0;
-                for(int i=0; i<allDirects.Count; i++)
+                for (int i = 0; i < allDirects.Count; i++)
                 {
                     if (allDirects[i] == null)
                     {
@@ -930,7 +927,7 @@ public class ftPreview : EditorWindow
                         allDirects[i].transform.hasChanged = false;
                     }
                 }
-                for(int i=0; i<allPoints.Count; i++)
+                for (int i = 0; i < allPoints.Count; i++)
                 {
                     if (allPoints[i] == null)
                     {
@@ -943,7 +940,7 @@ public class ftPreview : EditorWindow
                         allPoints[i].transform.hasChanged = false;
                     }
                 }
-                for(int i=0; i<allSkies.Count; i++)
+                for (int i = 0; i < allSkies.Count; i++)
                 {
                     if (allSkies[i] == null)
                     {
@@ -1066,11 +1063,11 @@ public class ftPreview : EditorWindow
                                 if (frameVer - receivedFrame < PREVIEW_HISTORY)
                                 {
                                     int frameIndex = frameVer;
-                                    while(frameIndex > receivedFrame)
+                                    while (frameIndex > receivedFrame)
                                     {
                                         frameIndex--;
                                         historyIndex--;
-                                        if (historyIndex < 0) historyIndex = PREVIEW_HISTORY-1;
+                                        if (historyIndex < 0) historyIndex = PREVIEW_HISTORY - 1;
                                     }
                                 }
                                 Shader.SetGlobalMatrix("_ftPreviewViewProj", viewProjHistory[historyIndex]);
@@ -1089,8 +1086,8 @@ public class ftPreview : EditorWindow
         }
     }
 
-	[MenuItem ("Bakery/Preview...", false, 1000)]
-	public static void Preview ()
+    [MenuItem("Bakery/Preview...", false, 1000)]
+    public static void Preview()
     {
         GetWindow(typeof(ftRenderLightmap));
 
@@ -1100,7 +1097,7 @@ public class ftPreview : EditorWindow
         var icon = EditorGUIUtility.Load(edPath + "icon.png") as Texture2D;
         instance.titleContent.image = icon;
         instance.Show();
-	}
+    }
 }
 
 #endif

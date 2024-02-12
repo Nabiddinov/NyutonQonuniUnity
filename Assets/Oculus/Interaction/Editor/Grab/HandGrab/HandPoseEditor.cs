@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
+using System;
 using Oculus.Interaction.Editor;
 using Oculus.Interaction.Input;
-using System;
 using UnityEditor;
 using UnityEngine;
 

@@ -20,8 +20,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.Assertions;
 using Oculus.Interaction.Collections;
+using UnityEngine.Assertions;
 
 namespace Oculus.Interaction.Body.Input
 {

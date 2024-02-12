@@ -18,14 +18,10 @@
  * limitations under the License.
  */
 
-using System.Collections.Generic;
 using System;
-using System.ComponentModel;
-using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.Assertions;
 using Component = UnityEngine.Component;
 
 /// <summary>

@@ -18,10 +18,9 @@
  * limitations under the License.
  */
 
-using Oculus.Interaction.Input;
-using Oculus.Interaction.PoseDetection;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Oculus.Interaction.Input;
 using UnityEngine;
 using UnityEngine.Assertions;
 

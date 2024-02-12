@@ -11,15 +11,15 @@
 #endif
 
 using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using Meta.Voice.Audio;
+using Meta.WitAi.Json;
 using UnityEngine;
 using UnityEngine.Networking;
-using Meta.WitAi.Json;
-using Meta.Voice.Audio;
 
 namespace Meta.WitAi.Requests
 {

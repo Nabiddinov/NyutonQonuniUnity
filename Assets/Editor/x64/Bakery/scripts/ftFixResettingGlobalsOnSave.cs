@@ -3,9 +3,7 @@
 // Disable 'obsolete' warnings
 #pragma warning disable 0618
 
-using UnityEngine;
 using UnityEditor;
-using System.Collections;
 
 // For reasons unknown Unity will reset all shader variables set by Shader.SetGlobal... if you save a scene
 // So here is a hack to fix it

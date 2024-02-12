@@ -7,9 +7,8 @@ language governing permissions and limitations under the license.
 
 ************************************************************************************/
 
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// TeleportAimHandler will provide a series of points in the world that represent the series of line

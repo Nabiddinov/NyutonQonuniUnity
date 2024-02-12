@@ -1,17 +1,11 @@
 #if UNITY_EDITOR
 
-using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEditor;
-using System.IO;
-using System.Text;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using UnityEditor.SceneManagement;
-using UnityEngine.SceneManagement;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using UnityEditor;
+using UnityEngine;
 
 public class ftShaderTweaks : ScriptableWizard
 {
@@ -101,7 +95,7 @@ public class ftShaderTweaks : ScriptableWizard
             UnityEngine.Debug.LogError("Can't open " + fname);
             return false;
         }
-        for(int i=0; i<lines.Count; i++)
+        for (int i = 0; i < lines.Count; i++)
         {
             writer.WriteLine(lines[i]);
         }
@@ -243,7 +237,7 @@ public class ftShaderTweaks : ScriptableWizard
         bool wasFalloff = falloff;
         bool wasFalloffDeferred = falloffDeferred;
 
-        this.minSize = new Vector2(320, 290+60);
+        this.minSize = new Vector2(320, 290 + 60);
 
         GUI.Label(new Rect(10, 20, 320, 60), "These settings will modify base Unity shaders.\nAll projects opened with this version of Editor\nwill use modified shaders.");
         //agree = GUI.Toggle(new Rect(10, 65, 200, 15), agree, "I understand");
@@ -319,7 +313,7 @@ public class ftShaderTweaks : ScriptableWizard
                         return;
                     }
 
-                    for(int i=0; i<lines.Count; i++)
+                    for (int i = 0; i < lines.Count; i++)
                     {
                         writer.WriteLine(lines[i]);
                     }
@@ -401,7 +395,7 @@ public class ftShaderTweaks : ScriptableWizard
                         return;
                     }
 
-                    for(int i=0; i<lines.Count; i++)
+                    for (int i = 0; i < lines.Count; i++)
                     {
                         writer.WriteLine(lines[i]);
                     }
@@ -486,7 +480,7 @@ public class ftShaderTweaks : ScriptableWizard
                         return;
                     }
 
-                    for(int i=0; i<lines.Count; i++)
+                    for (int i = 0; i < lines.Count; i++)
                     {
                         writer.WriteLine(lines[i]);
                     }
@@ -538,9 +532,9 @@ public class ftShaderTweaks : ScriptableWizard
                     //    lines.Add(ftSignatureBegin);
                     //    lines.Add("/*");
                     //    lines.Add(ftSignatureEnd);
-//
+                    //
                     //    lines.Add(line);
-//
+                    //
                     //    lines.Add(ftSignatureBegin);
                     //    lines.Add("*/");
                     //    lines.Add(line.Replace(unityLightFalloffNew, ftLightFalloffNew));
@@ -552,9 +546,9 @@ public class ftShaderTweaks : ScriptableWizard
                     //    lines.Add(ftSignatureBegin);
                     //    lines.Add("/*");
                     //    lines.Add(ftSignatureEnd);
-//
+                    //
                     //    lines.Add(line);
-//
+                    //
                     //    lines.Add(ftSignatureBegin);
                     //    lines.Add("*/");
                     //    lines.Add(line.Replace(unityLightFalloffNew2, ftLightFalloffNew2));
@@ -565,7 +559,7 @@ public class ftShaderTweaks : ScriptableWizard
                     if (line.IndexOf("#if") >= 0) lastIfdef = lines.Count;
                     if (line.IndexOf("define UNITY_LIGHT_ATTENUATION") >= 0 || line.IndexOf("define LIGHT_ATTENUATION") >= 0)
                     {
-                       lastDefine = lines.Count;
+                        lastDefine = lines.Count;
                     }
                     if (line.IndexOf("#endif") >= 0) lastEndif = lines.Count;
 
@@ -615,25 +609,25 @@ public class ftShaderTweaks : ScriptableWizard
                                 }
                             }
                             //else if (defineLine.IndexOf("define LIGHT_ATTENUATION") >= 0)
-                           // {
-                           //     if (ifdefLine.IndexOf("POINT") >= 0)
-                           //     {
-                           //         // Deferred point light
-                           //         lines.Insert(lastDefine, ftSignatureBegin);
-                           //         lines.Insert(lastDefine + 1, "/*");
-                           //         lines.Insert(lastDefine + 2, ftSignatureEnd);
+                            // {
+                            //     if (ifdefLine.IndexOf("POINT") >= 0)
+                            //     {
+                            //         // Deferred point light
+                            //         lines.Insert(lastDefine, ftSignatureBegin);
+                            //         lines.Insert(lastDefine + 1, "/*");
+                            //         lines.Insert(lastDefine + 2, ftSignatureEnd);
 
-                           //         lines.Insert(lastDefine + 4, ftSignatureBegin);
-                           //         lines.Insert(lastDefine + 5, "*/");
+                            //         lines.Insert(lastDefine + 4, ftSignatureBegin);
+                            //         lines.Insert(lastDefine + 5, "*/");
 
-                           //         if (ifdefLine.IndexOf("POINT") >= 0)
-                           //         {
-                           //             lines.Add(ftLightFalloffDeferred);
-                           //         }
+                            //         if (ifdefLine.IndexOf("POINT") >= 0)
+                            //         {
+                            //             lines.Add(ftLightFalloffDeferred);
+                            //         }
 
-                           //         lines.Add(ftSignatureEnd);
-                           //     }
-                           // }
+                            //         lines.Add(ftSignatureEnd);
+                            //     }
+                            // }
                         }
                         lines.Add(line);
                     }
@@ -652,7 +646,7 @@ public class ftShaderTweaks : ScriptableWizard
                         return;
                     }
 
-                    for(int i=0; i<lines.Count; i++)
+                    for (int i = 0; i < lines.Count; i++)
                     {
                         writer.WriteLine(lines[i]);
                     }
@@ -743,7 +737,7 @@ public class ftShaderTweaks : ScriptableWizard
                         return;
                     }
 
-                    for(int i=0; i<lines.Count; i++)
+                    for (int i = 0; i < lines.Count; i++)
                     {
                         writer.WriteLine(lines[i]);
                     }
@@ -768,8 +762,9 @@ public class ftShaderTweaks : ScriptableWizard
         GUI.EndGroup();
     }
 
-    [MenuItem ("Bakery/Global shader tweaks", false, 60)]
-    public static void RenderLightmap () {
+    [MenuItem("Bakery/Global shader tweaks", false, 60)]
+    public static void RenderLightmap()
+    {
         ScriptableWizard.DisplayWizard("Bakery - shader tweaks", typeof(ftShaderTweaks), "RenderLightmap");
     }
 }

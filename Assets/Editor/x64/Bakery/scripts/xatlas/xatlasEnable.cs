@@ -1,7 +1,5 @@
-using UnityEngine;
 using UnityEditor;
-using UnityEditor.SceneManagement;
-using System.Collections.Generic;
+using UnityEngine;
 
 public partial class ftModelPostProcessor : ftModelPostProcessorInternal
 {

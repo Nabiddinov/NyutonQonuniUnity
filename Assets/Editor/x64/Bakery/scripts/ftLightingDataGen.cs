@@ -1,12 +1,9 @@
 using UnityEditor;
 using UnityEngine;
-using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 #if UNITY_EDITOR
 
-using UnityEngine.Rendering;
 using System.Reflection;
 
 public class ftLightingDataGen
@@ -45,7 +42,7 @@ public class ftLightingDataGen
 #endif
             f.Write(bytesP2);
             f.Write(lights.Count);
-            for(int i=0; i<lights.Count; i++)
+            for (int i = 0; i < lights.Count; i++)
             {
                 var so = new SerializedObject(lights[i]);
                 inspectorModeInfo.SetValue(so, InspectorMode.Debug, null);
@@ -55,7 +52,7 @@ public class ftLightingDataGen
                 f.Write(0);
             }
             f.Write(lights.Count);
-            for(int i=0; i<lights.Count; i++)
+            for (int i = 0; i < lights.Count; i++)
             {
                 var so = new SerializedObject(lights[i]);
                 var channel = so.FindProperty("m_BakingOutput").FindPropertyRelative("occlusionMaskChannel").intValue;

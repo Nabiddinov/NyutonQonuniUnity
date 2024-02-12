@@ -32,13 +32,13 @@
 #define DONT_USE_BUILD_OPTIONS_EXTERNAL_MODIFICATIONS_FLAG
 #endif
 
-using UnityEngine;
-using UnityEditor;
 using System;
-using System.IO;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Threading;
+using UnityEditor;
+using UnityEngine;
 
 /// <summary>
 /// Allows Oculus to build apps from the command line.
@@ -372,7 +372,7 @@ partial class OculusBuildApp : EditorWindow
 
         if (gradleBuildProcess != null && !gradleBuildProcess.HasExited)
         {
-            var cancelThread = new Thread(delegate() { CancelGradleBuild(); });
+            var cancelThread = new Thread(delegate () { CancelGradleBuild(); });
             cancelThread.Start();
         }
     }
@@ -451,7 +451,7 @@ partial class OculusBuildApp : EditorWindow
 #endif
             dataPath = Application.dataPath;
 
-            buildThread = new Thread(delegate() { OVRBuildRun(); });
+            buildThread = new Thread(delegate () { OVRBuildRun(); });
             buildThread.Start();
             return;
         }

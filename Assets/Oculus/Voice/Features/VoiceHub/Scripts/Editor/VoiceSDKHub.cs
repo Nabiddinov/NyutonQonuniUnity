@@ -8,11 +8,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Threading;
 using Meta.Voice.Hub;
 using Meta.Voice.Hub.Attributes;
-using Meta.Voice.Hub.Utilities;
 using Meta.Voice.TelemetryUtilities;
 using UnityEditor;
 
@@ -22,7 +19,7 @@ namespace Meta.Voice.VSDKHub
     public class VoiceSDKHubContext : MetaHubContext
     {
     }
-    
+
     public class VoiceSDKHub : MetaHub
     {
         public static readonly List<string> Contexts = new List<string>
@@ -49,7 +46,7 @@ namespace Meta.Voice.VSDKHub
         {
             return VoiceHubConstants.CONTEXT_VOICE + "::" + pageName;
         }
-        
+
         [MenuItem("Oculus/Voice SDK/Voice Hub", false, 1)]
         private static void ShowWindow()
         {

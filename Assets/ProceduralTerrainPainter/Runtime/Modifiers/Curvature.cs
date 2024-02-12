@@ -10,18 +10,18 @@ namespace sc.terrain.proceduralpainter
         [Range(1f, 16f)] public float radius = 1;
         [Range(0.001f, 1f)] public float minFalloff = 0.001f;
         [Range(0.001f, 1f)] public float maxFalloff = 0.001f;
-        
+
         public void OnEnable()
         {
             passIndex = FilterPass.Curvature;
         }
-        
+
         public override void Configure(Material material)
         {
             base.Configure(material);
-            
+
             material.SetFloat("_CurvatureRadius", radius);
-            material.SetVector("_MinMaxCurvature", new Vector4(minMax.x, minMax.y, minFalloff,maxFalloff));
+            material.SetVector("_MinMaxCurvature", new Vector4(minMax.x, minMax.y, minFalloff, maxFalloff));
         }
     }
 }

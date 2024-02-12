@@ -8,7 +8,6 @@
 
 using System;
 using Meta.WitAi.Json;
-using UnityEngine;
 using UnityEngine.Scripting;
 
 namespace Meta.WitAi.Data.Entities
@@ -52,7 +51,7 @@ namespace Meta.WitAi.Data.Entities
     public class WitEntityData : WitEntityDataBase<string>
     {
         [Preserve]
-        public WitEntityData() {}
+        public WitEntityData() { }
 
         [Preserve]
         public WitEntityData(WitResponseNode node)
@@ -80,7 +79,7 @@ namespace Meta.WitAi.Data.Entities
     public class WitEntityFloatData : WitEntityDataBase<float>
     {
         [Preserve]
-        public WitEntityFloatData() {}
+        public WitEntityFloatData() { }
 
         [Preserve]
         public WitEntityFloatData(WitResponseNode node)
@@ -116,7 +115,7 @@ namespace Meta.WitAi.Data.Entities
     public class WitEntityIntData : WitEntityDataBase<int>
     {
         [Preserve]
-        public WitEntityIntData() {}
+        public WitEntityIntData() { }
 
         [Preserve]
         public WitEntityIntData(WitResponseNode node)

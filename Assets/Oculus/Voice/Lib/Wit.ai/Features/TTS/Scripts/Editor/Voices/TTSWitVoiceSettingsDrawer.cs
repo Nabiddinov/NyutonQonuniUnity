@@ -9,19 +9,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UnityEditor;
-using Meta.WitAi.TTS.Integrations;
-using Meta.WitAi.Windows;
+using Meta.WitAi.Data.Configuration;
 using Meta.WitAi.Data.Info;
 using Meta.WitAi.Lib;
-using Meta.WitAi.Data.Configuration;
 using Meta.WitAi.TTS.Data;
+using Meta.WitAi.TTS.Integrations;
 using Meta.WitAi.TTS.Utilities;
+using Meta.WitAi.Windows;
+using UnityEditor;
 using UnityEngine;
 
 namespace Meta.WitAi.TTS.Voices
 {
-    [CustomPropertyDrawer(typeof( TTSWitVoiceSettings))]
+    [CustomPropertyDrawer(typeof(TTSWitVoiceSettings))]
     public class TTSWitVoiceSettingsDrawer : PropertyDrawer
     {
         // Constants for var layout
@@ -43,7 +43,7 @@ namespace Meta.WitAi.TTS.Voices
         private string[] _voiceNames;
 
         // Subfields
-        private static readonly FieldInfo[] _fields = FieldGUI.GetFields(typeof( TTSWitVoiceSettings));
+        private static readonly FieldInfo[] _fields = FieldGUI.GetFields(typeof(TTSWitVoiceSettings));
 
         // Determine height
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)

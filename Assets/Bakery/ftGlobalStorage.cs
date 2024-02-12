@@ -311,14 +311,15 @@ public class ftGlobalStorage : ScriptableObject
     public List<string> texSettingsKey;
     public List<Vector2> texSettingsVal;
 
-    public void InitModifiedMeshMap(string assetPath) {
+    public void InitModifiedMeshMap(string assetPath)
+    {
 
         modifiedMeshMap = new Dictionary<string, int>();
 
         var index = modifiedAssetPathList.IndexOf(assetPath);
         if (index < 0) return;
         var m = modifiedAssets[index];
-        for(int j=0; j<m.meshName.Count; j++)
+        for (int j = 0; j < m.meshName.Count; j++)
         {
             modifiedMeshMap[m.meshName[j]] = j;//m.padding[j];
         }
@@ -331,9 +332,9 @@ public class ftGlobalStorage : ScriptableObject
 
     public void ConvertFromLegacy()
     {
-        for(int a=0; a<modifiedAssetPathList.Count; a++)
+        for (int a = 0; a < modifiedAssetPathList.Count; a++)
         {
-            while(modifiedAssets.Count <= a)
+            while (modifiedAssets.Count <= a)
             {
                 var str = new AdjustedMesh();
                 str.meshName = new List<string>();
@@ -341,7 +342,8 @@ public class ftGlobalStorage : ScriptableObject
                 modifiedAssets.Add(str);
             }
             var assetPath = modifiedAssetPathList[a];
-            for(int i=0; i<modifiedMeshList.Count; i++) {
+            for (int i = 0; i < modifiedMeshList.Count; i++)
+            {
                 var m = modifiedMeshList[i];
                 if (m == null) continue;
                 var mpath = AssetDatabase.GetAssetPath(m);
@@ -359,7 +361,7 @@ public class ftGlobalStorage : ScriptableObject
     {
         string s = "";
         var list = modifiedAssets[id].padding;
-        for(int i=0; i<list.Count; i++) s += list[i]+"_";
+        for (int i = 0; i < list.Count; i++) s += list[i] + "_";
         return s.GetHashCode();
     }
 
@@ -392,9 +394,9 @@ public class ftGlobalStorage : ScriptableObject
 
         // check if Bakery properties already present
         int propID = -1;
-        for(int i=0; i<props.Length; i++)
+        for (int i = 0; i < props.Length; i++)
         {
-            if (props[i].Substring(0,7) == "#BAKERY")
+            if (props[i].Substring(0, 7) == "#BAKERY")
             {
                 propID = i;
                 break;
@@ -405,7 +407,7 @@ public class ftGlobalStorage : ScriptableObject
         {
             // keep existing properties
             var newProps = new string[props.Length + 1];
-            for(int i=0; i<props.Length; i++) newProps[i] = props[i];
+            for (int i = 0; i < props.Length; i++) newProps[i] = props[i];
             props = newProps;
             propID = props.Length - 1;
         }
@@ -438,10 +440,10 @@ public class ftGlobalStorage : ScriptableObject
             return;
         }
         var newProps = new List<string>();
-        for(int i=0; i<props.Length; i++)
+        for (int i = 0; i < props.Length; i++)
         {
             var prop = props[i];
-            if (prop.Substring(0,7) != "#BAKERY")
+            if (prop.Substring(0, 7) != "#BAKERY")
             {
                 newProps.Add(prop);
             }

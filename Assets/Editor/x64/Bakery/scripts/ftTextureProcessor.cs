@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
 using UnityEditor;
-using System.Collections.Generic;
+using UnityEngine;
 
 public class ftTextureProcessor : AssetPostprocessor
 {
@@ -49,57 +49,57 @@ public class ftTextureProcessor : AssetPostprocessor
         importer.wrapMode = TextureWrapMode.Clamp;
 
         int texType = (int)settings.y;
-        switch(texType)
+        switch (texType)
         {
             case TEX_LM:
-            {
-                importer.textureType = TextureImporterType.Lightmap;
-                if (pstorage.lightmapCompression != BakeryProjectSettings.Compression.CompressButAllowOverridingAsset)
                 {
-                    importer.textureCompression = pstorage.lightmapCompression == BakeryProjectSettings.Compression.ForceCompress ?
-                        TextureImporterCompression.Compressed : TextureImporterCompression.Uncompressed;
+                    importer.textureType = TextureImporterType.Lightmap;
+                    if (pstorage.lightmapCompression != BakeryProjectSettings.Compression.CompressButAllowOverridingAsset)
+                    {
+                        importer.textureCompression = pstorage.lightmapCompression == BakeryProjectSettings.Compression.ForceCompress ?
+                            TextureImporterCompression.Compressed : TextureImporterCompression.Uncompressed;
+                    }
+                    break;
                 }
-                break;
-            }
             case TEX_LMDEFAULT:
-            {
-                importer.textureType = TextureImporterType.Default;
-                if (pstorage.lightmapCompression != BakeryProjectSettings.Compression.CompressButAllowOverridingAsset)
                 {
-                    importer.textureCompression = pstorage.lightmapCompression == BakeryProjectSettings.Compression.ForceCompress ?
-                        TextureImporterCompression.Compressed : TextureImporterCompression.Uncompressed;
+                    importer.textureType = TextureImporterType.Default;
+                    if (pstorage.lightmapCompression != BakeryProjectSettings.Compression.CompressButAllowOverridingAsset)
+                    {
+                        importer.textureCompression = pstorage.lightmapCompression == BakeryProjectSettings.Compression.ForceCompress ?
+                            TextureImporterCompression.Compressed : TextureImporterCompression.Uncompressed;
+                    }
+                    break;
                 }
-                break;
-            }
             case TEX_MASK:
-            {
-                importer.textureType = TextureImporterType.Default;
-                importer.textureCompression = pstorage.lightmapCompression != BakeryProjectSettings.Compression.ForceNoCompress ? TextureImporterCompression.CompressedHQ : TextureImporterCompression.Uncompressed;
-                importer.alphaSource = TextureImporterAlphaSource.FromInput;
-                break;
-            }
+                {
+                    importer.textureType = TextureImporterType.Default;
+                    importer.textureCompression = pstorage.lightmapCompression != BakeryProjectSettings.Compression.ForceNoCompress ? TextureImporterCompression.CompressedHQ : TextureImporterCompression.Uncompressed;
+                    importer.alphaSource = TextureImporterAlphaSource.FromInput;
+                    break;
+                }
             case TEX_MASK_NO_ALPHA:
-            {
-                importer.textureType = TextureImporterType.Default;
-                importer.textureCompression = pstorage.lightmapCompression != BakeryProjectSettings.Compression.ForceNoCompress ? TextureImporterCompression.Compressed : TextureImporterCompression.Uncompressed;
-                importer.alphaSource = TextureImporterAlphaSource.None;
-                break;
-            }
+                {
+                    importer.textureType = TextureImporterType.Default;
+                    importer.textureCompression = pstorage.lightmapCompression != BakeryProjectSettings.Compression.ForceNoCompress ? TextureImporterCompression.Compressed : TextureImporterCompression.Uncompressed;
+                    importer.alphaSource = TextureImporterAlphaSource.None;
+                    break;
+                }
             case TEX_DIR:
-            {
-                importer.textureType = TextureImporterType.Default;
-                importer.textureCompression =  pstorage.lightmapCompression != BakeryProjectSettings.Compression.ForceNoCompress ? (pstorage.dirHighQuality ? TextureImporterCompression.CompressedHQ : TextureImporterCompression.Compressed) : TextureImporterCompression.Uncompressed;
-                importer.sRGBTexture = (pstorage.format8bit == BakeryProjectSettings.FileFormat.PNG);
-                break;
-            }
+                {
+                    importer.textureType = TextureImporterType.Default;
+                    importer.textureCompression = pstorage.lightmapCompression != BakeryProjectSettings.Compression.ForceNoCompress ? (pstorage.dirHighQuality ? TextureImporterCompression.CompressedHQ : TextureImporterCompression.Compressed) : TextureImporterCompression.Uncompressed;
+                    importer.sRGBTexture = (pstorage.format8bit == BakeryProjectSettings.FileFormat.PNG);
+                    break;
+                }
             case TEX_DIR_NO_ALPHA:
-            {
-                importer.textureType = TextureImporterType.Default;
-                importer.textureCompression = pstorage.lightmapCompression != BakeryProjectSettings.Compression.ForceNoCompress ? TextureImporterCompression.Compressed : TextureImporterCompression.Uncompressed;
-                importer.alphaSource = TextureImporterAlphaSource.None;
-                importer.sRGBTexture = false;//(pstorage.format8bit == BakeryProjectSettings.FileFormat.PNG);
-                break;
-            }
+                {
+                    importer.textureType = TextureImporterType.Default;
+                    importer.textureCompression = pstorage.lightmapCompression != BakeryProjectSettings.Compression.ForceNoCompress ? TextureImporterCompression.Compressed : TextureImporterCompression.Uncompressed;
+                    importer.alphaSource = TextureImporterAlphaSource.None;
+                    importer.sRGBTexture = false;//(pstorage.format8bit == BakeryProjectSettings.FileFormat.PNG);
+                    break;
+                }
         }
     }
 }

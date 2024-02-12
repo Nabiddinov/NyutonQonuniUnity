@@ -119,7 +119,7 @@ namespace Oculus.Interaction
                 }
             }
         }
-        
+
         protected virtual void OnDisable()
         {
             if (_started)

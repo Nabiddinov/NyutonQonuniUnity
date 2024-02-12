@@ -18,11 +18,9 @@
  * limitations under the License.
  */
 
-using UnityEngine;
 using System;
-using System.Collections;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Add OVROverlay script to an object with an optional mesh primitive

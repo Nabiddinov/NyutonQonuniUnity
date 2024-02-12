@@ -5,8 +5,6 @@ using UnityEditor;
 #endif
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 [ExecuteInEditMode]
 [DisallowMultipleComponent]
@@ -70,27 +68,27 @@ public class BakerySkyLight : MonoBehaviour
 
     void OnDrawGizmos()
     {
-      Gizmos.color = new Color(49/255.0f, 91/255.0f, 191/255.0f);
-      Gizmos.DrawSphere(transform.position, 0.1f);
+        Gizmos.color = new Color(49 / 255.0f, 91 / 255.0f, 191 / 255.0f);
+        Gizmos.DrawSphere(transform.position, 0.1f);
     }
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = new Color(49/255.0f, 91/255.0f, 191/255.0f);
+        Gizmos.color = new Color(49 / 255.0f, 91 / 255.0f, 191 / 255.0f);
         Vector3 origin = transform.position;
         const int segments = 16;
-        for(int i=0; i<segments; i++)
+        for (int i = 0; i < segments; i++)
         {
             float p1 = i / (float)segments;
-            float p2 = (i+1) / (float)segments;
+            float p2 = (i + 1) / (float)segments;
 
-            float x1 = Mathf.Cos(p1 * Mathf.PI*2);
-            float y1 = Mathf.Sin(p1 * Mathf.PI*2);
+            float x1 = Mathf.Cos(p1 * Mathf.PI * 2);
+            float y1 = Mathf.Sin(p1 * Mathf.PI * 2);
 
-            float x2 = Mathf.Cos(p2 * Mathf.PI*2);
-            float y2 = Mathf.Sin(p2 * Mathf.PI*2);
+            float x2 = Mathf.Cos(p2 * Mathf.PI * 2);
+            float y2 = Mathf.Sin(p2 * Mathf.PI * 2);
 
-            Gizmos.DrawLine(origin + new Vector3(x1,0,y1), origin + new Vector3(x2,0,y2));
+            Gizmos.DrawLine(origin + new Vector3(x1, 0, y1), origin + new Vector3(x2, 0, y2));
 
             if (hemispherical)
             {
@@ -101,8 +99,8 @@ public class BakerySkyLight : MonoBehaviour
                 y2 = Mathf.Sin(p2 * Mathf.PI);
             }
 
-            Gizmos.DrawLine(origin + new Vector3(x1,y1,0), origin + new Vector3(x2,y2,0));
-            Gizmos.DrawLine(origin + new Vector3(0,y1,x1), origin + new Vector3(0,y2,x2));
+            Gizmos.DrawLine(origin + new Vector3(x1, y1, 0), origin + new Vector3(x2, y2, 0));
+            Gizmos.DrawLine(origin + new Vector3(0, y1, x1), origin + new Vector3(0, y2, x2));
         }
     }
 

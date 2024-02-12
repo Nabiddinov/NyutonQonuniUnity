@@ -1,8 +1,7 @@
-using UnityEngine;
-using UnityEditor;
-using UnityEngine.SceneManagement;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ftClearMenu : EditorWindow
 {
@@ -13,7 +12,7 @@ public class ftClearMenu : EditorWindow
         lightmapReferencesAndBakeSettings = 2
     }
 
-    static public string[] options = new string[] {"Nothing", "Baked data references", "All (data and bake settings)"};
+    static public string[] options = new string[] { "Nothing", "Baked data references", "All (data and bake settings)" };
 
     public SceneClearingMode sceneClearingMode = SceneClearingMode.lightmapReferences;
     public bool clearLightmapFiles = false;
@@ -80,7 +79,7 @@ public class ftClearMenu : EditorWindow
 
     static void RemoveFiles(List<Texture2D> maps)
     {
-        for(int i=0; i<maps.Count; i++)
+        for (int i = 0; i < maps.Count; i++)
         {
             RemoveFiles(maps[i]);
         }
@@ -91,7 +90,7 @@ public class ftClearMenu : EditorWindow
         if (removeLightmapFiles)
         {
             var sceneCount = SceneManager.sceneCount;
-            for(int i=0; i<sceneCount; i++)
+            for (int i = 0; i < sceneCount; i++)
             {
                 var scene = SceneManager.GetSceneAt(i);
                 if (!scene.isLoaded) continue;
@@ -113,7 +112,7 @@ public class ftClearMenu : EditorWindow
         {
             var newStorages = new List<GameObject>();
             var sceneCount = SceneManager.sceneCount;
-            for(int i=0; i<sceneCount; i++)
+            for (int i = 0; i < sceneCount; i++)
             {
                 var scene = SceneManager.GetSceneAt(i);
                 if (!scene.isLoaded) continue;
@@ -130,7 +129,7 @@ public class ftClearMenu : EditorWindow
                 Undo.DestroyObjectImmediate(go);
             }
             LightmapSettings.lightmaps = new LightmapData[0];
-            for(int i=0; i<newStorages.Count; i++)
+            for (int i = 0; i < newStorages.Count; i++)
             {
                 newStorages[i].name = "!ftraceLightmaps";
             }
@@ -138,7 +137,7 @@ public class ftClearMenu : EditorWindow
         else if (sceneClearMode == SceneClearingMode.lightmapReferencesAndBakeSettings)
         {
             var sceneCount = SceneManager.sceneCount;
-            for(int i=0; i<sceneCount; i++)
+            for (int i = 0; i < sceneCount; i++)
             {
                 var scene = SceneManager.GetSceneAt(i);
                 if (!scene.isLoaded) continue;
@@ -151,7 +150,7 @@ public class ftClearMenu : EditorWindow
 
 #if UNITY_2017_3_OR_NEWER
         var lights = FindObjectsOfType<Light>() as Light[];
-        for(int i=0; i<lights.Length; i++)
+        for (int i = 0; i < lights.Length; i++)
         {
             var output = lights[i].bakingOutput;
             output.isBaked = false;

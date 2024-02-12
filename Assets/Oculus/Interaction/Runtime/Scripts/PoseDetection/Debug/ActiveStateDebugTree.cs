@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-using Oculus.Interaction.DebugTree;
 using System;
 using System.Collections.Generic;
+using Oculus.Interaction.DebugTree;
 
 namespace Oculus.Interaction.PoseDetection.Debug
 {

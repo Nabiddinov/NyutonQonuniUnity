@@ -20,8 +20,8 @@
 
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Oculus.Interaction.Body.Input;
+using UnityEngine;
 
 namespace Oculus.Interaction.Body.PoseDetection
 {

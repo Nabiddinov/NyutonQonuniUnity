@@ -7,7 +7,7 @@ namespace CrazyMinnow.SALSA.OneClicks
         public string name;
         public List<OneClickComponent> components;
 
-        public OneClickExpression(){}
+        public OneClickExpression() { }
 
         public OneClickExpression(string name, List<OneClickComponent> components)
         {
@@ -33,10 +33,10 @@ namespace CrazyMinnow.SALSA.OneClicks
             this.components = components;
         }
 
-        public void SetEmoterBools(bool isRand, 
-                                   bool isEmph, 
-                                   bool isRep, 
-                                   float frac, 
+        public void SetEmoterBools(bool isRand,
+                                   bool isEmph,
+                                   bool isRep,
+                                   float frac,
                                    bool isAlwaysEmph,
                                    float delay,
                                    EmoteRepeater.StartDelay startType,

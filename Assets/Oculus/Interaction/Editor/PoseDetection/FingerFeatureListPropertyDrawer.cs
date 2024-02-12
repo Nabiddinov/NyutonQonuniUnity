@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-using Oculus.Interaction.PoseDetection.Editor.Model;
 using System;
 using System.Linq;
+using Oculus.Interaction.PoseDetection.Editor.Model;
 using UnityEditor;
 
 namespace Oculus.Interaction.PoseDetection.Editor

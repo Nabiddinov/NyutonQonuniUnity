@@ -28,16 +28,13 @@
 #define REQUIRES_XR_SDK
 #endif
 
-using UnityEngine;
-using UnityEditor;
-using UnityEditor.Callbacks;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
 using Oculus.VR.Editor;
+using UnityEditor;
+using UnityEngine;
 
 [InitializeOnLoad]
 public class OVRPluginUpdater : IOVRPluginInfoSupplier
@@ -1051,7 +1048,7 @@ public class OVRPluginUpdater : IOVRPluginInfoSupplier
         }
     }
 
-#region IOVRPluginInfoSupplier Implementation
+    #region IOVRPluginInfoSupplier Implementation
 
     // Test if the OVRPlugin/OpenXR plugin is currently activated, used by other editor utilities
     public bool IsOVRPluginOpenXRActivated() => IsOVRPluginOpenXRActivatedInternal();
@@ -1073,7 +1070,7 @@ public class OVRPluginUpdater : IOVRPluginInfoSupplier
         return enabledUtilsPluginPkg != null && enabledUtilsPluginPkg.IsBundledPluginPackage();
     }
 
-#endregion
+    #endregion
 }
 
 #endif

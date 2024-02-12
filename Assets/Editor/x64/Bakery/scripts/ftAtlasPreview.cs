@@ -1,5 +1,5 @@
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 public class ftAtlasPreview : EditorWindow
 {
@@ -49,7 +49,7 @@ public class ftAtlasPreview : EditorWindow
         if (update)
         {
             Graphics.SetRenderTarget(atlasRT);
-            GL.Clear(true, true, new Color(0,0,0,0));
+            GL.Clear(true, true, new Color(0, 0, 0, 0));
             GL.sRGBWrite = true;
 
             var worldMatrix = Matrix4x4.identity;
@@ -57,7 +57,7 @@ public class ftAtlasPreview : EditorWindow
             firstID = 99999;
             lastID = 0;
 
-            for(int i=0; i<objs.Count; i++)
+            for (int i = 0; i < objs.Count; i++)
             {
                 if (ids[i] > lastID) lastID = ids[i];
                 if (ids[i] < firstID) firstID = ids[i];
@@ -66,7 +66,7 @@ public class ftAtlasPreview : EditorWindow
             if (curAtlas < firstID) curAtlas = firstID;
 
             grp = null;
-            for(int i=0; i<objs.Count; i++)
+            for (int i = 0; i < objs.Count; i++)
             {
                 if (ids[i] != curAtlas) continue;
                 if (objs[i] == null) continue;
@@ -77,7 +77,7 @@ public class ftAtlasPreview : EditorWindow
                 int numSubs = mesh.subMeshCount;
                 Shader.SetGlobalVector("unity_LightmapST", scaleOffset[i]);
                 mat.SetPass(0);
-                for(int s=0; s<numSubs; s++)
+                for (int s = 0; s < numSubs; s++)
                 {
                     Graphics.DrawMeshNow(mesh, worldMatrix, s);
                 }
@@ -93,9 +93,9 @@ public class ftAtlasPreview : EditorWindow
         this.maxSize = new Vector2(2048, 2048);
 
         var pos = this.position;
-        if (pos.height != pos.width+32)
+        if (pos.height != pos.width + 32)
         {
-            this.position = new Rect(pos.x, pos.y, pos.width, pos.width+32);
+            this.position = new Rect(pos.x, pos.y, pos.width, pos.width + 32);
         }
 
         if (GUI.Button(new Rect(0, 0, 32, 32), "<"))
@@ -112,23 +112,23 @@ public class ftAtlasPreview : EditorWindow
         }
 
         int y = 0;
-        #if UNITY_2019_3_OR_NEWER
-            y = -10;
-        #endif
+#if UNITY_2019_3_OR_NEWER
+        y = -10;
+#endif
 
-        GUI.Label(new Rect(64, y, 320, 32), "Showing atlas "+((curAtlas-firstID)+1)+" of "+numAtlases);
+        GUI.Label(new Rect(64, y, 320, 32), "Showing atlas " + ((curAtlas - firstID) + 1) + " of " + numAtlases);
         if (grp != null)
         {
-            GUI.Label(new Rect(64, y+15, 320, 32), grp.name + " (" + grp.resolution + "x" + grp.resolution + ")");
+            GUI.Label(new Rect(64, y + 15, 320, 32), grp.name + " (" + grp.resolution + "x" + grp.resolution + ")");
         }
         else
         {
-            GUI.Label(new Rect(64, y+15, 320, 32), "(Not shown / per-vertex)");
+            GUI.Label(new Rect(64, y + 15, 320, 32), "(Not shown / per-vertex)");
         }
 
         if (atlasRT != null)
         {
-            EditorGUI.DrawPreviewTexture(new Rect(0, 32, position.width, position.height-32), atlasRT);//, ScaleMode.ScaleToFit, false, 1.0f);
+            EditorGUI.DrawPreviewTexture(new Rect(0, 32, position.width, position.height - 32), atlasRT);//, ScaleMode.ScaleToFit, false, 1.0f);
         }
         else
         {

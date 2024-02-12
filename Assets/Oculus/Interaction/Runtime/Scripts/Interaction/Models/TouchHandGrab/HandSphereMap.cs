@@ -18,10 +18,9 @@
  * limitations under the License.
  */
 
-using Oculus.Interaction.Input;
 using System.Collections.Generic;
+using Oculus.Interaction.Input;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace Oculus.Interaction
 {
@@ -76,7 +75,7 @@ namespace Oculus.Interaction
                 Vector3 spherePosition = (handedness == Handedness.Left ? -1 : 1) * sphere.Position;
                 HandSphere target = new HandSphere(
                     pose.rotation * spherePosition * scale + pose.position,
-                    sphere.Radius*scale,
+                    sphere.Radius * scale,
                     sphere.Joint);
                 spheres.Add(target);
             }

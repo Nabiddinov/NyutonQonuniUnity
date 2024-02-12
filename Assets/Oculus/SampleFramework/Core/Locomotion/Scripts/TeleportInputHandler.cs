@@ -8,8 +8,8 @@ language governing permissions and limitations under the license.
 ************************************************************************************/
 
 using System;
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 /// <summary>
 /// The TeleportInputHandler provides interfaces used to control aim related to teleports and related behaviors.

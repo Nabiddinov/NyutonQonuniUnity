@@ -18,14 +18,10 @@
  * limitations under the License.
  */
 
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using System;
-using UnityEngine;
+using System.IO;
 using OVRSimpleJSON;
-using Unity.Jobs;
-using Unity.Collections;
+using UnityEngine;
 
 public enum OVRGLTFType
 {

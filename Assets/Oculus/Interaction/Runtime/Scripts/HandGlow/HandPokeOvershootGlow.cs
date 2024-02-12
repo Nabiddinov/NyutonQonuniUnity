@@ -21,7 +21,6 @@
 using Oculus.Interaction.Input;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Rendering;
 
 namespace Oculus.Interaction
 {
@@ -115,7 +114,7 @@ namespace Oculus.Interaction
             }
         }
 
-        private void UpdateOvershoot(float normalizedDistance )
+        private void UpdateOvershoot(float normalizedDistance)
         {
             if (_materialEditor == null) return;
             var _block = _materialEditor.MaterialPropertyBlock;

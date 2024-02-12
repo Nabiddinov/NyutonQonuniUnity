@@ -20,8 +20,8 @@
 
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Meta.XR.BuildingBlocks.Editor;
+using UnityEngine;
 
 namespace Oculus.Interaction.Editor.BuildingBlocks
 {
@@ -44,7 +44,7 @@ namespace Oculus.Interaction.Editor.BuildingBlocks
             interaction.name = $"[BB] {BlockName}";
             BlocksUtils.UpdateForAutoWiring(interaction);
 
-            return  new List<GameObject>() { interaction };
+            return new List<GameObject>() { interaction };
         }
     }
 }

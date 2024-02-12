@@ -7,10 +7,10 @@
  */
 
 using System.Text;
-using UnityEngine;
-using UnityEngine.UI;
 using Meta.WitAi.TTS.Data;
 using Meta.WitAi.TTS.Utilities;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Meta.Voice.Samples.TTSVoices
 {

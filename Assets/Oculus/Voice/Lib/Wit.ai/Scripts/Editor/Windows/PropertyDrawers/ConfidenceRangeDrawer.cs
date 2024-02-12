@@ -7,9 +7,9 @@
  */
 
 using System.Collections.Generic;
+using Meta.WitAi.CallbackHandlers;
 using UnityEditor;
 using UnityEngine;
-using Meta.WitAi.CallbackHandlers;
 
 namespace Meta.WitAi.Windows
 {

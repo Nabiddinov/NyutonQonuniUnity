@@ -14,13 +14,13 @@ using System;
 using System.Collections.Generic;
 using Meta.Conduit;
 using Meta.Voice.TelemetryUtilities;
+using Meta.WitAi.Interfaces;
 using Meta.WitAi.Json;
-using UnityEditor;
-using UnityEngine;
 using Meta.WitAi.Lib;
 using Meta.WitAi.Requests;
 using Meta.WitAi.Windows;
-using Meta.WitAi.Interfaces;
+using UnityEditor;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Meta.WitAi.Data.Configuration
@@ -101,7 +101,7 @@ namespace Meta.WitAi.Data.Configuration
         public static int GetConfigurationIndex(WitConfiguration configuration)
         {
             // Search through configs
-            return Array.FindIndex(WitConfigs, (checkConfig) => checkConfig == configuration );
+            return Array.FindIndex(WitConfigs, (checkConfig) => checkConfig == configuration);
         }
         // Get configuration index
         public static int GetConfigurationIndex(string configurationName)

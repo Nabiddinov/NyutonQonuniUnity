@@ -18,10 +18,10 @@
  * limitations under the License.
  */
 
-using Oculus.Interaction.Input;
 using System.Collections.Generic;
-using UnityEngine;
 using Meta.XR.BuildingBlocks.Editor;
+using Oculus.Interaction.Input;
+using UnityEngine;
 
 namespace Oculus.Interaction.Editor.BuildingBlocks
 {

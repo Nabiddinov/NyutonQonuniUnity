@@ -7,9 +7,9 @@
  */
 
 using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Meta.WitAi.Data.Info;
 using Meta.WitAi.Requests;
 
@@ -187,7 +187,7 @@ namespace Meta.WitAi.Lib
                     return;
                 }
 
-                int totalTagCount = versionTagsBySnapshot.Sum(snap =>snap.Length);
+                int totalTagCount = versionTagsBySnapshot.Sum(snap => snap.Length);
                 appInfo.versionTags = new WitVersionTagInfo[totalTagCount];
 
                 for (int snapshot = 0, currentTag = 0; snapshot < versionTagsBySnapshot.Length; snapshot++)

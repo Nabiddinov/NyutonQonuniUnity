@@ -1,10 +1,6 @@
 
 using UnityEditor;
 using UnityEngine;
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 [CustomEditor(typeof(BakeryLightmapGroup))]
 [CanEditMultipleObjects]
@@ -50,7 +46,8 @@ public class ftLMGroupInspector : UnityEditor.Editor
         ftraceAutoResolution = serializedObject.FindProperty("autoResolution");
     }
 
-    public override void OnInspectorGUI() {
+    public override void OnInspectorGUI()
+    {
         serializedObject.Update();
 
         EditorGUILayout.LabelField("Bakery lightmap group parameters");

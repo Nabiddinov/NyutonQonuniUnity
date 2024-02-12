@@ -19,8 +19,8 @@
  */
 
 using System;
-using UnityEngine;
 using NUnit.Framework;
+using UnityEngine;
 
 namespace Meta.XR.BuildingBlocks.Editor
 {

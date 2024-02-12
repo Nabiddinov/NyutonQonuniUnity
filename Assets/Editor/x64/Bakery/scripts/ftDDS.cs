@@ -1,9 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using UnityEditor;
-using UnityEngine;
-
 public class ftDDS
 {
     public static byte[] ddsHeaderFloat4 = new byte[]

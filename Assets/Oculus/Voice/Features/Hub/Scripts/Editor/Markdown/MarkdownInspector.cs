@@ -8,10 +8,10 @@
 
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
-using UnityEngine;
 using System.Text.RegularExpressions;
 using Meta.Voice.Hub.Interfaces;
+using UnityEditor;
+using UnityEngine;
 using UnityEngine.Networking;
 
 namespace Meta.Voice.Hub.Markdown
@@ -122,7 +122,7 @@ namespace Meta.Voice.Hub.Markdown
                             if (img.width > windowWidth - padding)
                             {
                                 width = windowWidth - padding;
-                                aspectRatio = img.width / (float) img.height;
+                                aspectRatio = img.width / (float)img.height;
                                 height = width / aspectRatio;
                             }
 

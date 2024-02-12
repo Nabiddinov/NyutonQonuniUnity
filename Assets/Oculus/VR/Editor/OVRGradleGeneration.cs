@@ -26,16 +26,13 @@
 
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
 using System.Diagnostics;
 using System.Threading;
 using Oculus.VR.Editor;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 #if UNITY_ANDROID
@@ -433,7 +430,7 @@ public class OVRGradleGeneration
                 }
 
                 // Begin thread to time upload and install
-                var thread = new Thread(delegate() { TimeDeploy(); });
+                var thread = new Thread(delegate () { TimeDeploy(); });
                 thread.Start();
             }
         }

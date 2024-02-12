@@ -7,10 +7,9 @@
  */
 
 using System;
-using UnityEngine;
 using Meta.WitAi.Data.Configuration;
-using Meta.WitAi.Lib;
 using Meta.WitAi.Requests;
+using UnityEngine;
 
 namespace Meta.WitAi.Windows
 {

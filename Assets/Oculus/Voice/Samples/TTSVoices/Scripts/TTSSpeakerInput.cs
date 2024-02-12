@@ -8,9 +8,9 @@
 
 using System;
 using System.Collections;
+using Meta.WitAi.TTS.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
-using Meta.WitAi.TTS.Utilities;
 
 namespace Meta.Voice.Samples.TTSVoices
 {

@@ -7,8 +7,8 @@
  */
 
 using System.Collections.Generic;
-using UnityEngine;
 using Meta.WitAi.TTS.Data;
+using UnityEngine;
 
 namespace Meta.WitAi.TTS.Utilities
 {

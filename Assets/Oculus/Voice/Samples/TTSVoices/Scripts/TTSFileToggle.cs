@@ -9,8 +9,6 @@
 using System;
 using System.Collections.Generic;
 using Meta.WitAi.Requests;
-using Meta.WitAi.TTS;
-using Meta.WitAi.TTS.Data;
 using Meta.WitAi.TTS.Integrations;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,7 +24,7 @@ namespace Meta.Voice.Samples.TTSVoices
         [SerializeField] private string _labelFormat = "File Type: {0}";
 
         // Current audio file type
-        private TTSWitAudioType _fileType = (TTSWitAudioType) (-1);
+        private TTSWitAudioType _fileType = (TTSWitAudioType)(-1);
         private List<TTSWitAudioType> _fileTypes = new List<TTSWitAudioType>(Enum.GetValues(typeof(TTSWitAudioType)) as TTSWitAudioType[]);
 
         // Add listeners

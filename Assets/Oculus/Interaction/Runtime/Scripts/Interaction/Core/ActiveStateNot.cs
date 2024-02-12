@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using Oculus.Interaction.PoseDetection;
 using Oculus.Interaction.PoseDetection.Debug;
 using UnityEngine;
 

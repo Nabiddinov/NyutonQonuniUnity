@@ -18,13 +18,12 @@
  * limitations under the License.
  */
 
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Oculus.Interaction.Input;
 using UnityEngine;
-using System;
-using System.Runtime.InteropServices;
-using System.Collections.Generic;
 using UnityEngine.Assertions;
-using UnityEngine.Assertions.Must;
 
 namespace Oculus.Interaction.GrabAPI
 {

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 // Example script, a counterpart to BakeryVolumeTrigger.cs (see that script for more info)
 //
@@ -30,7 +28,7 @@ public class BakeryVolumeReceiver : MonoBehaviour
     public void SetPropertyBlock(MaterialPropertyBlock mb)
     {
         if (renderers == null) renderers = GetComponentsInChildren<Renderer>() as Renderer[];
-        for(int i=0; i<renderers.Length; i++)
+        for (int i = 0; i < renderers.Length; i++)
         {
             renderers[i].SetPropertyBlock(mb);
         }

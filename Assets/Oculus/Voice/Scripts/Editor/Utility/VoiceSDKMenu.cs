@@ -19,12 +19,12 @@
  */
 
 using Meta.Voice.VSDKHub;
-using UnityEngine;
-using UnityEditor;
-using Meta.WitAi.Windows;
 using Meta.WitAi.Data.Entities;
 using Meta.WitAi.TTS;
 using Meta.WitAi.TTS.Preload;
+using Meta.WitAi.Windows;
+using UnityEditor;
+using UnityEngine;
 
 namespace Oculus.Voice.Utility
 {

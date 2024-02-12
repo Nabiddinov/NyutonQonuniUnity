@@ -18,12 +18,9 @@
  * limitations under the License.
  */
 
-using Oculus.Interaction;
-using Oculus.Interaction.Input;
-using System.Collections;
 using System.Collections.Generic;
+using Oculus.Interaction.Input;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Oculus.Interaction
 {

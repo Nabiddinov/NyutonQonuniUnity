@@ -1,15 +1,10 @@
 #if UNITY_EDITOR
 //#if UNITY_2018_2_OR_NEWER
 
-using UnityEngine;
-using UnityEditor;
-using System;
-using System.IO;
-using System.Text;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Linq;
+using UnityEditor;
+using UnityEngine;
 
 /*
 public class ftSceneView
@@ -30,13 +25,15 @@ public class ftSceneView
     static void Atlas()
     {
         var fgo = GameObject.Find("!ftraceLightmaps");
-        if (fgo == null) {
+        if (fgo == null)
+        {
             fgo = new GameObject();
             fgo.name = "!ftraceLightmaps";
             fgo.hideFlags = HideFlags.HideInHierarchy;
         }
         var store = fgo.GetComponent<ftLightmapsStorage>();
-        if (store == null) {
+        if (store == null)
+        {
             store = fgo.AddComponent<ftLightmapsStorage>();
         }
         ftRenderLightmap.LoadStaticAtlasingSettings();
@@ -45,7 +42,7 @@ public class ftSceneView
         ftBuildGraphics.modifyLightmapStorage = false;
         ftBuildGraphics.validateLightmapStorageImmutability = false;
         var exportSceneFunc = ftBuildGraphics.ExportScene(null, false, true);
-        while(exportSceneFunc.MoveNext())
+        while (exportSceneFunc.MoveNext())
         {
             //progressBarText = ftBuildGraphics.progressBarText;
             //progressBarPercent = ftBuildGraphics.progressBarPercent;
@@ -73,7 +70,7 @@ public class ftSceneView
         var existingLmaps = LightmapSettings.lightmaps.ToList();
         tempTextures = new List<Texture2D>();
         var usedLMIDs = new HashSet<int>();
-        for(int i=0; i<objs.Count; i++)
+        for (int i = 0; i < objs.Count; i++)
         {
             if (objs[i] == null) continue;
             objs[i].lightmapScaleOffset = scaleOffset[i];
@@ -84,7 +81,7 @@ public class ftSceneView
                 int s = 1;//Math.Max(size[i],1);
                 var tex = new Texture2D(s, s);
                 tempTextures.Add(tex);
-                tex.SetPixels32(new Color32[s*s]);
+                tex.SetPixels32(new Color32[s * s]);
                 tex.Apply();
                 var ldata = new LightmapData();
                 ldata.lightmapColor = tex;

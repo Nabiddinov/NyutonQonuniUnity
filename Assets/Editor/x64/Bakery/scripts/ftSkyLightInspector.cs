@@ -1,26 +1,24 @@
 
-using UnityEditor;
-using UnityEngine;
-using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [CustomEditor(typeof(BakerySkyLight))]
 [CanEditMultipleObjects]
 public class ftSkyLightInspector : UnityEditor.Editor
 {
-    public static Quaternion QuaternionFromMatrix(Matrix4x4 m) {
+    public static Quaternion QuaternionFromMatrix(Matrix4x4 m)
+    {
         Quaternion q = new Quaternion();
-        q.w = Mathf.Sqrt( Mathf.Max( 0, 1 + m[0,0] + m[1,1] + m[2,2] ) ) / 2;
-        q.x = Mathf.Sqrt( Mathf.Max( 0, 1 + m[0,0] - m[1,1] - m[2,2] ) ) / 2;
-        q.y = Mathf.Sqrt( Mathf.Max( 0, 1 - m[0,0] + m[1,1] - m[2,2] ) ) / 2;
-        q.z = Mathf.Sqrt( Mathf.Max( 0, 1 - m[0,0] - m[1,1] + m[2,2] ) ) / 2;
-        q.x *= Mathf.Sign( q.x * ( m[2,1] - m[1,2] ) );
-        q.y *= Mathf.Sign( q.y * ( m[0,2] - m[2,0] ) );
-        q.z *= Mathf.Sign( q.z * ( m[1,0] - m[0,1] ) );
+        q.w = Mathf.Sqrt(Mathf.Max(0, 1 + m[0, 0] + m[1, 1] + m[2, 2])) / 2;
+        q.x = Mathf.Sqrt(Mathf.Max(0, 1 + m[0, 0] - m[1, 1] - m[2, 2])) / 2;
+        q.y = Mathf.Sqrt(Mathf.Max(0, 1 - m[0, 0] + m[1, 1] - m[2, 2])) / 2;
+        q.z = Mathf.Sqrt(Mathf.Max(0, 1 - m[0, 0] - m[1, 1] + m[2, 2])) / 2;
+        q.x *= Mathf.Sign(q.x * (m[2, 1] - m[1, 2]));
+        q.y *= Mathf.Sign(q.y * (m[0, 2] - m[2, 0]));
+        q.z *= Mathf.Sign(q.z * (m[1, 0] - m[0, 1]));
         return q;
     }
 
@@ -66,7 +64,7 @@ public class ftSkyLightInspector : UnityEditor.Editor
     static string[] selStrings = new string[] {"0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16",
                                                 "17","18","19","20","21","22","23","24","25","26","27","28","29","30"};//,"31"};
 
-    static public string[] directContributionOptions = new string[] {"Direct And Indirect (recommended)", "Indirect only"};
+    static public string[] directContributionOptions = new string[] { "Direct And Indirect (recommended)", "Indirect only" };
 
     bool showExperimental = false;
 
@@ -84,7 +82,8 @@ public class ftSkyLightInspector : UnityEditor.Editor
         ftraceTangentSH = serializedObject.FindProperty("tangentSH");
     }
 
-    public override void OnInspectorGUI() {
+    public override void OnInspectorGUI()
+    {
         {
             serializedObject.Update();
 
@@ -298,7 +297,7 @@ public class ftSkyLightInspector : UnityEditor.Editor
                 }
                 var tform = (target as BakerySkyLight).transform;
                 var angles = tform.eulerAngles;
-                if (angles.x !=0 || angles.z !=0)
+                if (angles.x != 0 || angles.z != 0)
                 {
                     if (skyboxValid && !skyMat.HasProperty("_MatrixRight")) skyboxValid = false; // only ftrace skybox can handle xz rotation for now
                 }
@@ -339,13 +338,13 @@ public class ftSkyLightInspector : UnityEditor.Editor
                     var r = tform.right;
                     var u = tform.up;
                     var f = tform.forward;
-                    if (skyMat.HasProperty("_MatrixRight")) skyMat.SetVector("_MatrixRight",  new Vector3(r.x, u.x, f.x));
+                    if (skyMat.HasProperty("_MatrixRight")) skyMat.SetVector("_MatrixRight", new Vector3(r.x, u.x, f.x));
                     if (skyMat.HasProperty("_MatrixUp")) skyMat.SetVector("_MatrixUp", new Vector3(r.y, u.y, f.y));
                     if (skyMat.HasProperty("_MatrixForward")) skyMat.SetVector("_MatrixForward", new Vector3(r.z, u.z, f.z));
                 }
                 else
                 {
-                    if (skyMat.HasProperty("_MatrixRight")) skyMat.SetVector("_MatrixRight",  tform.right);
+                    if (skyMat.HasProperty("_MatrixRight")) skyMat.SetVector("_MatrixRight", tform.right);
                     if (skyMat.HasProperty("_MatrixUp")) skyMat.SetVector("_MatrixUp", tform.up);
                     if (skyMat.HasProperty("_MatrixForward")) skyMat.SetVector("_MatrixForward", tform.forward);
                 }

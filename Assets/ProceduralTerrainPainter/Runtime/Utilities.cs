@@ -17,12 +17,12 @@ namespace sc.terrain.proceduralpainter
 
             return 1;
         }
-        
+
         public static int GetChannelIndex(int layerIndex)
         {
             return (layerIndex % 4);
         }
-        
+
         //Create an RGBA component mask (eg. channelIndex=2 samples the Blue channel)
         public static Vector4 GetVectorMask(int channelIndex)
         {
@@ -35,16 +35,16 @@ namespace sc.terrain.proceduralpainter
                 default: return Vector4.zero;
             }
         }
-        
+
         public static int GetSplatmapIndex(int layerIndex)
         {
             if (layerIndex > 11) return 3;
             if (layerIndex > 7) return 2;
             if (layerIndex > 3) return 1;
-            
+
             return 0;
         }
-        
+
         public static Bounds RecalculateBounds(Terrain[] terrains)
         {
             Vector3 minSum = Vector3.one * Mathf.Infinity;
@@ -52,8 +52,8 @@ namespace sc.terrain.proceduralpainter
 
             foreach (Terrain terrain in terrains)
             {
-                if(terrain == null) continue;
-                if(!terrain.gameObject.activeInHierarchy) continue;;
+                if (terrain == null) continue;
+                if (!terrain.gameObject.activeInHierarchy) continue; ;
 
                 //Min/max bounds corners in world-space
                 Vector3 min = terrain.GetPosition(); //Safe to assume terrain starts at origin
@@ -80,9 +80,9 @@ namespace sc.terrain.proceduralpainter
         {
             //Weirdness, using an array means the layers aren't actually assigned in reversed order
             List<TerrainLayer> layerList = new List<TerrainLayer>();
-            
+
             //Convert LayerSettings to Layers
-            for (int i = layerSettings.Count-1; i >= 0; i--)
+            for (int i = layerSettings.Count - 1; i >= 0; i--)
             {
                 layerList.Add(layerSettings[i].layer);
             }

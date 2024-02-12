@@ -7,7 +7,6 @@
  */
 
 using System;
-using Meta.WitAi;
 using Meta.WitAi.Data.Info;
 namespace Meta.WitAi.Data.Configuration.Tabs
 {

@@ -8,9 +8,8 @@ language governing permissions and limitations under the license.
 ************************************************************************************/
 
 using System;
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// This aim handler simulates the parabolic curve that a thrown item would follow, a common style of teleport aiming.

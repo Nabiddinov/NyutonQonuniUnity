@@ -8,9 +8,9 @@
 
 using System;
 using System.Collections.Generic;
+using Meta.WitAi.Data.Info;
 using Meta.WitAi.Interfaces;
 using Meta.WitAi.Json;
-using Meta.WitAi.Data.Info;
 
 namespace Meta.WitAi.Data.Entities
 {

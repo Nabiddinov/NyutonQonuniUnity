@@ -19,8 +19,8 @@
  */
 
 using Meta.Voice;
-using Meta.WitAi.Json;
 using Meta.WitAi.Configuration;
+using Meta.WitAi.Json;
 using Meta.WitAi.Requests;
 
 namespace Oculus.Voice.Bindings.Android

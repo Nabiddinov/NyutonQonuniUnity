@@ -7,8 +7,8 @@
  */
 
 using System;
-using UnityEngine;
 using Meta.WitAi;
+using UnityEngine;
 
 namespace Meta.Voice.Audio
 {

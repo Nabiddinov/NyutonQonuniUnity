@@ -1,6 +1,5 @@
 #define USE_TERRAINS
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,8 +9,6 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.IO;
 #endif
 
@@ -20,12 +17,13 @@ using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 [InitializeOnLoad]
 #endif
-public class ftLightmaps {
+public class ftLightmaps
+{
 
     struct LightmapAdditionalData
     {
-       public Texture2D rnm0, rnm1, rnm2;
-       public int mode;
+        public Texture2D rnm0, rnm1, rnm2;
+        public int mode;
     };
 
     static List<int> lightmapRefCount;
@@ -119,7 +117,7 @@ public class ftLightmaps {
     public static string GetProjectSettingsPathNew()
     {
         var path = GetRuntimePath();
-        for(int i=path.Length-2; i>=0; i--)
+        for (int i = path.Length - 2; i >= 0; i--)
         {
             char c = path[i];
             if (c == '/' || c == '\\')
@@ -222,7 +220,7 @@ public class ftLightmaps {
         var listToProcessHash = gstorage.modifiedAssetPaddingHash;
         var listProcessed = lstorage.modifiedAssetPathList;
         var listProcessedHash = lstorage.modifiedAssetPaddingHash;
-        for(int i=0; i<listToProccess.Count; i++)
+        for (int i = 0; i < listToProccess.Count; i++)
         {
             int localID = listProcessed.IndexOf(listToProccess[i]);
             if (localID >= 0)
@@ -252,9 +250,9 @@ public class ftLightmaps {
             {
                 var props = importer.extraUserProperties;
                 int propID = -1;
-                for(int p=0; p<props.Length; p++)
+                for (int p = 0; p < props.Length; p++)
                 {
-                    if (props[p].Substring(0,7) == "#BAKERY")
+                    if (props[p].Substring(0, 7) == "#BAKERY")
                     {
                         propID = p;
                         break;
@@ -289,7 +287,7 @@ public class ftLightmaps {
             int gid = gstorage.modifiedAssetPathList.IndexOf(path);
             if (gid < 0) return;
             int hash = gstorage.CalculatePaddingHash(gid);
-            while(gstorage.modifiedAssetPaddingHash.Count <= gid) gstorage.modifiedAssetPaddingHash.Add(0);
+            while (gstorage.modifiedAssetPaddingHash.Count <= gid) gstorage.modifiedAssetPaddingHash.Add(0);
             gstorage.modifiedAssetPaddingHash[gid] = hash;
 
             int id = lstorage.modifiedAssetPathList.IndexOf(path);
@@ -298,7 +296,7 @@ public class ftLightmaps {
                 lstorage.modifiedAssetPathList.Add(path);
                 id = lstorage.modifiedAssetPathList.Count - 1;
             }
-            while(lstorage.modifiedAssetPaddingHash.Count <= id) lstorage.modifiedAssetPaddingHash.Add(0);
+            while (lstorage.modifiedAssetPaddingHash.Count <= id) lstorage.modifiedAssetPaddingHash.Add(0);
             lstorage.modifiedAssetPaddingHash[id] = hash;
             EditorUtility.SetDirty(gstorage);
             EditorSceneManager.MarkAllScenesDirty();
@@ -317,7 +315,8 @@ public class ftLightmaps {
 
 #endif
 
-    static ftLightmaps() {
+    static ftLightmaps()
+    {
 
 #if UNITY_EDITOR
         EditorSceneManager.sceneOpening -= OnSceneOpening; // Andrew fix
@@ -346,27 +345,30 @@ public class ftLightmaps {
 
     static void SetDirectionalMode()
     {
-        if (directionalMode >= 0) LightmapSettings.lightmapsMode =  directionalMode==1 ? LightmapsMode.CombinedDirectional : LightmapsMode.NonDirectional;
+        if (directionalMode >= 0) LightmapSettings.lightmapsMode = directionalMode == 1 ? LightmapsMode.CombinedDirectional : LightmapsMode.NonDirectional;
     }
 
-    static void OnSceneChangedPlay(Scene prev, Scene next) {
+    static void OnSceneChangedPlay(Scene prev, Scene next)
+    {
         //if (Lightmapping.lightingDataAsset == null) {
-            SetDirectionalMode();
+        SetDirectionalMode();
         //}
     }
 
 #if UNITY_EDITOR
-    static void OnSceneChangedEditor() {
+    static void OnSceneChangedEditor()
+    {
         // Unity can modify directional mode on scene change, have to force the correct one
         // activeSceneChangedInEditMode isn't always available
         //if (Lightmapping.lightingDataAsset == null) {
-            SetDirectionalMode();
+        SetDirectionalMode();
         //}
     }
 
     // using Opening instead of Opened because it's called before lightmap data is loaded and proper directional mode is set
     //static void OnSceneOpened(Scene scene, OpenSceneMode mode) {
-    static void OnSceneOpening(string path, OpenSceneMode mode) {
+    static void OnSceneOpening(string path, OpenSceneMode mode)
+    {
         //Refresh();
         //if (scene.name == "_tempScene") return;
         if (Path.GetFileNameWithoutExtension(path) == "_tempScene") return;
@@ -380,11 +382,12 @@ public class ftLightmaps {
     }
 #endif
 
-    public static void RefreshFull() {
+    public static void RefreshFull()
+    {
         var activeScene = SceneManager.GetActiveScene();
         var sceneCount = SceneManager.sceneCount;
 
-        for(int i=0; i<sceneCount; i++)
+        for (int i = 0; i < sceneCount; i++)
         {
             var scene = SceneManager.GetSceneAt(i);
             if (!scene.isLoaded) continue;
@@ -392,7 +395,7 @@ public class ftLightmaps {
             LightmapSettings.lightmaps = new LightmapData[0];
         }
 
-        for(int i=0; i<sceneCount; i++)
+        for (int i = 0; i < sceneCount; i++)
         {
             RefreshScene(SceneManager.GetSceneAt(i), null, true);
         }
@@ -402,7 +405,7 @@ public class ftLightmaps {
     public static GameObject FindInScene(string nm, Scene scn)
     {
         var objs = scn.GetRootGameObjects();
-        for(int i=0; i<objs.Length; i++)
+        for (int i = 0; i < objs.Length; i++)
         {
             if (objs[i].name == nm) return objs[i];
             var obj = objs[i].transform.Find(nm);
@@ -411,9 +414,9 @@ public class ftLightmaps {
         return null;
     }
 
-/*    public static void RefreshScene(int sceneID, ref List<LightmapData> lmaps, int lmCounter) {
-        RefreshScene(scene);
-    }*/
+    /*    public static void RefreshScene(int sceneID, ref List<LightmapData> lmaps, int lmCounter) {
+            RefreshScene(scene);
+        }*/
 
     static Texture2D GetEmptyDirectionTex(ftLightmapsStorage storage)
     {
@@ -427,7 +430,8 @@ public class ftLightmaps {
         return storage.emptyDirectionTex;
     }
 
-    public static void RefreshScene(Scene scene, ftLightmapsStorage storage = null, bool updateNonBaked = false) {
+    public static void RefreshScene(Scene scene, ftLightmapsStorage storage = null, bool updateNonBaked = false)
+    {
         var sceneCount = SceneManager.sceneCount;
 
         if (globalMapsAdditional == null) globalMapsAdditional = new List<LightmapAdditionalData>();
@@ -448,13 +452,15 @@ public class ftLightmaps {
             SceneManager.SetActiveScene(scene);
 
             var go = FindInScene("!ftraceLightmaps", scene);
-            if (go==null) {
+            if (go == null)
+            {
                 //Debug.LogError("dbg: no storage");
                 return;
             }
 
             storage = go.GetComponent<ftLightmapsStorage>();
-            if (storage == null) {
+            if (storage == null)
+            {
                 //Debug.LogError("dbg: no storage 2");
                 return;
             }
@@ -473,7 +479,7 @@ public class ftLightmaps {
         // Set dummy directional tex for non-directional lightmaps in directional mode
         if (directionalMode == 1)
         {
-            for(int i=0; i<existingLmaps.Length; i++)
+            for (int i = 0; i < existingLmaps.Length; i++)
             {
                 if (existingLmaps[i].lightmapDir == null)
                 {
@@ -490,7 +496,7 @@ public class ftLightmaps {
         if (existingLmaps.Length == storage.maps.Count)
         {
             sameArray = true;
-            for(int i=0; i<storage.maps.Count; i++)
+            for (int i = 0; i < storage.maps.Count; i++)
             {
                 if (existingLmaps[i].lightmapColor != storage.maps[i])
                 {
@@ -510,7 +516,8 @@ public class ftLightmaps {
             if (sceneCount >= 1)
             {
                 // first add old
-                for(int i=0; i<existingLmaps.Length; i++) {
+                for (int i = 0; i < existingLmaps.Length; i++)
+                {
                     // skip empty lightmaps (can be created by 5.6 ldata asset or vertex color)
                     // ... unless there are valid lightmaps around them
                     bool lightmapIsEmpty = existingLmaps[i] == null || (existingLmaps[i].lightmapColor == null && existingLmaps[i].shadowMask == null);
@@ -523,7 +530,8 @@ public class ftLightmaps {
                 }
             }
 
-            for(int i=0; i<storage.maps.Count; i++) {
+            for (int i = 0; i < storage.maps.Count; i++)
+            {
 
                 var texlm = storage.maps[i];
                 Texture2D texmask = null;
@@ -544,7 +552,8 @@ public class ftLightmaps {
 
                 bool found = false;
                 int firstEmpty = -1;
-                for(int j=0; j<lmaps.Count; j++) {
+                for (int j = 0; j < lmaps.Count; j++)
+                {
                     if (lmaps[j].lightmapColor == texlm && lmaps[j].shadowMask == texmask)
                     {
                         // lightmap already added - reuse
@@ -556,7 +565,7 @@ public class ftLightmaps {
                         // additional maps array could be flushed due to script recompilation - recover
                         if (texrnm0 != null && (lmapsAdditional.Count <= j || lmapsAdditional[j].rnm0 == null))
                         {
-                            while(lmapsAdditional.Count <= j) lmapsAdditional.Add(new LightmapAdditionalData());
+                            while (lmapsAdditional.Count <= j) lmapsAdditional.Add(new LightmapAdditionalData());
                             var l = new LightmapAdditionalData();
                             l.rnm0 = texrnm0;
                             l.rnm1 = texrnm1;
@@ -622,13 +631,13 @@ public class ftLightmaps {
                         if (firstEmpty < 0)
                         {
                             //Debug.LogError("added "+(lmaps.Count-1));
-                            while(lmapsAdditional.Count < lmaps.Count-1) lmapsAdditional.Add(new LightmapAdditionalData());
+                            while (lmapsAdditional.Count < lmaps.Count - 1) lmapsAdditional.Add(new LightmapAdditionalData());
                             lmapsAdditional.Add(l);
                         }
                         else
                         {
                             //Debug.LogError("set " + firstEmpty);
-                            while(lmapsAdditional.Count < firstEmpty+1) lmapsAdditional.Add(new LightmapAdditionalData());
+                            while (lmapsAdditional.Count < firstEmpty + 1) lmapsAdditional.Add(new LightmapAdditionalData());
                             lmapsAdditional[firstEmpty] = l;
                         }
                     }
@@ -637,7 +646,8 @@ public class ftLightmaps {
         }
         else // reuse existing lightmap array, only remap IDs
         {
-            for(int i=0; i<storage.maps.Count; i++) {
+            for (int i = 0; i < storage.maps.Count; i++)
+            {
                 storage.idremap[i] = i;
 
                 //Debug.LogError("full reuse");
@@ -686,20 +696,20 @@ public class ftLightmaps {
         // Attempt to update skybox probe
         if (RenderSettings.ambientMode == UnityEngine.Rendering.AmbientMode.Skybox)// && Lightmapping.lightingDataAsset == null)
         {
-            var probe = RenderSettings.ambientProbe ;
+            var probe = RenderSettings.ambientProbe;
             int isEmpty = -1;
-            for(int i=0; i<3; i++)
+            for (int i = 0; i < 3; i++)
             {
-                for(int j=0; j<9; j++)
+                for (int j = 0; j < 9; j++)
                 {
                     // default bugged probes are [almost] black or 1302?
-                    float a = Mathf.Abs(probe[i,j]);
+                    float a = Mathf.Abs(probe[i, j]);
                     if (a > 1000.0f || a < 0.000001f)
                     {
                         isEmpty = 1;
                         break;
                     }
-                    if (probe[i,j] != 0)
+                    if (probe[i, j] != 0)
                     {
                         isEmpty = 0;
                         break;
@@ -709,13 +719,13 @@ public class ftLightmaps {
             }
             if (isEmpty != 0)
             {
-               DynamicGI.UpdateEnvironment();
+                DynamicGI.UpdateEnvironment();
             }
         }
 
         // Set lightmap data on mesh renderers
-        var emptyVec4 = new Vector4(1,1,0,0);
-        for(int i=0; i<storage.bakedRenderers.Count; i++)
+        var emptyVec4 = new Vector4(1, 1, 0, 0);
+        for (int i = 0; i < storage.bakedRenderers.Count; i++)
         {
             var r = storage.bakedRenderers[i];
             if (r == null)
@@ -773,7 +783,7 @@ public class ftLightmaps {
         // Set lightmap data on definitely-not-baked mesh renderers (can be possibly avoided)
         if (updateNonBaked)
         {
-            for(int i=0; i<storage.nonBakedRenderers.Count; i++)
+            for (int i = 0; i < storage.nonBakedRenderers.Count; i++)
             {
                 var r = storage.nonBakedRenderers[i];
                 if (r == null) continue;
@@ -784,7 +794,7 @@ public class ftLightmaps {
 
 #if USE_TERRAINS
         // Set lightmap data on terrains
-        for(int i=0; i<storage.bakedRenderersTerrain.Count; i++)
+        for (int i = 0; i < storage.bakedRenderersTerrain.Count; i++)
         {
             var r = storage.bakedRenderersTerrain[i];
             if (r == null)
@@ -814,7 +824,7 @@ public class ftLightmaps {
 #endif
 
         // Set shadowmask parameters on lights
-        for(int i=0; i<storage.bakedLights.Count; i++)
+        for (int i = 0; i < storage.bakedLights.Count; i++)
         {
 #if UNITY_2017_3_OR_NEWER
             if (storage.bakedLights[i] == null) continue;
@@ -831,7 +841,7 @@ public class ftLightmaps {
                 output.lightmapBakeType = LightmapBakeType.Mixed;
                 output.mixedLightingMode = channel > 100 ? MixedLightingMode.Subtractive : MixedLightingMode.Shadowmask;
                 output.occlusionMaskChannel = channel > 100 ? -1 : channel;
-                output.probeOcclusionLightIndex  = storage.bakedLights[i].bakingOutput.probeOcclusionLightIndex;
+                output.probeOcclusionLightIndex = storage.bakedLights[i].bakingOutput.probeOcclusionLightIndex;
             }
             storage.bakedLights[i].bakingOutput = output;
 #endif
@@ -839,10 +849,10 @@ public class ftLightmaps {
 
         // Increment lightmap refcounts
         if (lightmapRefCount == null) lightmapRefCount = new List<int>();
-        for(int i=0; i<storage.idremap.Length; i++)
+        for (int i = 0; i < storage.idremap.Length; i++)
         {
             int currentID = storage.idremap[i];
-            while(lightmapRefCount.Count <= currentID) lightmapRefCount.Add(0);
+            while (lightmapRefCount.Count <= currentID) lightmapRefCount.Add(0);
             if (lightmapRefCount[currentID] < 0) lightmapRefCount[currentID] = 0;
             lightmapRefCount[currentID]++;
         }
@@ -863,7 +873,7 @@ public class ftLightmaps {
         LightmapData[] existingLmaps = null;
         List<LightmapAdditionalData> existingLmapsAdditional = null;
         //bool rebuild = false;
-        for(int i=0; i<storage.idremap.Length; i++)
+        for (int i = 0; i < storage.idremap.Length; i++)
         {
             int currentID = storage.idremap[i];
 
@@ -928,7 +938,7 @@ public class ftLightmaps {
     {
         Renderer r;
         int id;
-        for(int i=0; i<storage.bakedRenderers.Count; i++)
+        for (int i = 0; i < storage.bakedRenderers.Count; i++)
         {
             r = storage.bakedRenderers[i];
             if (r == null) continue;
@@ -939,7 +949,7 @@ public class ftLightmaps {
 
 #if USE_TERRAINS
         Terrain r2;
-        for(int i=0; i<storage.bakedRenderersTerrain.Count; i++)
+        for (int i = 0; i < storage.bakedRenderersTerrain.Count; i++)
         {
             r2 = storage.bakedRenderersTerrain[i];
             if (r2 == null) continue;

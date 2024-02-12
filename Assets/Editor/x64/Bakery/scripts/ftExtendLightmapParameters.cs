@@ -1,14 +1,8 @@
-using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEditor;
-using UnityEditor.SceneManagement;
 using System;
-using System.IO;
-using System.Text;
-using System.Reflection;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.Reflection;
+using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(LightmapParameters), true)]
 [CanEditMultipleObjects]
@@ -31,7 +25,7 @@ public class ftExtendLightmapParameters : Editor
         if (gstorage == null) gstorage = ftRenderLightmap.FindGlobalStorage();
         var tagTable = gstorage.tagOverrides;
         if (tagTable == null) tagTable = gstorage.tagOverrides = new List<ftGlobalStorage.TagData>();
-        for(int i=0; i<tagTable.Count; i++)
+        for (int i = 0; i < tagTable.Count; i++)
         {
             var tagData = tagTable[i];
             if (tagData.tag != curTag) continue;
@@ -57,7 +51,7 @@ public class ftExtendLightmapParameters : Editor
     void OnDisable()
     {
         MethodInfo disableMethod = defaultEditor.GetType().GetMethod("OnDisable", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-        if (disableMethod != null) disableMethod.Invoke(defaultEditor,null);
+        if (disableMethod != null) disableMethod.Invoke(defaultEditor, null);
         DestroyImmediate(defaultEditor);
     }
 
@@ -95,7 +89,7 @@ public class ftExtendLightmapParameters : Editor
             else
             {
                 var tagTable = gstorage.tagOverrides;
-                for(int i=0; i<tagTable.Count; i++)
+                for (int i = 0; i < tagTable.Count; i++)
                 {
                     var tagData = tagTable[i];
                     if (tagData.tag != curTag) continue;

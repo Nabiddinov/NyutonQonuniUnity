@@ -22,8 +22,8 @@ using System.Collections.Generic;
 using Meta.Voice.TelemetryUtilities;
 using Meta.WitAi;
 using Meta.WitAi.Data.Configuration;
-using Meta.WitAi.Windows;
 using Meta.WitAi.Data.Info;
+using Meta.WitAi.Windows;
 using Oculus.Voice.Utility;
 using UnityEngine;
 

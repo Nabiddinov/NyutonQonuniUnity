@@ -6,8 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 namespace Meta.Voice.Samples.Dictation
 {

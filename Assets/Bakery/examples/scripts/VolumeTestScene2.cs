@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class VolumeTestScene2 : MonoBehaviour
 {
@@ -20,7 +18,7 @@ public class VolumeTestScene2 : MonoBehaviour
 
     void UpdateRooms()
     {
-        for(int i=0; i<secondFloorVolumes.Length; i++)
+        for (int i = 0; i < secondFloorVolumes.Length; i++)
         {
             secondFloorVolumes[i].UpdateBounds();
         }
@@ -30,7 +28,7 @@ public class VolumeTestScene2 : MonoBehaviour
     {
         if (randomizeLastRoom)
         {
-            if (Random.Range(0,2) == 1)
+            if (Random.Range(0, 2) == 1)
             {
                 SwapRooms();
             }

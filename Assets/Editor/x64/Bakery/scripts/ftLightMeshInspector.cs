@@ -1,10 +1,6 @@
 
 using UnityEditor;
 using UnityEngine;
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine.Rendering;
 
 [CustomEditor(typeof(BakeryLightMesh))]
@@ -200,7 +196,8 @@ public class ftLightMeshInspector : UnityEditor.Editor
         return false;
     }
 
-    public override void OnInspectorGUI() {
+    public override void OnInspectorGUI()
+    {
         //if (showFtrace)
         {
             OnEnable();
@@ -308,7 +305,7 @@ public class ftLightMeshInspector : UnityEditor.Editor
         int iterator = -1;
         int numMaterialValid = targets.Length;
 
-        foreach(BakeryLightMesh selectedLight in targets)
+        foreach (BakeryLightMesh selectedLight in targets)
         {
             iterator++;
             var so = new SerializedObject(selectedLight);
@@ -375,9 +372,9 @@ public class ftLightMeshInspector : UnityEditor.Editor
                 else
                 {
                     eps *= Mathf.Max(lightInt, intensity);
-                    if (Mathf.Abs(lightR*lightInt - fr*intensity) > eps ||
-                        Mathf.Abs(lightG*lightInt - fg*intensity) > eps ||
-                        Mathf.Abs(lightB*lightInt - fb*intensity) > eps)
+                    if (Mathf.Abs(lightR * lightInt - fr * intensity) > eps ||
+                        Mathf.Abs(lightG * lightInt - fg * intensity) > eps ||
+                        Mathf.Abs(lightB * lightInt - fb * intensity) > eps)
                     {
                         match = false;
                         why = "intensity doesn't match";
@@ -426,7 +423,7 @@ public class ftLightMeshInspector : UnityEditor.Editor
 
             isMesh = true;
 
-            for(int i=0; i<mats.Length; i++)
+            for (int i = 0; i < mats.Length; i++)
             {
                 var mat = mats[i];
                 if (singleMat == null) singleMat = mat;
@@ -468,7 +465,7 @@ public class ftLightMeshInspector : UnityEditor.Editor
                     break;
                 }
                 var mclr = mat.HasProperty("_Color") ? mat.color : Color.white;
-                float eps = 0.5f/255.0f;
+                float eps = 0.5f / 255.0f;
                 if (Mathf.Abs(mclr.r - clr.r) > eps || Mathf.Abs(mclr.g - clr.g) > eps || Mathf.Abs(mclr.b - clr.b) > eps)
                 {
                     showError = true;
@@ -483,7 +480,7 @@ public class ftLightMeshInspector : UnityEditor.Editor
                     //match = false;
                     break;
                 }
-                if (ftraceLightTexture.objectReferenceValue == null && mat.HasProperty("_MainTex") && mat.GetTexture("_MainTex")!=null)
+                if (ftraceLightTexture.objectReferenceValue == null && mat.HasProperty("_MainTex") && mat.GetTexture("_MainTex") != null)
                 {
                     showError = true;
                     showErrorText = "Error: textures don't match";
@@ -527,7 +524,7 @@ public class ftLightMeshInspector : UnityEditor.Editor
                 if (GUILayout.Button(txt))
                 {
                     //iterator = 0;
-                    foreach(BakeryLightMesh selectedLight in targets)
+                    foreach (BakeryLightMesh selectedLight in targets)
                     {
                         //iterator++;
                         var so = new SerializedObject(selectedLight);
@@ -595,7 +592,7 @@ public class ftLightMeshInspector : UnityEditor.Editor
             }
             if (GUILayout.Button(txt))
             {
-                foreach(BakeryLightMesh selectedLight in targets)
+                foreach (BakeryLightMesh selectedLight in targets)
                 {
                     //iterator++;
                     var so = new SerializedObject(selectedLight);

@@ -5,8 +5,6 @@ using UnityEditor;
 #endif
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 [ExecuteInEditMode]
 [DisallowMultipleComponent]
@@ -73,25 +71,25 @@ public class BakeryDirectLight : MonoBehaviour
 
     void OnDrawGizmos()
     {
-      Gizmos.color = Color.yellow;
-      Gizmos.DrawSphere(transform.position, 0.1f);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, 0.1f);
 
-      //Gizmos.DrawWireSphere(transform.position, 0.5f);
+        //Gizmos.DrawWireSphere(transform.position, 0.5f);
     }
 
     void OnDrawGizmosSelected()
     {
-      Gizmos.color = Color.yellow;
-      var endPoint = transform.position + transform.forward * 2;
-      Gizmos.DrawLine(transform.position, endPoint);
+        Gizmos.color = Color.yellow;
+        var endPoint = transform.position + transform.forward * 2;
+        Gizmos.DrawLine(transform.position, endPoint);
 
-      //Gizmos.color = Color.blue;
-      Gizmos.DrawWireSphere(transform.position, 0.2f);
+        //Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 0.2f);
 
-      Gizmos.DrawLine(endPoint, endPoint + (transform.position + transform.right - endPoint).normalized * 0.5f);
-      Gizmos.DrawLine(endPoint, endPoint + (transform.position - transform.right - endPoint).normalized * 0.5f);
-      Gizmos.DrawLine(endPoint, endPoint + (transform.position + transform.up - endPoint).normalized * 0.5f);
-      Gizmos.DrawLine(endPoint, endPoint + (transform.position - transform.up - endPoint).normalized * 0.5f);
+        Gizmos.DrawLine(endPoint, endPoint + (transform.position + transform.right - endPoint).normalized * 0.5f);
+        Gizmos.DrawLine(endPoint, endPoint + (transform.position - transform.right - endPoint).normalized * 0.5f);
+        Gizmos.DrawLine(endPoint, endPoint + (transform.position + transform.up - endPoint).normalized * 0.5f);
+        Gizmos.DrawLine(endPoint, endPoint + (transform.position - transform.up - endPoint).normalized * 0.5f);
     }
 
 #endif
