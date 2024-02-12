@@ -25,17 +25,12 @@ public class Scen3Controller : MonoBehaviour
         yield return new WaitForSeconds(8);
         Model.SetActive(true);
         LinkAnim.SetInteger("Link", 1);
-
-        //LinkAnim.Play("Idle");
-        //StartCoroutine(Kutish(2.5f));
     }
-
 
     public void Chiqish()
     {
         audioClip2.Stop();
         LinkAnim.SetInteger("Link", 2);
-        //LinkAnim.Play("Take 001");
         audioClip.Play();
         StartCoroutine(Kutish(6.5f));
     }
@@ -44,6 +39,5 @@ public class Scen3Controller : MonoBehaviour
     {
         yield return new WaitForSeconds(a);
         LinkAnim.SetInteger("Link", 1);
-        //LinkAnim.Play("Idle");
     }
 }
