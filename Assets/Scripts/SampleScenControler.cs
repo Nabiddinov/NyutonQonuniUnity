@@ -13,17 +13,14 @@ public class SampleScenControler : MonoBehaviour
     public AudioClip LinkAudio;
     public AudioSource NyutonAudio;
 
-
     void Start()
     {
         StartCoroutine(controller());
     }
 
-
     IEnumerator controller()
     {
         yield return new WaitForSeconds(52.2f);
-        //yield return new WaitForSeconds(6);
 
         Nyuton.SetActive(true);
         NyutonAnim.SetInteger("Nyuton", 1);
