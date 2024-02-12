@@ -9,7 +9,6 @@ public class Scen1ChangeA : MonoBehaviour
         StartCoroutine(ScenAlmshuv());
     }
 
-
     IEnumerator ScenAlmshuv()
     {
         yield return new WaitForSeconds(86);
